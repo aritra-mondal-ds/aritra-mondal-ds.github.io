@@ -47,7 +47,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen font-sans bg-background text-foreground antialiased selection:bg-indigo-500/20 selection:text-indigo-400">
+      <body
+        className="min-h-screen font-sans bg-background text-foreground antialiased selection:bg-indigo-500/20 selection:text-indigo-400"
+        suppressHydrationWarning
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
