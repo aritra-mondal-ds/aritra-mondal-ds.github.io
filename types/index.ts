@@ -91,12 +91,16 @@ export interface Education {
   id: string;
   degree: string;
   institution: string;
+  institutionUrl?: string;
   location: string;
   period: string;
   honors?: string;
-  description: string;
-  skillsGained: string[];
   frenchEquivalent?: string;
+  description: string;
+  thesis?: string;
+  modules?: string[];
+  skillsGained: string[];
+  logoText?: string;
 }
 
 export interface Certification {
