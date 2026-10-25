@@ -108,4 +108,5 @@ export interface Certification {
   issuer: string;
   dateOrStatus: string;
   badgeUrl?: string;
+  verifyUrl?: string;
 }

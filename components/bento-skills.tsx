@@ -11,6 +11,7 @@ import {
   Award,
   Languages,
   CheckCircle2,
+  ExternalLink,
   Terminal,
   Cpu,
   Layers,
@@ -152,11 +153,24 @@ export function BentoSkills() {
                 {certificationsData.map((cert, cIdx) => (
                   <div
                     key={cIdx}
-                    className="p-3 rounded-xl border border-border/70 bg-card/80 text-xs"
+                    className="p-3 rounded-xl border border-border/70 bg-card/80 text-xs hover:border-indigo-500/30 transition-colors"
                   >
-                    <div className="font-semibold text-foreground flex items-center gap-1.5">
-                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
-                      <span>{cert.name}</span>
+                    <div className="font-semibold text-foreground flex items-center justify-between gap-1.5">
+                      <div className="flex items-center gap-1.5">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
+                        <span>{cert.name}</span>
+                      </div>
+                      {cert.verifyUrl && (
+                        <a
+                          href={cert.verifyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Verify ${cert.name}`}
+                          className="text-muted-foreground hover:text-indigo-500 transition-colors shrink-0"
+                        >
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                      )}
                     </div>
                     <div className="flex items-center justify-between mt-1 text-[11px] text-muted-foreground">
                       <span>{cert.issuer}</span>

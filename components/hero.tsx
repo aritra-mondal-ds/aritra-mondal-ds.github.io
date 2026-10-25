@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { profileData } from "@/data/profile";
 import {
   GraduationCap,
@@ -40,23 +41,45 @@ export function Hero() {
           <span>Actively Interviewing · Data Scientist roles in Paris & France (Hybrid/Onsite)</span>
         </div>
 
-        {/* Main Headline */}
-        <div className="space-y-4 max-w-4xl">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.12]">
-            Engineering{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-sky-400">
-              End-to-End Machine Learning
-            </span>{" "}
-            & Distributed Data Systems
-          </h1>
+        {/* Main Headline & Authentic Portrait */}
+        <div className="flex flex-col-reverse md:flex-row md:items-center justify-between gap-8 max-w-5xl">
+          <div className="space-y-4 max-w-3xl">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.12]">
+              Engineering{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-sky-400">
+                End-to-End Machine Learning
+              </span>{" "}
+              & Distributed Data Systems
+            </h1>
 
-          <p className="text-lg sm:text-xl text-muted-foreground font-normal leading-relaxed max-w-3xl">
-            Hi, I&apos;m <span className="font-semibold text-foreground">{profileData.name}</span>. Data Scientist with production experience at{" "}
-            <span className="text-foreground font-medium underline decoration-indigo-400/50 underline-offset-4">
-              Amadeus
-            </span>{" "}
-            and an Applied MSc in Data Science & AI (Summa Cum Laude, Bac+5). I build scalable predictive models, distributed Spark/Scala pipelines, and resilient MLOps architectures.
-          </p>
+            <p className="text-lg sm:text-xl text-muted-foreground font-normal leading-relaxed">
+              Hi, I&apos;m <span className="font-semibold text-foreground">{profileData.name}</span>. Data Scientist with production experience at{" "}
+              <span className="text-foreground font-medium underline decoration-indigo-400/50 underline-offset-4">
+                Amadeus
+              </span>{" "}
+              and an Applied MSc in Data Science & AI (Summa Cum Laude, Bac+5). I build scalable predictive models, distributed Spark/Scala pipelines, and resilient MLOps architectures.
+            </p>
+          </div>
+
+          {/* Authentic Portrait with 100% Biometric Preservation */}
+          <div className="relative shrink-0 self-start md:self-center">
+            <div className="relative w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-2xl p-1 bg-gradient-to-tr from-indigo-500/30 via-border to-sky-500/20 shadow-xl overflow-hidden group">
+              <div className="relative w-full h-full rounded-xl overflow-hidden bg-muted">
+                <Image
+                  src="/aritra-mondal.jpg"
+                  alt="Aritra Mondal — Data Scientist"
+                  width={176}
+                  height={176}
+                  priority
+                  className="object-cover object-top w-full h-full transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+            </div>
+            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap px-2.5 py-0.5 rounded-full bg-card/90 backdrop-blur-md border border-border shadow-sm text-[10px] font-mono text-muted-foreground flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Aritra Mondal</span>
+            </div>
+          </div>
         </div>
 
         {/* French Recruiter Signal Pills */}
