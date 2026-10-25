@@ -44,6 +44,12 @@ export function Footer() {
               Experience
             </a>
             <a
+              href="#education"
+              className="hover:text-foreground transition-colors"
+            >
+              Education
+            </a>
+            <a
               href="#terminal"
               className="hover:text-foreground transition-colors"
             >

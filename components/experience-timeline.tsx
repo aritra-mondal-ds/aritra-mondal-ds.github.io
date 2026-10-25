@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { experiencesData, educationData } from "@/data/experience";
 import {
   Briefcase,
@@ -21,11 +21,45 @@ export function ExperienceTimeline() {
   const [activeTab, setActiveTab] = useState<"experience" | "education">("experience");
   const [expandedModules, setExpandedModules] = useState<Record<string, boolean>>({});
 
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash;
+      if (hash === "#education") {
+        setActiveTab("education");
+        const el = document.getElementById("education-target");
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      } else if (hash === "#experience") {
+        setActiveTab("experience");
+        const el = document.getElementById("experience-target");
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    };
+
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
+  const handleTabChange = (tab: "experience" | "education") => {
+    setActiveTab(tab);
+    window.history.replaceState(null, "", `#${tab}`);
+  };
+
   const toggleModules = (id: string) =>
     setExpandedModules((prev) => ({ ...prev, [id]: !prev[id] }));
 
   return (
-    <section id="experience" className="py-20 border-t border-border/60 relative">
+    <section className="py-20 border-t border-border/60 relative">
+      {/* Invisible anchor targets with scroll-margin offset for sticky header */}
+      <span id="experience" className="absolute -top-24 pointer-events-none" />
+      <span id="education" className="absolute -top-24 pointer-events-none" />
+      <span id="experience-target" className="absolute -top-24 pointer-events-none" />
+      <span id="education-target" className="absolute -top-24 pointer-events-none" />
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
@@ -45,7 +79,7 @@ export function ExperienceTimeline() {
           {/* Tab Selector */}
           <div className="inline-flex p-1 rounded-xl bg-card border border-border shadow-sm">
             <button
-              onClick={() => setActiveTab("experience")}
+              onClick={() => handleTabChange("experience")}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
                 activeTab === "experience"
                   ? "bg-indigo-600 text-white shadow-sm"
@@ -56,7 +90,7 @@ export function ExperienceTimeline() {
               <span>Work Experience ({experiencesData.length})</span>
             </button>
             <button
-              onClick={() => setActiveTab("education")}
+              onClick={() => handleTabChange("education")}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
                 activeTab === "education"
                   ? "bg-indigo-600 text-white shadow-sm"
@@ -140,7 +174,7 @@ export function ExperienceTimeline() {
 
         ) : (
           /* ─── Education ─── */
-          <div id="education" className="space-y-8 relative before:absolute before:inset-0 before:left-3.5 sm:before:left-5 before:h-full before:w-0.5 before:bg-border">
+          <div className="space-y-8 relative before:absolute before:inset-0 before:left-3.5 sm:before:left-5 before:h-full before:w-0.5 before:bg-border">
             {educationData.map((edu) => {
               const modulesOpen = !!expandedModules[edu.id];
               return (
