@@ -70,89 +70,19 @@ export const skillCategories: SkillCategory[] = [
 ];
 
 export const certificationsData: Certification[] = [
-  // ── Cloud & Infrastructure ──────────────────────────────────────────────
   {
-    id: "aws-saa",
     name: "AWS Certified Solutions Architect – Associate",
-    issuer: "Amazon Web Services",
-    issuerUrl: "https://aws.amazon.com/certification/certified-solutions-architect-associate/",
-    dateOrStatus: "In Progress — 2025",
-    category: "Cloud",
-    status: "in-progress",
-    icon: "Cloud",
-    skills: ["EC2", "S3", "EMR", "VPC", "IAM", "Lambda", "CloudFormation"],
+    issuer: "Amazon Web Services (AWS)",
+    dateOrStatus: "In Progress (2025)",
   },
-
-  // ── Database & Graph ────────────────────────────────────────────────────
   {
-    id: "neo4j-pro",
     name: "Neo4j Certified Professional",
     issuer: "Neo4j Graph Academy",
-    issuerUrl: "https://graphacademy.neo4j.com/courses/neo4j-certification/",
     dateOrStatus: "Certified 2024",
-    credentialUrl: "https://graphacademy.neo4j.com/certificates/",
-    category: "Database",
-    status: "active",
-    icon: "Database",
-    skills: ["Cypher Query Language", "Graph Data Modeling", "Graph Algorithms", "Neo4j APOC"],
   },
-
-  // ── Security ────────────────────────────────────────────────────────────
   {
-    id: "fortinet-nse1",
-    name: "Fortinet NSE 1 – Information Security Awareness",
+    name: "Fortinet NSE 1, NSE 2, NSE 3",
     issuer: "Fortinet Network Security Expert",
-    issuerUrl: "https://www.fortinet.com/training/certification",
-    dateOrStatus: "Valid until Jun 2026",
-    category: "Security",
-    status: "active",
-    icon: "Shield",
-    skills: ["Cybersecurity Fundamentals", "Threat Landscape"],
-  },
-  {
-    id: "fortinet-nse2",
-    name: "Fortinet NSE 2 – Network Security Associate",
-    issuer: "Fortinet Network Security Expert",
-    issuerUrl: "https://www.fortinet.com/training/certification",
-    dateOrStatus: "Valid until Jun 2026",
-    category: "Security",
-    status: "active",
-    icon: "Shield",
-    skills: ["Network Security Products", "Security Architecture Overview"],
-  },
-  {
-    id: "fortinet-nse3",
-    name: "Fortinet NSE 3 – Network Security Associate",
-    issuer: "Fortinet Network Security Expert",
-    issuerUrl: "https://www.fortinet.com/training/certification",
-    dateOrStatus: "Valid until Jun 2026",
-    category: "Security",
-    status: "active",
-    icon: "Shield",
-    skills: ["FortiGate Firewalls", "Endpoint Security", "Secure Email Gateway", "SIEM"],
-  },
-
-  // ── Academic Degrees ────────────────────────────────────────────────────
-  {
-    id: "dsti-msc",
-    name: "Applied MSc in Data Science & Artificial Intelligence",
-    issuer: "Data ScienceTech Institute (DSTI), France",
-    issuerUrl: "https://www.datasciencetech.institute",
-    dateOrStatus: "Graduated 2024 · Summa Cum Laude",
-    category: "Academic",
-    status: "active",
-    icon: "GraduationCap",
-    skills: ["Machine Learning", "Deep Learning", "Big Data (Spark)", "MLOps", "Cloud (AWS/Azure)", "Graph Analytics"],
-  },
-  {
-    id: "northumbria-bsc",
-    name: "BSc (Hons) Computer Security",
-    issuer: "Northumbria University, United Kingdom",
-    issuerUrl: "https://www.northumbria.ac.uk",
-    dateOrStatus: "Graduated 2020 · Honours",
-    category: "Academic",
-    status: "active",
-    icon: "GraduationCap",
-    skills: ["Network Security", "Cryptography", "IDS/IPS (SNORT)", "Ethical Hacking", "Computer Forensics"],
+    dateOrStatus: "Valid until June 2026",
   },
 ];

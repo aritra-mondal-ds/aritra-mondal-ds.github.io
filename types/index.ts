@@ -104,15 +104,8 @@ export interface Education {
 }
 
 export interface Certification {
-  id: string;
   name: string;
   issuer: string;
-  issuerUrl?: string;
   dateOrStatus: string;
-  credentialId?: string;
-  credentialUrl?: string;
-  category: "Cloud" | "Database" | "Security" | "ML & AI" | "Data Engineering" | "Academic";
-  status: "active" | "in-progress" | "expired";
-  icon?: string;
-  skills?: string[];
+  badgeUrl?: string;
 }

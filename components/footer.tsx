@@ -44,12 +44,6 @@ export function Footer() {
               Experience
             </a>
             <a
-              href="#certifications"
-              className="hover:text-foreground transition-colors"
-            >
-              Certifications
-            </a>
-            <a
               href="#terminal"
               className="hover:text-foreground transition-colors"
             >
