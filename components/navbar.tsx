@@ -3,30 +3,53 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { profileData } from "@/data/profile";
+import { profileDataFr } from "@/data/fr/profile";
+import { uiEn } from "@/data/en/ui";
+import { uiFr } from "@/data/fr/ui";
 import { ThemeToggle } from "./theme-toggle";
-import { FileDown, Menu, X, Sparkles } from "lucide-react";
+import { FileDown, Menu, X, Sparkles, Globe } from "lucide-react";
 import { Github, Linkedin } from "@/components/icons";
 
-export function Navbar() {
+interface NavbarProps {
+  locale?: "en" | "fr";
+}
+
+export function Navbar({ locale = "en" }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [currentHash, setCurrentHash] = useState("");
+
+  const currentProfile = locale === "fr" ? profileDataFr : profileData;
+  const currentUi = locale === "fr" ? uiFr : uiEn;
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
+    const handleHash = () => {
+      setCurrentHash(window.location.hash);
+    };
+
+    handleHash();
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("hashchange", handleHash);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("hashchange", handleHash);
+    };
   }, []);
 
   const navLinks = [
-    { name: "Projects", href: "#projects" },
-    { name: "Skills", href: "#skills" },
-    { name: "Experience", href: "#experience" },
-    { name: "Education", href: "#education" },
-    { name: "Terminal", href: "#terminal" },
-    { name: "Contact", href: "#contact" },
+    { name: currentUi.nav.projects, href: "#projects" },
+    { name: currentUi.nav.skills, href: "#skills" },
+    { name: currentUi.nav.experience, href: "#experience" },
+    { name: currentUi.nav.education, href: "#education" },
+    { name: currentUi.nav.terminal, href: "#terminal" },
+    { name: currentUi.nav.contact, href: "#contact" },
   ];
+
+  const targetEnHref = currentHash ? `/${currentHash}` : "/";
+  const targetFrHref = currentHash ? `/fr/${currentHash}` : "/fr/";
 
   return (
     <header
@@ -40,7 +63,7 @@ export function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo / Personal Brand */}
           <Link
-            href="/"
+            href={locale === "fr" ? "/fr/" : "/"}
             className="group flex items-center gap-3 text-foreground transition-opacity hover:opacity-90"
           >
             <div className="h-9 w-9 rounded-lg bg-gradient-to-tr from-indigo-600 to-indigo-400 flex items-center justify-center text-white font-mono font-bold text-sm shadow-glow-sm">
@@ -48,7 +71,7 @@ export function Navbar() {
             </div>
             <div className="flex flex-col">
               <span className="font-semibold text-sm tracking-tight flex items-center gap-1.5">
-                {profileData.name}
+                {currentProfile.name}
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               </span>
               <span className="text-[11px] text-muted-foreground font-mono">
@@ -72,6 +95,32 @@ export function Navbar() {
 
           {/* Actions & Socials */}
           <div className="hidden sm:flex items-center gap-2">
+            {/* Language Switcher Pill */}
+            <div className="inline-flex items-center p-0.5 rounded-lg border border-border bg-card/60 backdrop-blur-md shadow-sm text-xs font-mono">
+              <Link
+                href={targetEnHref}
+                className={`px-2 py-1 rounded-md transition-all ${
+                  locale === "en"
+                    ? "bg-indigo-600 text-white font-bold shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+                title="Switch to English"
+              >
+                EN
+              </Link>
+              <Link
+                href={targetFrHref}
+                className={`px-2 py-1 rounded-md transition-all ${
+                  locale === "fr"
+                    ? "bg-indigo-600 text-white font-bold shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+                title="Passer en Français"
+              >
+                FR
+              </Link>
+            </div>
+
             <a
               href="https://github.com/aritra-mondal-ds"
               target="_blank"
@@ -96,10 +145,10 @@ export function Navbar() {
               href="/cv.pdf"
               download="Aritra_Mondal_Data_Scientist_CV.pdf"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-border bg-card/60 backdrop-blur-md text-foreground hover:bg-muted transition-colors shadow-sm"
-              title="Download CV (PDF)"
+              title={locale === "fr" ? "Télécharger le CV (PDF)" : "Download CV (PDF)"}
             >
               <FileDown className="h-3.5 w-3.5 text-indigo-500" />
-              <span>CV</span>
+              <span>{currentUi.nav.downloadCv}</span>
             </a>
 
             <a
@@ -107,15 +156,40 @@ export function Navbar() {
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium bg-foreground text-background hover:opacity-90 transition-opacity shadow-sm"
             >
               <Sparkles className="h-3 w-3" />
-              <span>Hire Me</span>
+              <span>{currentUi.nav.hireMe}</span>
             </a>
 
             <ThemeToggle />
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="flex sm:hidden items-center gap-2">
+          {/* Mobile Menu Button & Language Switch */}
+          <div className="flex sm:hidden items-center gap-1.5">
+            {/* Mobile Language Switcher */}
+            <div className="inline-flex items-center p-0.5 rounded-md border border-border bg-card/60 text-[11px] font-mono">
+              <Link
+                href={targetEnHref}
+                className={`px-1.5 py-0.5 rounded ${
+                  locale === "en"
+                    ? "bg-indigo-600 text-white font-bold"
+                    : "text-muted-foreground"
+                }`}
+              >
+                EN
+              </Link>
+              <Link
+                href={targetFrHref}
+                className={`px-1.5 py-0.5 rounded ${
+                  locale === "fr"
+                    ? "bg-indigo-600 text-white font-bold"
+                    : "text-muted-foreground"
+                }`}
+              >
+                FR
+              </Link>
+            </div>
+
             <ThemeToggle />
+
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="h-9 w-9 rounded-lg border border-border bg-card/60 flex items-center justify-center text-muted-foreground hover:text-foreground"
@@ -140,22 +214,32 @@ export function Navbar() {
                   {link.name}
                 </a>
               ))}
-              <div className="pt-3 border-t border-border flex items-center gap-3">
+              <div className="pt-3 border-t border-border flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <a
+                    href="https://github.com/aritra-mondal-ds"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground py-1"
+                  >
+                    <Github className="h-4 w-4" /> GitHub
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/aritra-mondal-66702021"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground py-1"
+                  >
+                    <Linkedin className="h-4 w-4" /> LinkedIn
+                  </a>
+                </div>
                 <a
-                  href="https://github.com/aritra-mondal-ds"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground py-1"
+                  href="/cv.pdf"
+                  download="Aritra_Mondal_Data_Scientist_CV.pdf"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-medium border border-border bg-muted/80 text-foreground"
                 >
-                  <Github className="h-4 w-4" /> GitHub
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/aritra-mondal-66702021"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground py-1"
-                >
-                  <Linkedin className="h-4 w-4" /> LinkedIn
+                  <FileDown className="h-3 w-3 text-indigo-500" />
+                  <span>{currentUi.nav.downloadCv}</span>
                 </a>
               </div>
             </nav>

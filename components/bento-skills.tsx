@@ -2,7 +2,11 @@
 
 import React, { useState } from "react";
 import { skillCategories, certificationsData } from "@/data/skills";
+import { skillCategoriesFr, certificationsDataFr } from "@/data/fr/skills";
 import { profileData } from "@/data/profile";
+import { profileDataFr } from "@/data/fr/profile";
+import { uiEn } from "@/data/en/ui";
+import { uiFr } from "@/data/fr/ui";
 import {
   Brain,
   Database,
@@ -12,13 +16,20 @@ import {
   Languages,
   CheckCircle2,
   ExternalLink,
-  Terminal,
-  Cpu,
   Layers,
 } from "lucide-react";
 
-export function BentoSkills() {
+interface BentoSkillsProps {
+  locale?: "en" | "fr";
+}
+
+export function BentoSkills({ locale = "en" }: BentoSkillsProps) {
   const [activeFilter, setActiveFilter] = useState<string>("all");
+
+  const currentCategories = locale === "fr" ? skillCategoriesFr : skillCategories;
+  const currentCerts = locale === "fr" ? certificationsDataFr : certificationsData;
+  const currentProfile = locale === "fr" ? profileDataFr : profileData;
+  const currentUi = locale === "fr" ? uiFr : uiEn;
 
   const iconMap: Record<string, React.ReactNode> = {
     Brain: <Brain className="h-5 w-5 text-indigo-400" />,
@@ -35,13 +46,13 @@ export function BentoSkills() {
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-indigo-500 mb-2">
               <Layers className="h-3.5 w-3.5" />
-              <span>Technical Architecture</span>
+              <span>{currentUi.skills.badge}</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-              Core Competencies & Stack
+              {currentUi.skills.title}
             </h2>
             <p className="text-muted-foreground mt-2 max-w-2xl text-sm sm:text-base">
-              Organized by engineering discipline and production utility. Tested in enterprise distributed environments and rigorous academic research.
+              {currentUi.skills.subtitle}
             </p>
           </div>
 
@@ -56,7 +67,7 @@ export function BentoSkills() {
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
-                All
+                {currentUi.skills.filterAll}
               </button>
               <button
                 onClick={() => setActiveFilter("core")}
@@ -66,7 +77,7 @@ export function BentoSkills() {
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
-                Production Core
+                {currentUi.skills.filterCore}
               </button>
             </div>
           </div>
@@ -75,7 +86,7 @@ export function BentoSkills() {
         {/* Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* 4 Technical Domains */}
-          {skillCategories.map((category) => {
+          {currentCategories.map((category) => {
             const filteredSkills =
               activeFilter === "core"
                 ? category.skills.filter((s) => s.highlight)
@@ -92,7 +103,7 @@ export function BentoSkills() {
                       {iconMap[category.icon]}
                     </div>
                     <span className="text-[11px] font-mono text-muted-foreground">
-                      {filteredSkills.length} tools
+                      {filteredSkills.length} {currentUi.skills.toolsSuffix}
                     </span>
                   </div>
 
@@ -123,8 +134,10 @@ export function BentoSkills() {
                 </div>
 
                 <div className="mt-6 pt-4 border-t border-border/50 flex items-center justify-between text-[11px] font-mono text-muted-foreground">
-                  <span>Proficiency:</span>
-                  <span className="text-foreground font-semibold">Production Ready</span>
+                  <span>{currentUi.skills.proficiencyLabel}</span>
+                  <span className="text-foreground font-semibold">
+                    {currentUi.skills.proficiencyValue}
+                  </span>
                 </div>
               </div>
             );
@@ -138,19 +151,19 @@ export function BentoSkills() {
                   <Award className="h-5 w-5" />
                 </div>
                 <span className="text-[11px] font-mono text-amber-600 dark:text-amber-400 font-medium">
-                  Verified Credentials
+                  {currentUi.skills.verifiedBadge}
                 </span>
               </div>
 
               <h3 className="text-lg font-bold text-foreground mb-1">
-                Industry Certifications
+                {currentUi.skills.certificationsTitle}
               </h3>
               <p className="text-xs text-muted-foreground mb-4">
-                Cloud architecture, graph databases, and enterprise security frameworks.
+                {currentUi.skills.certificationsSub}
               </p>
 
               <div className="space-y-3">
-                {certificationsData.map((cert, cIdx) => (
+                {currentCerts.map((cert, cIdx) => (
                   <div
                     key={cIdx}
                     className="p-3 rounded-xl border border-border/70 bg-card/80 text-xs hover:border-indigo-500/30 transition-colors"
@@ -184,7 +197,7 @@ export function BentoSkills() {
             </div>
 
             <div className="mt-6 pt-4 border-t border-border/50 text-[11px] font-mono text-muted-foreground">
-              <span>Cloud Target: AWS Solutions Architect</span>
+              <span>{currentUi.skills.targetLabel}</span>
             </div>
           </div>
 
@@ -196,19 +209,19 @@ export function BentoSkills() {
                   <Languages className="h-5 w-5" />
                 </div>
                 <span className="text-[11px] font-mono text-indigo-600 dark:text-indigo-400 font-medium">
-                  Global Mobility
+                  {currentUi.skills.mobilityBadge}
                 </span>
               </div>
 
               <h3 className="text-lg font-bold text-foreground mb-1">
-                Languages & Communication
+                {currentUi.skills.mobilityTitle}
               </h3>
               <p className="text-xs text-muted-foreground mb-4">
-                Operating smoothly in cross-functional French & international agile teams.
+                {currentUi.skills.mobilitySub}
               </p>
 
               <div className="space-y-3">
-                {profileData.languages.map((lang, lIdx) => (
+                {currentProfile.languages.map((lang, lIdx) => (
                   <div
                     key={lIdx}
                     className="flex items-center justify-between p-3 rounded-xl border border-border/70 bg-card/80 text-xs"
@@ -228,9 +241,9 @@ export function BentoSkills() {
             </div>
 
             <div className="mt-6 pt-4 border-t border-border/50 text-[11px] font-mono text-muted-foreground flex items-center justify-between">
-              <span>Work Rights:</span>
+              <span>{currentUi.skills.workRightsLabel}</span>
               <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
-                Titre de séjour / EU Open
+                {currentUi.skills.workRightsValue}
               </span>
             </div>
           </div>

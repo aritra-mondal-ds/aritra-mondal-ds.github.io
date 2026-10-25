@@ -2,23 +2,33 @@
 
 import React, { useState } from "react";
 import { profileData } from "@/data/profile";
+import { profileDataFr } from "@/data/fr/profile";
+import { uiEn } from "@/data/en/ui";
+import { uiFr } from "@/data/fr/ui";
 import { Terminal, Copy, Check, Sparkles, Play } from "lucide-react";
 
-export function InteractiveTerminal() {
+interface InteractiveTerminalProps {
+  locale?: "en" | "fr";
+}
+
+export function InteractiveTerminal({ locale = "en" }: InteractiveTerminalProps) {
   const [activeCommand, setActiveCommand] = useState<string>("curl -s /profile | jq .");
   const [copied, setCopied] = useState(false);
 
-  const commandResponses: Record<string, object> = {
+  const currentProfile = locale === "fr" ? profileDataFr : profileData;
+  const currentUi = locale === "fr" ? uiFr : uiEn;
+
+  const commandResponsesEn: Record<string, object> = {
     "curl -s /profile | jq .": {
-      candidate: profileData.name,
+      candidate: currentProfile.name,
       role: "Data Scientist & ML Systems Engineer",
       education: "Applied MSc in DS & AI (Bac+5 / Summa Cum Laude)",
-      location: profileData.location,
+      location: currentProfile.location,
       work_authorization: "Authorized to work in France (Titre de séjour / EU Open)",
       experience_highlight: "Amadeus Production ML & Big Data Pipelines (Spark/Scala/AWS)",
       contact: {
-        email: profileData.email,
-        phone: profileData.phone,
+        email: currentProfile.email,
+        phone: currentProfile.phone,
         linkedin: "linkedin.com/in/aritra-mondal-66702021",
         github: "github.com/aritra-mondal-ds",
       },
@@ -39,13 +49,52 @@ export function InteractiveTerminal() {
       systems: ["SNORT IDS", "Network Protocols (TCP/UDP/ICMP)", "Java/Kotlin"],
     },
     "contact --fast": {
-      email: profileData.email,
-      phone: profileData.phone,
+      email: currentProfile.email,
+      phone: currentProfile.phone,
       paris_availability: "Available for on-site & hybrid interviews in Paris & France",
       calendly_or_chat: "Open to immediate recruiter phone screens & technical discussions",
     },
   };
 
+  const commandResponsesFr: Record<string, object> = {
+    "curl -s /profile | jq .": {
+      candidat: currentProfile.name,
+      poste: "Data Scientist & Ingénieur Systèmes ML",
+      formation: "Applied MSc en Data Science & IA (Bac+5 / Summa Cum Laude)",
+      localisation: currentProfile.location,
+      droit_de_travail: "Autorisé à travailler en France (Titre de séjour / Plein droit UE)",
+      realisation_phare: "Pipelines ML & Big Data en Production chez Amadeus (Spark/Scala/AWS)",
+      contact: {
+        email: currentProfile.email,
+        telephone: currentProfile.phone,
+        linkedin: "linkedin.com/in/aritra-mondal-66702021",
+        github: "github.com/aritra-mondal-ds",
+      },
+      statut: "En recherche active de postes à Paris et en France",
+    },
+    "cat production-metrics.json": {
+      acceleration_etl_amadeus: "Réduction de 35% de la latence par réécriture PySpark → Scala",
+      debit_de_donnees: "Flux d'événements Parquet multi-Go quotidiens sur AWS S3 & EMR",
+      features_series_temporelles: "73+ caractéristiques alpha développées avec validation walk-forward",
+      telemetrie_securite: "Réduction de 20% des faux positifs sur analyse de trafic IDS SNORT",
+      classement_academique_msc: "Mention Très Bien / Summa Cum Laude (Félicitations du Jury)",
+    },
+    "cat stack.json": {
+      frameworks_ml: ["Scikit-learn", "XGBoost", "PyTorch", "Transformers", "MLflow"],
+      big_data_distribue: ["Apache Spark", "PySpark", "Scala", "Parquet", "DuckDB", "SQL"],
+      cloud_et_infra: ["AWS EMR", "AWS S3", "Docker", "Jenkins CI/CD", "Linux/Bash"],
+      bases_de_donnees: ["Neo4j (Certifié)", "PostgreSQL", "DuckDB"],
+      systemes: ["SNORT IDS", "Protocoles Réseau (TCP/UDP/ICMP)", "Java/Kotlin"],
+    },
+    "contact --fast": {
+      email: currentProfile.email,
+      telephone: currentProfile.phone,
+      disponibilite_paris: "Disponible pour entretiens sur site et hybrides à Paris et France",
+      echange_ouvert: "Ouvert aux entretiens de préqualification téléphonique et techniques",
+    },
+  };
+
+  const commandResponses = locale === "fr" ? commandResponsesFr : commandResponsesEn;
   const currentOutput = commandResponses[activeCommand] || commandResponses["curl -s /profile | jq ."];
 
   const handleCopy = () => {
@@ -54,6 +103,13 @@ export function InteractiveTerminal() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const commands = [
+    "curl -s /profile | jq .",
+    "cat production-metrics.json",
+    "cat stack.json",
+    "contact --fast",
+  ];
+
   return (
     <section id="terminal" className="py-20 border-t border-border/60 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,79 +117,84 @@ export function InteractiveTerminal() {
         <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-indigo-500 mb-2">
             <Terminal className="h-3.5 w-3.5" />
-            <span>Developer Interface</span>
+            <span>{currentUi.terminal.badge}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-            Interactive Recruiter Terminal
+            {currentUi.terminal.title}
           </h2>
           <p className="text-muted-foreground mt-2 text-sm sm:text-base">
-            Inspect raw candidate metadata and production metrics via high-speed CLI queries.
+            {currentUi.terminal.subtitle}
           </p>
         </div>
 
-        {/* Terminal Window */}
-        <div className="max-w-3xl mx-auto rounded-2xl border border-zinc-800 bg-[#0d1117] text-zinc-100 shadow-2xl overflow-hidden font-mono text-xs sm:text-sm">
-          {/* Terminal Title Bar */}
-          <div className="px-4 py-3 bg-[#161b22] border-b border-zinc-800 flex items-center justify-between">
+        {/* Terminal Shell Window */}
+        <div className="max-w-4xl mx-auto rounded-2xl border border-zinc-800 bg-zinc-950 text-zinc-100 shadow-2xl overflow-hidden font-mono text-xs sm:text-sm">
+          {/* Title Bar */}
+          <div className="flex items-center justify-between px-4 py-3 bg-zinc-900 border-b border-zinc-800">
             <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
-              <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
-              <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
-              <span className="ml-2 text-xs text-zinc-400">aritra@production-node: ~</span>
+              <span className="h-3 w-3 rounded-full bg-red-500/80 inline-block" />
+              <span className="h-3 w-3 rounded-full bg-amber-500/80 inline-block" />
+              <span className="h-3 w-3 rounded-full bg-emerald-500/80 inline-block" />
+              <span className="text-xs text-zinc-400 font-mono ml-2">
+                aritra@production-node: ~
+              </span>
             </div>
 
             <button
               onClick={handleCopy}
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs transition-colors"
-              title="Copy JSON to clipboard"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs transition-colors"
             >
               {copied ? (
                 <>
                   <Check className="h-3.5 w-3.5 text-emerald-400" />
-                  <span className="text-emerald-400">Copied</span>
+                  <span>{currentUi.terminal.copied}</span>
                 </>
               ) : (
                 <>
                   <Copy className="h-3.5 w-3.5" />
-                  <span>Copy JSON</span>
+                  <span>{currentUi.terminal.copyJson}</span>
                 </>
               )}
             </button>
           </div>
 
-          {/* Quick Command Pills */}
-          <div className="px-4 py-2.5 bg-[#12161f] border-b border-zinc-800/80 flex flex-wrap items-center gap-2">
-            <span className="text-[11px] text-zinc-400">Run:</span>
-            {Object.keys(commandResponses).map((cmd) => (
+          {/* Command Buttons Strip */}
+          <div className="p-3 bg-zinc-900/50 border-b border-zinc-800/80 flex items-center gap-2 overflow-x-auto scrollbar-none">
+            <span className="text-xs text-zinc-500 pl-1">{currentUi.terminal.runLabel}</span>
+            {commands.map((cmd) => (
               <button
                 key={cmd}
                 onClick={() => setActiveCommand(cmd)}
-                className={`px-2 py-0.5 rounded text-[11px] transition-colors ${
+                className={`px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap flex items-center gap-1.5 ${
                   activeCommand === cmd
-                    ? "bg-indigo-600 text-white font-medium shadow-sm"
+                    ? "bg-indigo-600 text-white font-semibold"
                     : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
                 }`}
               >
-                ${cmd}
+                <Play className="h-2.5 w-2.5 fill-current" />
+                <span>{cmd}</span>
               </button>
             ))}
           </div>
 
-          {/* Command Prompt & Output */}
-          <div className="p-5 overflow-x-auto max-h-[420px] scrollbar-thin">
-            <div className="flex items-center gap-2 text-emerald-400 font-bold mb-3">
-              <span>visitor@paris-headhunter:~$</span>
-              <span className="text-zinc-100">{activeCommand}</span>
+          {/* Terminal Body */}
+          <div className="p-5 overflow-x-auto max-h-[380px] leading-relaxed text-zinc-300 scrollbar-thin">
+            <div className="flex items-center gap-2 text-indigo-400 mb-2">
+              <span className="text-emerald-400">$</span>
+              <span>{activeCommand}</span>
             </div>
-
-            <pre className="text-zinc-300 leading-relaxed font-mono whitespace-pre text-xs sm:text-sm">
-              <code>{JSON.stringify(currentOutput, null, 2)}</code>
+            <pre className="text-zinc-200">
+              {JSON.stringify(currentOutput, null, 2)}
             </pre>
+          </div>
 
-            <div className="mt-4 pt-3 border-t border-zinc-800/60 flex items-center gap-2 text-zinc-400 text-[11px]">
-              <span className="w-2 h-3.5 bg-emerald-400 animate-pulse inline-block" />
-              <span>Session: 200 OK · Latency: 12ms · Target: Paris / France Scale-Ups</span>
-            </div>
+          {/* Terminal Footer */}
+          <div className="px-4 py-2.5 bg-zinc-900/80 border-t border-zinc-800 text-[11px] text-zinc-400 flex items-center justify-between">
+            <span>{currentUi.terminal.sessionLabel}</span>
+            <span className="flex items-center gap-1.5 text-emerald-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              ONLINE
+            </span>
           </div>
         </div>
       </div>

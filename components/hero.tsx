@@ -3,6 +3,9 @@
 import React from "react";
 import Image from "next/image";
 import { profileData } from "@/data/profile";
+import { profileDataFr } from "@/data/fr/profile";
+import { uiEn } from "@/data/en/ui";
+import { uiFr } from "@/data/fr/ui";
 import {
   GraduationCap,
   MapPin,
@@ -17,7 +20,14 @@ import {
 } from "lucide-react";
 import { Github, Linkedin } from "@/components/icons";
 
-export function Hero() {
+interface HeroProps {
+  locale?: "en" | "fr";
+}
+
+export function Hero({ locale = "en" }: HeroProps) {
+  const currentProfile = locale === "fr" ? profileDataFr : profileData;
+  const currentUi = locale === "fr" ? uiFr : uiEn;
+
   const iconMap: Record<string, React.ReactNode> = {
     GraduationCap: <GraduationCap className="h-4 w-4 text-indigo-500" />,
     MapPin: <MapPin className="h-4 w-4 text-emerald-500" />,
@@ -38,26 +48,40 @@ export function Hero() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
-          <span>Actively Interviewing · Data Scientist roles in Paris & France (Hybrid/Onsite)</span>
+          <span>{currentUi.hero.badge}</span>
         </div>
 
         {/* Main Headline & Authentic Portrait */}
         <div className="flex flex-col-reverse md:flex-row md:items-center justify-between gap-8 max-w-5xl">
           <div className="space-y-4 max-w-3xl">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.12]">
-              Engineering{" "}
+              {currentUi.hero.headlinePrefix}{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-sky-400">
-                End-to-End Machine Learning
+                {currentUi.hero.headlineGradient}
               </span>{" "}
-              & Distributed Data Systems
+              {currentUi.hero.headlineSuffix}
             </h1>
 
             <p className="text-lg sm:text-xl text-muted-foreground font-normal leading-relaxed">
-              Hi, I&apos;m <span className="font-semibold text-foreground">{profileData.name}</span>. Data Scientist with production experience at{" "}
-              <span className="text-foreground font-medium underline decoration-indigo-400/50 underline-offset-4">
-                Amadeus
-              </span>{" "}
-              and an Applied MSc in Data Science & AI (Summa Cum Laude, Bac+5). I build scalable predictive models, distributed Spark/Scala pipelines, and resilient MLOps architectures.
+              {locale === "fr" ? (
+                <>
+                  Bonjour, je suis{" "}
+                  <span className="font-semibold text-foreground">{currentProfile.name}</span>. Data Scientist avec une expérience de production chez{" "}
+                  <span className="text-foreground font-medium underline decoration-indigo-400/50 underline-offset-4">
+                    Amadeus
+                  </span>{" "}
+                  et titulaire d&apos;un Applied MSc en Data Science & IA (Summa Cum Laude, Bac+5). Je conçois des modèles prédictifs scalables, des pipelines distribués Spark/Scala et des architectures MLOps résilientes.
+                </>
+              ) : (
+                <>
+                  Hi, I&apos;m{" "}
+                  <span className="font-semibold text-foreground">{currentProfile.name}</span>. Data Scientist with production experience at{" "}
+                  <span className="text-foreground font-medium underline decoration-indigo-400/50 underline-offset-4">
+                    Amadeus
+                  </span>{" "}
+                  and an Applied MSc in Data Science & AI (Summa Cum Laude, Bac+5). I build scalable predictive models, distributed Spark/Scala pipelines, and resilient MLOps architectures.
+                </>
+              )}
             </p>
           </div>
 
@@ -86,11 +110,11 @@ export function Hero() {
         <div className="mt-8 pt-6 border-t border-border/60">
           <div className="text-xs font-mono uppercase tracking-wider text-muted-foreground mb-3 flex items-center gap-2">
             <Sparkles className="h-3 w-3 text-indigo-500" />
-            <span>Key French Market Recruiter Signals</span>
+            <span>{currentUi.hero.recruiterTitle}</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
-            {profileData.recruiterSignals.map((signal, idx) => (
+            {currentProfile.recruiterSignals.map((signal, idx) => (
               <div
                 key={idx}
                 className="group relative flex items-start gap-3 p-3 rounded-xl border border-border/80 bg-card/60 backdrop-blur-sm hover:border-indigo-500/40 hover:bg-card/90 transition-all shadow-sm"
@@ -127,7 +151,7 @@ export function Hero() {
             href="#projects"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
           >
-            <span>View Projects</span>
+            <span>{currentUi.hero.viewProjects}</span>
             <ArrowRight className="h-4 w-4" />
           </a>
 
@@ -137,7 +161,7 @@ export function Hero() {
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-colors shadow-sm"
           >
             <FileDown className="h-4 w-4 text-indigo-500" />
-            <span>Download CV (PDF)</span>
+            <span>{currentUi.hero.downloadCvPdf}</span>
           </a>
 
           <a
@@ -145,7 +169,7 @@ export function Hero() {
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-colors shadow-sm"
           >
             <Mail className="h-4 w-4 text-muted-foreground" />
-            <span>Get in Touch</span>
+            <span>{currentUi.hero.getInTouch}</span>
           </a>
 
           <a

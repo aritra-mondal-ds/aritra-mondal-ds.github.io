@@ -10,16 +10,16 @@ import { Footer } from "@/components/footer";
 export default function Home() {
   return (
     <>
-      <Navbar />
+      <Navbar locale="en" />
       <main className="flex-1">
-        <Hero />
-        <ProjectsSection />
-        <BentoSkills />
-        <ExperienceTimeline />
-        <InteractiveTerminal />
-        <ContactSection />
+        <Hero locale="en" />
+        <ProjectsSection locale="en" />
+        <BentoSkills locale="en" />
+        <ExperienceTimeline locale="en" />
+        <InteractiveTerminal locale="en" />
+        <ContactSection locale="en" />
       </main>
-      <Footer />
+      <Footer locale="en" />
     </>
   );
 }

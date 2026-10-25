@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import { Project } from "@/types";
+import { uiEn } from "@/data/en/ui";
+import { uiFr } from "@/data/fr/ui";
 import {
   ExternalLink,
   TrendingUp,
@@ -17,10 +19,12 @@ import { Github } from "@/components/icons";
 interface ProjectCardProps {
   project: Project;
   featuredIndex?: number;
+  locale?: "en" | "fr";
 }
 
-export function ProjectCard({ project, featuredIndex }: ProjectCardProps) {
+export function ProjectCard({ project, featuredIndex, locale = "en" }: ProjectCardProps) {
   const [expanded, setExpanded] = useState(false);
+  const currentUi = locale === "fr" ? uiFr : uiEn;
 
   return (
     <article className="group relative rounded-2xl border border-border bg-card/80 hover:border-indigo-500/40 hover:bg-card transition-all duration-300 shadow-sm hover:shadow-lg flex flex-col justify-between overflow-hidden">
@@ -68,7 +72,9 @@ export function ProjectCard({ project, featuredIndex }: ProjectCardProps) {
               <AlertCircle className="h-3.5 w-3.5" />
             </div>
             <div>
-              <span className="font-semibold text-foreground">Problem: </span>
+              <span className="font-semibold text-foreground">
+                {currentUi.projects.problemLabel}:{" "}
+              </span>
               <span className="text-muted-foreground">{project.problem}</span>
             </div>
           </div>
@@ -79,7 +85,9 @@ export function ProjectCard({ project, featuredIndex }: ProjectCardProps) {
               <Lightbulb className="h-3.5 w-3.5" />
             </div>
             <div>
-              <span className="font-semibold text-foreground">Solution: </span>
+              <span className="font-semibold text-foreground">
+                {currentUi.projects.solutionLabel}:{" "}
+              </span>
               <span className="text-muted-foreground">{project.solution}</span>
             </div>
           </div>
@@ -93,7 +101,9 @@ export function ProjectCard({ project, featuredIndex }: ProjectCardProps) {
                   <Server className="h-3.5 w-3.5" />
                 </div>
                 <div>
-                  <span className="font-semibold text-foreground">Production & Scale: </span>
+                  <span className="font-semibold text-foreground">
+                    {currentUi.projects.productionLabel}:{" "}
+                  </span>
                   <span className="text-muted-foreground">{project.production}</span>
                 </div>
               </div>
@@ -104,7 +114,9 @@ export function ProjectCard({ project, featuredIndex }: ProjectCardProps) {
                   <TrendingUp className="h-3.5 w-3.5" />
                 </div>
                 <div>
-                  <span className="font-semibold text-foreground">Business Impact: </span>
+                  <span className="font-semibold text-foreground">
+                    {currentUi.projects.impactLabel}:{" "}
+                  </span>
                   <span className="text-foreground font-medium">{project.businessImpact}</span>
                 </div>
               </div>
@@ -118,11 +130,11 @@ export function ProjectCard({ project, featuredIndex }: ProjectCardProps) {
         >
           {expanded ? (
             <>
-              Show less <ChevronUp className="h-3.5 w-3.5" />
+              {currentUi.projects.showLess} <ChevronUp className="h-3.5 w-3.5" />
             </>
           ) : (
             <>
-              View production & impact architecture <ChevronDown className="h-3.5 w-3.5" />
+              {currentUi.projects.showMore} <ChevronDown className="h-3.5 w-3.5" />
             </>
           )}
         </button>
@@ -151,7 +163,7 @@ export function ProjectCard({ project, featuredIndex }: ProjectCardProps) {
                 className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Github className="h-3.5 w-3.5" />
-                <span>Source Code</span>
+                <span>{currentUi.projects.sourceCode}</span>
               </a>
             )}
 
@@ -163,13 +175,13 @@ export function ProjectCard({ project, featuredIndex }: ProjectCardProps) {
                 className="inline-flex items-center gap-1.5 text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:underline transition-colors"
               >
                 <ExternalLink className="h-3.5 w-3.5" />
-                <span>Interactive / Details</span>
+                <span>{currentUi.projects.interactive}</span>
               </a>
             )}
           </div>
 
           <span className="text-[11px] font-mono text-muted-foreground">
-            XYZ Impact Proven
+            {currentUi.projects.provenLabel}
           </span>
         </div>
       </div>

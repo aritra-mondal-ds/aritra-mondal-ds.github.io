@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import { experiencesData, educationData } from "@/data/experience";
+import { experiencesDataFr, educationDataFr } from "@/data/fr/experience";
+import { uiEn } from "@/data/en/ui";
+import { uiFr } from "@/data/fr/ui";
 import {
   Briefcase,
   GraduationCap,
@@ -17,9 +20,17 @@ import {
   ChevronUp,
 } from "lucide-react";
 
-export function ExperienceTimeline() {
+interface ExperienceTimelineProps {
+  locale?: "en" | "fr";
+}
+
+export function ExperienceTimeline({ locale = "en" }: ExperienceTimelineProps) {
   const [activeTab, setActiveTab] = useState<"experience" | "education">("experience");
   const [expandedModules, setExpandedModules] = useState<Record<string, boolean>>({});
+
+  const currentExperiences = locale === "fr" ? experiencesDataFr : experiencesData;
+  const currentEducation = locale === "fr" ? educationDataFr : educationData;
+  const currentUi = locale === "fr" ? uiFr : uiEn;
 
   useEffect(() => {
     const handleHash = () => {
@@ -66,13 +77,13 @@ export function ExperienceTimeline() {
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-indigo-500 mb-2">
               <Briefcase className="h-3.5 w-3.5" />
-              <span>Career Trajectory</span>
+              <span>{currentUi.experience.badge}</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-              Experience & Education
+              {currentUi.experience.title}
             </h2>
             <p className="text-muted-foreground mt-2 max-w-2xl text-sm sm:text-base">
-              Dual background in enterprise production data science and European academic excellence.
+              {currentUi.experience.subtitle}
             </p>
           </div>
 
@@ -87,7 +98,9 @@ export function ExperienceTimeline() {
               }`}
             >
               <Briefcase className="h-3.5 w-3.5" />
-              <span>Work Experience ({experiencesData.length})</span>
+              <span>
+                {currentUi.experience.tabExperience} ({currentExperiences.length})
+              </span>
             </button>
             <button
               onClick={() => handleTabChange("education")}
@@ -98,7 +111,9 @@ export function ExperienceTimeline() {
               }`}
             >
               <GraduationCap className="h-3.5 w-3.5" />
-              <span>Education & Bac+5 ({educationData.length})</span>
+              <span>
+                {currentUi.experience.tabEducation} ({currentEducation.length})
+              </span>
             </button>
           </div>
         </div>
@@ -106,7 +121,7 @@ export function ExperienceTimeline() {
         {/* ─── Work Experience ─── */}
         {activeTab === "experience" ? (
           <div className="space-y-8 relative before:absolute before:inset-0 before:left-3.5 sm:before:left-5 before:h-full before:w-0.5 before:bg-border">
-            {experiencesData.map((exp) => (
+            {currentExperiences.map((exp) => (
               <div key={exp.id} className="relative flex items-start gap-6 sm:gap-8 group">
                 {/* Timeline node */}
                 <div className="relative z-10 flex h-7 w-7 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-card border-2 border-indigo-600 text-indigo-600 dark:text-indigo-400 font-mono font-bold text-xs shadow-md shrink-0">
@@ -145,7 +160,7 @@ export function ExperienceTimeline() {
 
                   <div className="space-y-2.5 my-4">
                     <span className="text-xs font-mono font-semibold uppercase tracking-wider text-foreground">
-                      Quantified Accomplishments (XYZ Framework):
+                      {currentUi.experience.xyzLabel}
                     </span>
                     <ul className="space-y-2">
                       {exp.achievements.map((ach, idx) => (
@@ -171,11 +186,10 @@ export function ExperienceTimeline() {
               </div>
             ))}
           </div>
-
         ) : (
           /* ─── Education ─── */
           <div className="space-y-8 relative before:absolute before:inset-0 before:left-3.5 sm:before:left-5 before:h-full before:w-0.5 before:bg-border">
-            {educationData.map((edu) => {
+            {currentEducation.map((edu) => {
               const modulesOpen = !!expandedModules[edu.id];
               return (
                 <div key={edu.id} className="relative flex items-start gap-6 sm:gap-8 group">
@@ -186,7 +200,6 @@ export function ExperienceTimeline() {
 
                   {/* Card */}
                   <div className="flex-1 p-6 sm:p-7 rounded-2xl border border-border bg-card/80 hover:border-indigo-500/40 hover:bg-card transition-all duration-300 shadow-sm">
-
                     {/* Header row */}
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-3">
                       <div className="flex-1">
@@ -243,7 +256,7 @@ export function ExperienceTimeline() {
                       <div className="mb-4 p-3.5 rounded-xl border border-border/70 bg-muted/40">
                         <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-foreground mb-1.5">
                           <FlaskConical className="h-3.5 w-3.5 text-indigo-500" />
-                          <span>Final Project / Thesis</span>
+                          <span>{currentUi.experience.thesisLabel}</span>
                         </div>
                         <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                           {edu.thesis}
@@ -259,7 +272,9 @@ export function ExperienceTimeline() {
                           className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-foreground hover:text-indigo-500 transition-colors mb-2"
                         >
                           <BookOpen className="h-3.5 w-3.5 text-indigo-500" />
-                          <span>Core Modules ({edu.modules.length})</span>
+                          <span>
+                            {currentUi.experience.modulesLabel} ({edu.modules.length})
+                          </span>
                           {modulesOpen
                             ? <ChevronUp className="h-3.5 w-3.5" />
                             : <ChevronDown className="h-3.5 w-3.5" />}
@@ -284,7 +299,7 @@ export function ExperienceTimeline() {
                     {/* Skills gained */}
                     <div className="pt-4 border-t border-border/60">
                       <span className="text-xs font-mono font-semibold uppercase tracking-wider text-muted-foreground block mb-2">
-                        Technical Skills Developed:
+                        {currentUi.experience.skillsLabel}
                       </span>
                       <div className="flex flex-wrap gap-1.5">
                         {edu.skillsGained.map((skill, sIdx) => (

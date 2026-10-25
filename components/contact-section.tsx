@@ -2,6 +2,9 @@
 
 import React, { useState } from "react";
 import { profileData } from "@/data/profile";
+import { profileDataFr } from "@/data/fr/profile";
+import { uiEn } from "@/data/en/ui";
+import { uiFr } from "@/data/fr/ui";
 import {
   Mail,
   Phone,
@@ -15,18 +18,25 @@ import {
 } from "lucide-react";
 import { Github, Linkedin } from "@/components/icons";
 
-export function ContactSection() {
+interface ContactSectionProps {
+  locale?: "en" | "fr";
+}
+
+export function ContactSection({ locale = "en" }: ContactSectionProps) {
   const [emailCopied, setEmailCopied] = useState(false);
   const [phoneCopied, setPhoneCopied] = useState(false);
 
+  const currentProfile = locale === "fr" ? profileDataFr : profileData;
+  const currentUi = locale === "fr" ? uiFr : uiEn;
+
   const copyEmail = () => {
-    navigator.clipboard.writeText(profileData.email);
+    navigator.clipboard.writeText(currentProfile.email);
     setEmailCopied(true);
     setTimeout(() => setEmailCopied(false), 2000);
   };
 
   const copyPhone = () => {
-    navigator.clipboard.writeText(profileData.phone);
+    navigator.clipboard.writeText(currentProfile.phone);
     setPhoneCopied(true);
     setTimeout(() => setPhoneCopied(false), 2000);
   };
@@ -41,13 +51,13 @@ export function ContactSection() {
           <div className="text-center max-w-2xl mx-auto mb-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-xs font-mono font-medium mb-3">
               <Sparkles className="h-3.5 w-3.5" />
-              <span>Direct Recruitment Channel</span>
+              <span>{currentUi.contact.badge}</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-              Let&apos;s Build Something Extraordinary
+              {currentUi.contact.title}
             </h2>
             <p className="text-muted-foreground mt-3 text-sm sm:text-base">
-              Actively targeting Mid/Senior Data Scientist, ML Engineer, and Big Data positions in France (Paris, Sophia Antipolis, Lyon, Hybrid, or EU Remote).
+              {currentUi.contact.subtitle}
             </p>
           </div>
 
@@ -60,29 +70,31 @@ export function ContactSection() {
                 </div>
                 <button
                   onClick={copyEmail}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono bg-muted hover:bg-muted/80 text-foreground transition-colors"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono border border-border bg-muted/60 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {emailCopied ? (
                     <>
                       <Check className="h-3.5 w-3.5 text-emerald-500" />
-                      <span className="text-emerald-500">Copied</span>
+                      <span>{currentUi.terminal.copied}</span>
                     </>
                   ) : (
                     <>
                       <Copy className="h-3.5 w-3.5" />
-                      <span>Copy Email</span>
+                      <span>{currentUi.contact.copyEmail}</span>
                     </>
                   )}
                 </button>
               </div>
 
               <div>
-                <span className="text-xs font-mono text-muted-foreground">Email Address</span>
+                <span className="text-xs font-mono text-muted-foreground uppercase">
+                  {currentUi.contact.emailLabel}
+                </span>
                 <a
-                  href={`mailto:${profileData.email}`}
-                  className="text-base font-bold text-foreground hover:text-indigo-600 dark:hover:text-indigo-400 block mt-0.5 truncate"
+                  href={`mailto:${currentProfile.email}`}
+                  className="block text-base sm:text-lg font-bold text-foreground hover:text-indigo-500 transition-colors mt-0.5 truncate"
                 >
-                  {profileData.email}
+                  {currentProfile.email}
                 </a>
               </div>
             </div>
@@ -95,80 +107,82 @@ export function ContactSection() {
                 </div>
                 <button
                   onClick={copyPhone}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono bg-muted hover:bg-muted/80 text-foreground transition-colors"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono border border-border bg-muted/60 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {phoneCopied ? (
                     <>
                       <Check className="h-3.5 w-3.5 text-emerald-500" />
-                      <span className="text-emerald-500">Copied</span>
+                      <span>{currentUi.terminal.copied}</span>
                     </>
                   ) : (
                     <>
                       <Copy className="h-3.5 w-3.5" />
-                      <span>Copy Number</span>
+                      <span>{currentUi.contact.copyPhone}</span>
                     </>
                   )}
                 </button>
               </div>
 
               <div>
-                <span className="text-xs font-mono text-muted-foreground">Direct Mobile (France)</span>
+                <span className="text-xs font-mono text-muted-foreground uppercase">
+                  {currentUi.contact.phoneLabel}
+                </span>
                 <a
-                  href={`tel:${profileData.phone.replace(/[^0-9+]/g, "")}`}
-                  className="text-base font-bold text-foreground hover:text-emerald-600 dark:hover:text-emerald-400 block mt-0.5"
+                  href={`tel:${currentProfile.phone.replace(/[^0-9+]/g, "")}`}
+                  className="block text-base sm:text-lg font-bold text-foreground hover:text-indigo-500 transition-colors mt-0.5"
                 >
-                  {profileData.phone}
+                  {currentProfile.phone}
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Recruiter Assurance Bar */}
-          <div className="p-4 rounded-xl border border-border/80 bg-muted/40 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-indigo-500 shrink-0" />
-              <span>Based in France · Mobile for Paris</span>
+          {/* Quick Signal Pills */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 my-6 pt-6 border-t border-border/60 text-xs text-muted-foreground">
+            <div className="flex items-center gap-2 p-2.5 rounded-xl bg-card/60 border border-border/60">
+              <MapPin className="h-4 w-4 text-emerald-500 shrink-0" />
+              <span>{currentUi.contact.basedLabel}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-emerald-500 shrink-0" />
-              <span>Titre de séjour · Immediate Rights</span>
+            <div className="flex items-center gap-2 p-2.5 rounded-xl bg-card/60 border border-border/60">
+              <ShieldCheck className="h-4 w-4 text-indigo-500 shrink-0" />
+              <span>{currentUi.contact.rightsLabel}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4 text-amber-500 shrink-0" />
-              <span>Response Time: &lt; 24 Hours</span>
+            <div className="flex items-center gap-2 p-2.5 rounded-xl bg-card/60 border border-border/60">
+              <Clock className="h-4 w-4 text-sky-500 shrink-0" />
+              <span>{currentUi.contact.responseLabel}</span>
             </div>
           </div>
 
-          {/* Social Profiles & Direct CTA */}
-          <div className="mt-8 pt-6 border-t border-border flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <a
-                href="https://www.linkedin.com/in/aritra-mondal-66702021"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium border border-border bg-card hover:bg-muted text-foreground transition-colors"
-              >
-                <Linkedin className="h-4 w-4 text-sky-500" />
-                <span>LinkedIn Message</span>
-              </a>
-
-              <a
-                href="https://github.com/aritra-mondal-ds"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium border border-border bg-card hover:bg-muted text-foreground transition-colors"
-              >
-                <Github className="h-4 w-4" />
-                <span>GitHub Repositories</span>
-              </a>
-            </div>
-
+          {/* Direct Contact CTAs */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-6 border-t border-border/60">
             <a
-              href={`mailto:${profileData.email}?subject=Data%20Scientist%20Opportunity%20-%20Interview%20Inquiry`}
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              href={`mailto:${currentProfile.email}?subject=Entretien%20Data%20Scientist%20-%20Aritra%20Mondal`}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
               <Send className="h-4 w-4" />
-              <span>Schedule Initial Interview</span>
+              <span>
+                {locale === "fr" ? "Envoyer un e-mail à Aritra" : "Send an Email to Aritra"}
+              </span>
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/aritra-mondal-66702021"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-colors shadow-sm"
+            >
+              <Linkedin className="h-4 w-4 text-sky-500" />
+              <span>{currentUi.contact.linkedinLabel}</span>
+            </a>
+
+            <a
+              href="https://github.com/aritra-mondal-ds"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-colors shadow-sm"
+            >
+              <Github className="h-4 w-4" />
+              <span>{currentUi.contact.githubLabel}</span>
             </a>
           </div>
         </div>
