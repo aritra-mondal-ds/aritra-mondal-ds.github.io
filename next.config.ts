@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Enables static export compatibility for GitHub Pages or Vercel
-  // Set images unoptimized so static exports or custom hosts don't break
+  // Enables static export compatibility for GitHub Pages, Cloudflare Pages, or Vercel
+  output: "export",
   images: {
     unoptimized: true,
   },
