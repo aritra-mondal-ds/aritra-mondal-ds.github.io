@@ -146,12 +146,24 @@ export function ExperienceTimeline({ locale = "en" }: ExperienceTimelineProps) {
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
                     <div>
                       <h3 className="text-xl font-bold text-foreground">{exp.role}</h3>
-                      <div className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 flex items-center gap-2 mt-0.5">
+                      <div className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 flex flex-wrap items-center gap-2 mt-0.5">
                         <Building2 className="h-3.5 w-3.5" />
                         <span>{exp.company}</span>
                         <span className="text-xs font-mono font-normal px-2 py-0.5 rounded bg-muted text-muted-foreground border border-border">
                           {exp.type}
                         </span>
+                        {(exp.location.toLowerCase().includes("hybrid") || exp.location.toLowerCase().includes("hybride")) && (
+                          <span className="text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25 flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                            {locale === "fr" ? "Mode Hybride (Présentiel & Télétravail)" : "Hybrid (On-site & Remote)"}
+                          </span>
+                        )}
+                        {(exp.location.toLowerCase().includes("100% remote") || exp.location.toLowerCase().includes("100% télétravail")) && (
+                          <span className="text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-sky-500/10 text-sky-700 dark:text-sky-300 border border-sky-500/25 flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
+                            {locale === "fr" ? "100% Télétravail (Autonomie complète)" : "100% Autonomous Remote"}
+                          </span>
+                        )}
                       </div>
                     </div>
 

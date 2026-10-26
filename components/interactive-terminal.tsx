@@ -21,8 +21,9 @@ export function InteractiveTerminal({ locale = "en" }: InteractiveTerminalProps)
   const commandResponsesEn: Record<string, object> = {
     "curl -s /profile | jq .": {
       candidate: currentProfile.name,
-      role: "Data Scientist & ML Systems Engineer",
+      role: "Entry-level / Junior-Mid Data Scientist & ML Systems Engineer",
       education: "Applied MSc in DS & AI (Bac+5 / Summa Cum Laude)",
+      work_model: "Hybrid (On-site & Remote) & 100% Remote autonomous execution proven",
       location: currentProfile.location,
       work_authorization: "Authorized to work in France (Titre de séjour / EU Open)",
       experience_highlight: "Amadeus Production ML & Big Data Pipelines (Spark/Scala/AWS)",
@@ -62,8 +63,9 @@ export function InteractiveTerminal({ locale = "en" }: InteractiveTerminalProps)
   const commandResponsesFr: Record<string, object> = {
     "curl -s /profile | jq .": {
       candidat: currentProfile.name,
-      poste: "Data Scientist & Ingénieur Systèmes ML",
+      poste: "Data Scientist & Ingénieur Systèmes ML (Junior – Confirmé)",
       formation: "Applied MSc en Data Science & IA (Bac+5 / Summa Cum Laude)",
+      mode_de_travail: "Expérience Hybride (Amadeus) & 100% Télétravail autonome prouvé (Jungleworks)",
       localisation: currentProfile.location,
       droit_de_travail: "Autorisé à travailler en France (Titre de séjour / Plein droit UE)",
       realisation_phare: "Pipelines ML & Big Data en Production chez Amadeus (Spark/Scala/AWS)",

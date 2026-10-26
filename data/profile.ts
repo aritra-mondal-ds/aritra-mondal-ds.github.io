@@ -58,7 +58,7 @@ export const profileData: Profile = {
       label: "Contract Target",
       value: "CDI (Statut Cadre)",
       badge: "Permanent Contract",
-      detail: "Targeting Mid/Senior Data Scientist & ML Engineer roles across France",
+      detail: "Targeting Entry-level, Junior to Mid-level Data Scientist & ML Engineer roles across France",
     },
     {
       icon: "GraduationCap",
@@ -96,10 +96,10 @@ export const recruiterFastTrackEn: RecruiterFastTrack = {
   availability: "Immediate (Available to start without delay)",
   noticePeriod: "0 days (No current employment notice period / Aucun préavis)",
   contractType: "CDI (Permanent contract / Statut Cadre)",
-  targetRole: "Data Scientist / Machine Learning Engineer / Big Data ML Specialist",
+  targetRole: "Entry-level / Junior – Mid Data Scientist & Machine Learning Engineer",
   locationDetails: "Paris & Île-de-France (Immediate autonomous relocation / Hybrid 2-3 days or Full Onsite), Biarritz, Sophia Antipolis, Lyon, or EU Remote",
   workAuthorization: "Titre de séjour / Full legal work authorization across France & EU (No complex visa sponsorship required)",
-  salaryExpectation: "Aligned with Paris market standards (€50,000 – €62,000 base according to seniority, bonus & hybrid package)",
+  salaryExpectation: "Aligned with Paris market standards (€42,000 – €52,000 base for Junior / Mid roles, bonus & hybrid package)",
   languages: "English (Native / C2), French (Professional B1/B2 — daily engineering syncs, technical documentation, written & oral communication)",
   topHighlights: [
     {
@@ -116,7 +116,7 @@ export const recruiterFastTrackEn: RecruiterFastTrack = {
     }
   ],
   slackPitch: `*Candidate Synthesis : Aritra Mondal*
-• *Target Role* : Data Scientist / Machine Learning Engineer
+• *Target Role* : Entry-level / Junior – Mid Data Scientist & Machine Learning Engineer
 • *Contract & Availability* : CDI (Statut Cadre) — *Immediate availability (0-day notice / Aucun préavis)*
 • *Education* : Applied MSc in Data Science & AI (DSTI France, Bac+5 Equivalent — Summa Cum Laude) + BSc (Hons) Computer Security
 • *Production Track Record* : Amadeus (Distributed airline demand forecasting on AWS EMR, Spark/Scala migration with 35% ETL speedup, Parquet, Jenkins CI/CD)

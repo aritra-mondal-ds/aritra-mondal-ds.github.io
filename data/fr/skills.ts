@@ -73,7 +73,7 @@ export const certificationsDataFr: Certification[] = [
   {
     name: "AWS Certified Solutions Architect – Associate",
     issuer: "Amazon Web Services (AWS)",
-    dateOrStatus: "En cours de préparation (2025)",
+    dateOrStatus: "En cours (Prévu 2027)",
     verifyUrl: "https://aws.amazon.com/certification/certified-solutions-architect-associate/",
   },
   {
@@ -83,21 +83,27 @@ export const certificationsDataFr: Certification[] = [
     verifyUrl: "https://graphacademy.neo4j.com/",
   },
   {
+    name: "Certified Ethical Hacker (CEH)",
+    issuer: "EC-Council",
+    dateOrStatus: "Obtenu en 2019",
+    verifyUrl: "https://www.eccouncil.org/train-certify/certified-ethical-hacker-ceh/",
+  },
+  {
     name: "Fortinet NSE 1 – Sensibilisation à la Cybersécurité",
     issuer: "Fortinet Training Institute",
-    dateOrStatus: "Valide jusqu'en juin 2026",
+    dateOrStatus: "Obtenu en Juin 2026",
     verifyUrl: "https://www.fortinet.com/training/certification",
   },
   {
     name: "Fortinet NSE 2 – Fondamentaux de la Sécurité Réseau",
     issuer: "Fortinet Training Institute",
-    dateOrStatus: "Valide jusqu'en juin 2026",
+    dateOrStatus: "Obtenu en Juin 2026",
     verifyUrl: "https://www.fortinet.com/training/certification",
   },
   {
     name: "Fortinet NSE 3 – Produits & Architectures de Sécurité",
     issuer: "Fortinet Training Institute",
-    dateOrStatus: "Valide jusqu'en juin 2026",
+    dateOrStatus: "Obtenu en Juin 2026",
     verifyUrl: "https://www.fortinet.com/training/certification",
   },
 ];

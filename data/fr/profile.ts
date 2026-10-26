@@ -58,7 +58,7 @@ export const profileDataFr: Profile = {
       label: "Contrat Cible",
       value: "CDI (Statut Cadre)",
       badge: "Emploi Stable",
-      detail: "À la recherche d'un poste en CDI en tant que Data Scientist / ML Engineer en France",
+      detail: "Cible des postes Junior à Confirmé (Entry-level / Junior-Mid) en Data Science & ML en France",
     },
     {
       icon: "GraduationCap",
@@ -96,10 +96,10 @@ export const recruiterFastTrackFr: RecruiterFastTrack = {
   availability: "Immédiate (Sans délai d'attente)",
   noticePeriod: "0 jour (Aucun préavis en cours / Disponibilité totale)",
   contractType: "CDI (Contrat à Durée Indéterminée / Statut Cadre)",
-  targetRole: "Data Scientist / Machine Learning Engineer / Spécialiste Big Data & MLOps",
+  targetRole: "Data Scientist / Machine Learning Engineer (Profil Junior à Confirmé)",
   locationDetails: "Paris & Île-de-France (Installation autonome immédiate / 2–3 jours hybride ou présentiel complet), Biarritz, Sophia Antipolis, Lyon ou Télétravail France/Europe",
   workAuthorization: "Titre de séjour valide (Plein droit au travail en France & UE, aucune démarche complexe de parrainage)",
-  salaryExpectation: "Aligné sur les standards du marché parisien (50 000 € – 62 000 € brut annuel selon séniorité, package et formule hybride)",
+  salaryExpectation: "Aligné sur les standards du marché français (42 000 € – 52 000 € brut annuel pour profil Junior / Mid, package hybride)",
   languages: "Anglais (Natif / C2), Français (Professionnel B1/B2 — réunions quotidiennes, documentation technique, communications orales et écrites fluides)",
   topHighlights: [
     {
@@ -116,7 +116,7 @@ export const recruiterFastTrackFr: RecruiterFastTrack = {
     }
   ],
   slackPitch: `*Fiche Synthèse Recrutement : Aritra Mondal*
-• *Poste visé* : Data Scientist / Machine Learning Engineer
+• *Poste visé* : Data Scientist / Machine Learning Engineer (Junior – Confirmé)
 • *Type de contrat & Disponibilité* : CDI (Statut Cadre) — *Disponibilité immédiate (0 jour de préavis)*
 • *Formation* : Applied MSc Data Science & IA (DSTI France, Équivalent Bac+5 — Summa Cum Laude) + BSc (Hons) Computer Security
 • *Expérience Industrielle* : Amadeus (Pipelines de prévision de demande sur AWS EMR, migration Spark/Scala avec +35% de gain de vitesse, Parquet, Jenkins CI/CD)
