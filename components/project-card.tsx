@@ -13,8 +13,10 @@ import {
   Award,
   ChevronDown,
   ChevronUp,
+  Layers,
 } from "lucide-react";
 import { Github } from "@/components/icons";
+import { openPipelineModal } from "./pipeline-visualizer-modal";
 
 interface ProjectCardProps {
   project: Project;
@@ -63,6 +65,24 @@ export function ProjectCard({ project, featuredIndex, locale = "en" }: ProjectCa
             </div>
           ))}
         </div>
+
+        {/* Amadeus Spark/Scala Interactive Pipeline Architecture Visualizer Launcher */}
+        {project.id === "airline-demand-forecasting" && (
+          <div className="mb-5">
+            <button
+              onClick={openPipelineModal}
+              className="w-full py-2.5 px-3.5 rounded-xl bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-sky-500/10 hover:from-indigo-500/20 hover:to-sky-500/20 border border-indigo-500/30 text-indigo-600 dark:text-indigo-400 font-mono text-xs font-semibold flex items-center justify-between transition-all group/btn shadow-sm cursor-pointer"
+            >
+              <span className="flex items-center gap-2">
+                <Layers className="h-4 w-4 text-indigo-500 animate-pulse" />
+                <span>{currentUi.pipelineVisualizer.buttonLabel}</span>
+              </span>
+              <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 group-hover/btn:bg-emerald-500 group-hover/btn:text-white transition-all">
+                -35% Latency ⚡
+              </span>
+            </button>
+          </div>
+        )}
 
         {/* Problem -> Solution -> Production -> Business Impact Framework */}
         <div className="space-y-3.5 text-xs sm:text-sm">

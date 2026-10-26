@@ -7,6 +7,7 @@ import { uiEn } from "@/data/en/ui";
 import { uiFr } from "@/data/fr/ui";
 import { ProjectCard } from "./project-card";
 import { Rocket } from "lucide-react";
+import { PipelineVisualizerModal } from "./pipeline-visualizer-modal";
 
 interface ProjectsSectionProps {
   locale?: "en" | "fr";
@@ -81,6 +82,8 @@ export function ProjectsSection({ locale = "en" }: ProjectsSectionProps) {
           ))}
         </div>
       </div>
+
+      <PipelineVisualizerModal locale={locale} />
     </section>
   );
 }

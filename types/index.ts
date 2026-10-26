@@ -127,3 +127,23 @@ export interface RecruiterFastTrack {
   }[];
   slackPitch: string;
 }
+
+export interface PipelineNode {
+  id: string;
+  title: string;
+  category: string;
+  tech: string;
+  specs: string;
+  role: string;
+  bottleneckPySpark?: string;
+  optimizationScala?: string;
+  icon: string;
+}
+
+export interface PipelineBenchmark {
+  metric: string;
+  pysparkValue: string;
+  scalaValue: string;
+  improvement: string;
+  detail: string;
+}
