@@ -7,8 +7,9 @@ import { profileDataFr } from "@/data/fr/profile";
 import { uiEn } from "@/data/en/ui";
 import { uiFr } from "@/data/fr/ui";
 import { ThemeToggle } from "./theme-toggle";
-import { FileDown, Menu, X, Sparkles, Globe } from "lucide-react";
+import { FileDown, Menu, X, Sparkles, Globe, Zap } from "lucide-react";
 import { Github, Linkedin } from "@/components/icons";
+import { RecruiterFastTrackModal, openRecruiterModal } from "./recruiter-fast-track-modal";
 
 interface NavbarProps {
   locale?: "en" | "fr";
@@ -151,6 +152,15 @@ export function Navbar({ locale = "en" }: NavbarProps) {
               <Linkedin className="h-4 w-4" />
             </a>
 
+            <button
+              onClick={openRecruiterModal}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all shadow-sm cursor-pointer"
+              title={locale === "fr" ? "Ouvrir la fiche express recruteur" : "Open executive recruiter synthesis"}
+            >
+              <Zap className="h-3.5 w-3.5 fill-current text-emerald-500 animate-pulse" />
+              <span>{currentUi.recruiterFastTrack.buttonNav}</span>
+            </button>
+
             <a
               href="/cv.pdf"
               download="Aritra_Mondal_Data_Scientist_CV.pdf"
@@ -225,6 +235,23 @@ export function Navbar({ locale = "en" }: NavbarProps) {
                   {link.name}
                 </a>
               ))}
+              <div className="pt-2">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    openRecruiterModal();
+                  }}
+                  className="w-full text-left flex items-center justify-between px-3 py-2.5 text-xs font-semibold rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30"
+                >
+                  <span className="flex items-center gap-2">
+                    <Zap className="h-4 w-4 fill-current text-emerald-500 animate-pulse" />
+                    <span>{currentUi.recruiterFastTrack.buttonNav}</span>
+                  </span>
+                  <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 font-bold">
+                    {locale === "fr" ? "0 Préavis" : "0 Notice"}
+                  </span>
+                </button>
+              </div>
               <div className="pt-3 border-t border-border flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <a
@@ -257,6 +284,8 @@ export function Navbar({ locale = "en" }: NavbarProps) {
           </div>
         )}
       </div>
+
+      <RecruiterFastTrackModal locale={locale} />
     </header>
   );
 }

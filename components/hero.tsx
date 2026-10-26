@@ -17,8 +17,12 @@ import {
   Mail,
   Sparkles,
   Terminal,
+  Zap,
+  Clock,
+  Cpu,
 } from "lucide-react";
 import { Github, Linkedin } from "@/components/icons";
+import { openRecruiterModal } from "./recruiter-fast-track-modal";
 
 interface HeroProps {
   locale?: "en" | "fr";
@@ -34,6 +38,9 @@ export function Hero({ locale = "en" }: HeroProps) {
     ShieldCheck: <ShieldCheck className="h-4 w-4 text-sky-500" />,
     Languages: <Languages className="h-4 w-4 text-amber-500" />,
     Briefcase: <Briefcase className="h-4 w-4 text-violet-500" />,
+    Clock: <Clock className="h-4 w-4 text-emerald-500" />,
+    Cpu: <Cpu className="h-4 w-4 text-indigo-500" />,
+    Zap: <Zap className="h-4 w-4 text-emerald-500" />,
   };
 
   return (
@@ -42,14 +49,21 @@ export function Hero({ locale = "en" }: HeroProps) {
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-indigo-500/10 dark:bg-indigo-600/15 blur-[120px] rounded-full pointer-events-none -z-10" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top availability pill */}
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs font-mono font-medium mb-6 shadow-sm">
+        {/* Top availability pill with 1-click Fast-Track recruiter modal trigger */}
+        <button
+          onClick={openRecruiterModal}
+          className="group inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs font-mono font-medium hover:bg-emerald-500/20 transition-all cursor-pointer shadow-sm mb-6"
+          title={locale === "fr" ? "Ouvrir la fiche express recruteur" : "Open executive recruiter synthesis"}
+        >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
           <span>{currentUi.hero.badge}</span>
-        </div>
+          <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 group-hover:bg-emerald-500 group-hover:text-white transition-all ml-1">
+            {locale === "fr" ? "Fiche Recruteur ⚡" : "Fast-Track ⚡"}
+          </span>
+        </button>
 
         {/* Main Headline & Authentic Portrait */}
         <div className="flex flex-col-reverse md:flex-row md:items-center justify-between gap-8 max-w-5xl">
@@ -147,6 +161,14 @@ export function Hero({ locale = "en" }: HeroProps) {
 
         {/* Primary CTAs & Social Links */}
         <div className="mt-8 flex flex-wrap items-center gap-3">
+          <button
+            onClick={openRecruiterModal}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-sm cursor-pointer"
+          >
+            <Zap className="h-4 w-4 fill-current text-emerald-500 animate-pulse" />
+            <span>{currentUi.recruiterFastTrack.buttonHero}</span>
+          </button>
+
           <a
             href="#projects"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/25 transition-all hover:scale-[1.02] active:scale-[0.98]"

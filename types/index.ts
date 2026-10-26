@@ -110,3 +110,20 @@ export interface Certification {
   badgeUrl?: string;
   verifyUrl?: string;
 }
+
+export interface RecruiterFastTrack {
+  headline: string;
+  availability: string;
+  noticePeriod: string;
+  contractType: string;
+  targetRole: string;
+  locationDetails: string;
+  workAuthorization: string;
+  salaryExpectation: string;
+  languages: string;
+  topHighlights: {
+    title: string;
+    description: string;
+  }[];
+  slackPitch: string;
+}

@@ -51,8 +51,11 @@ export function InteractiveTerminal({ locale = "en" }: InteractiveTerminalProps)
     "contact --fast": {
       email: currentProfile.email,
       phone: currentProfile.phone,
-      paris_availability: "Available for on-site & hybrid interviews in Paris & France",
-      calendly_or_chat: "Open to immediate recruiter phone screens & technical discussions",
+      availability: "IMMEDIATE (0-day notice / Aucun préavis)",
+      target_contract: "CDI (Statut Cadre)",
+      location: "Paris & France (Relocation ready / Hybrid 2-3 days or full onsite)",
+      work_authorization: "Titre de séjour (Full legal work authorization in France & EU)",
+      recruiter_sheet: "Click [Fast-Track ⚡] in the top navigation to view full executive synthesis",
     },
   };
 
@@ -89,8 +92,11 @@ export function InteractiveTerminal({ locale = "en" }: InteractiveTerminalProps)
     "contact --fast": {
       email: currentProfile.email,
       telephone: currentProfile.phone,
-      disponibilite_paris: "Disponible pour entretiens sur site et hybrides à Paris et France",
-      echange_ouvert: "Ouvert aux entretiens de préqualification téléphonique et techniques",
+      disponibilite: "IMMÉDIATE (0 jour de préavis / Aucun préavis)",
+      contrat_cible: "CDI (Statut Cadre)",
+      mobilite: "Paris & France (Déménagement autonome prêt / Hybride ou Présentiel)",
+      droit_au_travail: "Titre de séjour valide (Plein droit au travail en France & UE)",
+      fiche_recruteur: "Cliquez sur [Fiche Recruteur ⚡] dans la barre de navigation pour la synthèse complète",
     },
   };
 

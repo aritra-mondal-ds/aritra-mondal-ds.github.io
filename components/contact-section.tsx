@@ -15,8 +15,10 @@ import {
   MapPin,
   Clock,
   ShieldCheck,
+  Zap,
 } from "lucide-react";
 import { Github, Linkedin } from "@/components/icons";
+import { openRecruiterModal } from "./recruiter-fast-track-modal";
 
 interface ContactSectionProps {
   locale?: "en" | "fr";
@@ -167,6 +169,14 @@ export function ContactSection({ locale = "en" }: ContactSectionProps) {
 
           {/* Direct Contact CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-6 border-t border-border/60">
+            <button
+              onClick={openRecruiterModal}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all shadow-sm cursor-pointer"
+            >
+              <Zap className="h-4 w-4 fill-current text-emerald-500 animate-pulse" />
+              <span>{currentUi.recruiterFastTrack.buttonNav}</span>
+            </button>
+
             <a
               href={`mailto:${currentProfile.email}?subject=Entretien%20Data%20Scientist%20-%20Aritra%20Mondal`}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
