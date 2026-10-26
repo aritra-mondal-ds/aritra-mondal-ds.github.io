@@ -94,3 +94,4 @@ export const uiFr = {
     techStack: "Développé avec Next.js 15, Tailwind CSS & TypeScript",
   },
 };
+

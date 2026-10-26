@@ -88,8 +88,12 @@ export function ExperienceTimeline({ locale = "en" }: ExperienceTimelineProps) {
           </div>
 
           {/* Tab Selector */}
-          <div className="inline-flex p-1 rounded-xl bg-card border border-border shadow-sm">
+          <div role="tablist" aria-label="Experience and education switcher" className="inline-flex p-1 rounded-xl bg-card border border-border shadow-sm">
             <button
+              role="tab"
+              aria-selected={activeTab === "experience"}
+              aria-controls="experience-panel"
+              id="experience-tab"
               onClick={() => handleTabChange("experience")}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
                 activeTab === "experience"
@@ -103,6 +107,10 @@ export function ExperienceTimeline({ locale = "en" }: ExperienceTimelineProps) {
               </span>
             </button>
             <button
+              role="tab"
+              aria-selected={activeTab === "education"}
+              aria-controls="education-panel"
+              id="education-tab"
               onClick={() => handleTabChange("education")}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
                 activeTab === "education"
@@ -120,7 +128,12 @@ export function ExperienceTimeline({ locale = "en" }: ExperienceTimelineProps) {
 
         {/* ─── Work Experience ─── */}
         {activeTab === "experience" ? (
-          <div className="space-y-8 relative before:absolute before:inset-0 before:left-3.5 sm:before:left-5 before:h-full before:w-0.5 before:bg-border">
+          <div
+            id="experience-panel"
+            role="tabpanel"
+            aria-labelledby="experience-tab"
+            className="space-y-8 relative before:absolute before:inset-0 before:left-3.5 sm:before:left-5 before:h-full before:w-0.5 before:bg-border"
+          >
             {currentExperiences.map((exp) => (
               <div key={exp.id} className="relative flex items-start gap-6 sm:gap-8 group">
                 {/* Timeline node */}
@@ -188,7 +201,12 @@ export function ExperienceTimeline({ locale = "en" }: ExperienceTimelineProps) {
           </div>
         ) : (
           /* ─── Education ─── */
-          <div className="space-y-8 relative before:absolute before:inset-0 before:left-3.5 sm:before:left-5 before:h-full before:w-0.5 before:bg-border">
+          <div
+            id="education-panel"
+            role="tabpanel"
+            aria-labelledby="education-tab"
+            className="space-y-8 relative before:absolute before:inset-0 before:left-3.5 sm:before:left-5 before:h-full before:w-0.5 before:bg-border"
+          >
             {currentEducation.map((edu) => {
               const modulesOpen = !!expandedModules[edu.id];
               return (

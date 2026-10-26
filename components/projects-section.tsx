@@ -56,6 +56,7 @@ export function ProjectsSection({ locale = "en" }: ProjectsSectionProps) {
               <button
                 key={cat.key}
                 onClick={() => setSelectedCategory(cat.key)}
+                aria-pressed={selectedCategory === cat.key}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
                   selectedCategory === cat.key
                     ? "bg-foreground text-background font-semibold shadow-sm"

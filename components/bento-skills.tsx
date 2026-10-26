@@ -61,6 +61,7 @@ export function BentoSkills({ locale = "en" }: BentoSkillsProps) {
             <div className="inline-flex p-1 rounded-lg bg-card border border-border text-xs font-mono">
               <button
                 onClick={() => setActiveFilter("all")}
+                aria-pressed={activeFilter === "all"}
                 className={`px-2.5 py-1 rounded-md transition-colors ${
                   activeFilter === "all"
                     ? "bg-indigo-600 text-white font-semibold"
@@ -71,6 +72,7 @@ export function BentoSkills({ locale = "en" }: BentoSkillsProps) {
               </button>
               <button
                 onClick={() => setActiveFilter("core")}
+                aria-pressed={activeFilter === "core"}
                 className={`px-2.5 py-1 rounded-md transition-colors ${
                   activeFilter === "core"
                     ? "bg-indigo-600 text-white font-semibold"

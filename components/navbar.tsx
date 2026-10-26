@@ -39,6 +39,16 @@ export function Navbar({ locale = "en" }: NavbarProps) {
     };
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenuOpen]);
+
   const navLinks = [
     { name: currentUi.nav.projects, href: "#projects" },
     { name: currentUi.nav.skills, href: "#skills" },
@@ -192,8 +202,9 @@ export function Navbar({ locale = "en" }: NavbarProps) {
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="h-9 w-9 rounded-lg border border-border bg-card/60 flex items-center justify-center text-muted-foreground hover:text-foreground"
-              aria-label="Open menu"
+              className="h-10 w-10 rounded-lg border border-border bg-card/60 flex items-center justify-center text-muted-foreground hover:text-foreground touch-manipulation transition-colors"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>

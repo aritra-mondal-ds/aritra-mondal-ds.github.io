@@ -101,3 +101,4 @@ export const certificationsDataFr: Certification[] = [
     verifyUrl: "https://www.fortinet.com/training/certification",
   },
 ];
+

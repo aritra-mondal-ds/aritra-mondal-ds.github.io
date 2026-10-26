@@ -97,10 +97,16 @@ export function InteractiveTerminal({ locale = "en" }: InteractiveTerminalProps)
   const commandResponses = locale === "fr" ? commandResponsesFr : commandResponsesEn;
   const currentOutput = commandResponses[activeCommand] || commandResponses["curl -s /profile | jq ."];
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(JSON.stringify(currentOutput, null, 2));
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = async () => {
+    try {
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(JSON.stringify(currentOutput, null, 2));
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }
+    } catch {
+      // Fallback gracefully without unhandled console rejection
+    }
   };
 
   const commands = [

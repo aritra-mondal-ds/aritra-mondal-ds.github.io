@@ -138,3 +138,4 @@ export const projectsDataFr: Project[] = [
     featured: true,
   },
 ];
+

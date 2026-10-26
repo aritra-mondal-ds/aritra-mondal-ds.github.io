@@ -94,3 +94,4 @@ export const uiEn = {
     techStack: "Engineered with Next.js 15, Tailwind CSS & TypeScript",
   },
 };
+

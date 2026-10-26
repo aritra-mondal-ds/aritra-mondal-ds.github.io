@@ -11,7 +11,7 @@ export default function FrenchHomePage() {
   return (
     <>
       <Navbar locale="fr" />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <Hero locale="fr" />
         <ProjectsSection locale="fr" />
         <BentoSkills locale="fr" />
@@ -23,3 +23,4 @@ export default function FrenchHomePage() {
     </>
   );
 }
+

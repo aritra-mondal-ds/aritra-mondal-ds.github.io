@@ -126,6 +126,7 @@ export function ProjectCard({ project, featuredIndex, locale = "en" }: ProjectCa
 
         <button
           onClick={() => setExpanded(!expanded)}
+          aria-expanded={expanded}
           className="mt-3 text-xs font-mono text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center gap-1 transition-colors"
         >
           {expanded ? (

@@ -17,6 +17,13 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Aritra Mondal", url: "https://github.com/aritra-mondal-ds" }],
   creator: "Aritra Mondal",
+  alternates: {
+    canonical: "/fr",
+    languages: {
+      "en-FR": "/",
+      "fr-FR": "/fr",
+    },
+  },
   openGraph: {
     type: "website",
     locale: "fr_FR",
@@ -45,3 +52,4 @@ export default function FrenchLayout({
 }>) {
   return <>{children}</>;
 }
+

@@ -29,16 +29,28 @@ export function ContactSection({ locale = "en" }: ContactSectionProps) {
   const currentProfile = locale === "fr" ? profileDataFr : profileData;
   const currentUi = locale === "fr" ? uiFr : uiEn;
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText(currentProfile.email);
-    setEmailCopied(true);
-    setTimeout(() => setEmailCopied(false), 2000);
+  const copyEmail = async () => {
+    try {
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(currentProfile.email);
+        setEmailCopied(true);
+        setTimeout(() => setEmailCopied(false), 2000);
+      }
+    } catch {
+      // Fallback gracefully without unhandled console rejection
+    }
   };
 
-  const copyPhone = () => {
-    navigator.clipboard.writeText(currentProfile.phone);
-    setPhoneCopied(true);
-    setTimeout(() => setPhoneCopied(false), 2000);
+  const copyPhone = async () => {
+    try {
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(currentProfile.phone);
+        setPhoneCopied(true);
+        setTimeout(() => setPhoneCopied(false), 2000);
+      }
+    } catch {
+      // Fallback gracefully without unhandled console rejection
+    }
   };
 
   return (
