@@ -20,9 +20,11 @@ import {
   Zap,
   Clock,
   Cpu,
+  Command,
 } from "lucide-react";
 import { Github, Linkedin } from "@/components/icons";
 import { openRecruiterModal } from "./recruiter-fast-track-modal";
+import { openCommandPalette } from "./command-palette";
 
 interface HeroProps {
   locale?: "en" | "fr";
@@ -131,18 +133,18 @@ export function Hero({ locale = "en" }: HeroProps) {
             {currentProfile.recruiterSignals.map((signal, idx) => (
               <div
                 key={idx}
-                className="group relative flex items-start gap-3 p-3 rounded-xl border border-border/80 bg-card/60 backdrop-blur-sm hover:border-indigo-500/40 hover:bg-card/90 transition-all shadow-sm"
+                className="group relative flex items-start gap-3 p-3 rounded-xl border border-border/80 bg-card/60 backdrop-blur-sm hover:border-indigo-500/40 hover:bg-card/90 transition-all shadow-sm min-h-[84px]"
               >
                 <div className="p-2 rounded-lg bg-muted/80 border border-border/50 shrink-0">
                   {iconMap[signal.icon] || <Sparkles className="h-4 w-4 text-indigo-500" />}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between gap-1 mb-0.5">
-                    <span className="text-[11px] font-mono text-muted-foreground uppercase">
+                    <span className="text-[11px] font-mono text-muted-foreground uppercase truncate">
                       {signal.label}
                     </span>
                     {signal.badge && (
-                      <span className="text-[10px] font-semibold px-1.5 py-0.2 rounded bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">
+                      <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20 whitespace-nowrap shrink-0">
                         {signal.badge}
                       </span>
                     )}
@@ -216,11 +218,23 @@ export function Hero({ locale = "en" }: HeroProps) {
 
           <a
             href="#terminal"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm text-muted-foreground hover:text-foreground font-mono transition-colors ml-auto"
+            className="inline-flex items-center gap-2 px-3 py-2.5 rounded-xl font-medium text-sm text-muted-foreground hover:text-foreground font-mono transition-colors"
           >
             <Terminal className="h-4 w-4 text-indigo-400" />
             <span className="text-xs">curl -s /profile</span>
           </a>
+
+          <button
+            onClick={openCommandPalette}
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-mono text-muted-foreground hover:text-foreground border border-border bg-card/60 hover:bg-card transition-colors shadow-sm ml-auto cursor-pointer"
+            title={locale === "fr" ? "Ouvrir la palette de commandes (⌘K)" : "Open command palette (⌘K)"}
+          >
+            <Command className="h-3.5 w-3.5 text-indigo-500" />
+            <span className="text-[11px] font-sans hidden sm:inline">{locale === "fr" ? "Commandes" : "Commands"}</span>
+            <kbd className="px-1.5 py-0.5 text-[10px] font-mono rounded bg-muted border border-border text-foreground font-semibold">
+              ⌘K
+            </kbd>
+          </button>
         </div>
       </div>
     </section>

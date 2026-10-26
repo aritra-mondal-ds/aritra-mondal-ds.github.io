@@ -5,8 +5,9 @@ import { profileData } from "@/data/profile";
 import { profileDataFr } from "@/data/fr/profile";
 import { uiEn } from "@/data/en/ui";
 import { uiFr } from "@/data/fr/ui";
-import { Mail } from "lucide-react";
+import { Mail, Command } from "lucide-react";
 import { Github, Linkedin } from "@/components/icons";
+import { openCommandPalette } from "./command-palette";
 
 interface FooterProps {
   locale?: "en" | "fr";
@@ -87,7 +88,15 @@ export function Footer({ locale = "en" }: FooterProps) {
           <div>
             © {currentYear} {currentProfile.name}. {currentUi.footer.rightsReserved}
           </div>
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={openCommandPalette}
+              className="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-muted/70 hover:bg-muted border border-border text-[11px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+              title="Command Palette (⌘K)"
+            >
+              <Command className="h-3 w-3 text-indigo-500" />
+              <span>⌘K Palette</span>
+            </button>
             <span>{currentUi.footer.techStack}</span>
           </div>
         </div>

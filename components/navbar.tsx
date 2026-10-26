@@ -7,9 +7,10 @@ import { profileDataFr } from "@/data/fr/profile";
 import { uiEn } from "@/data/en/ui";
 import { uiFr } from "@/data/fr/ui";
 import { ThemeToggle } from "./theme-toggle";
-import { FileDown, Menu, X, Sparkles, Globe, Zap } from "lucide-react";
+import { FileDown, Menu, X, Sparkles, Globe, Zap, Command, Search } from "lucide-react";
 import { Github, Linkedin } from "@/components/icons";
 import { RecruiterFastTrackModal, openRecruiterModal } from "./recruiter-fast-track-modal";
+import { CommandPalette, openCommandPalette } from "./command-palette";
 
 interface NavbarProps {
   locale?: "en" | "fr";
@@ -67,15 +68,15 @@ export function Navbar({ locale = "en" }: NavbarProps) {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
           ? "bg-background/80 backdrop-blur-xl border-b border-border shadow-sm py-3"
-          : "bg-transparent py-5"
+          : "bg-transparent py-4 sm:py-5"
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-2">
           {/* Logo / Personal Brand */}
           <Link
             href={locale === "fr" ? "/fr/" : "/"}
-            className="group flex items-center gap-3 text-foreground transition-opacity hover:opacity-90"
+            className="group flex items-center gap-2.5 sm:gap-3 text-foreground transition-opacity hover:opacity-90 shrink-0"
           >
             <div className="h-9 w-9 rounded-lg bg-gradient-to-tr from-indigo-600 to-indigo-400 flex items-center justify-center text-white font-mono font-bold text-sm shadow-glow-sm">
               AM
@@ -92,12 +93,12 @@ export function Navbar({ locale = "en" }: NavbarProps) {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 bg-card/60 border border-border/80 px-3 py-1.5 rounded-full backdrop-blur-md shadow-sm">
+          <nav className="hidden lg:flex items-center gap-0.5 bg-card/60 border border-border/80 px-2.5 py-1.5 rounded-full backdrop-blur-md shadow-sm">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="px-3 py-1 text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 rounded-full transition-colors"
+                className="px-2.5 xl:px-3 py-1 text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 rounded-full transition-colors whitespace-nowrap"
               >
                 {link.name}
               </a>
@@ -105,7 +106,23 @@ export function Navbar({ locale = "en" }: NavbarProps) {
           </nav>
 
           {/* Actions & Socials */}
-          <div className="hidden sm:flex items-center gap-2">
+          <div className="hidden sm:flex items-center gap-1.5 lg:gap-2 shrink-0">
+            {/* Global Command Palette Trigger (Cmd+K / Ctrl+K) */}
+            <button
+              onClick={openCommandPalette}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-border bg-card/60 backdrop-blur-md text-xs font-mono text-muted-foreground hover:text-foreground hover:border-indigo-500/40 transition-all shadow-sm cursor-pointer group"
+              title={locale === "fr" ? "Palette de commandes globale (⌘K)" : "Global Command Palette (⌘K)"}
+              aria-label="Open command palette"
+            >
+              <Search className="h-3.5 w-3.5 text-indigo-500 group-hover:text-indigo-400 transition-colors" />
+              <span className="hidden xl:inline text-xs font-sans text-muted-foreground group-hover:text-foreground">
+                {locale === "fr" ? "Recherche" : "Search"}
+              </span>
+              <kbd className="px-1.5 py-0.5 text-[10px] font-mono rounded bg-muted/80 border border-border text-foreground font-semibold">
+                ⌘K
+              </kbd>
+            </button>
+
             {/* Language Switcher Pill */}
             <div className="inline-flex items-center p-0.5 rounded-lg border border-border bg-card/60 backdrop-blur-md shadow-sm text-xs font-mono">
               <Link
@@ -154,17 +171,17 @@ export function Navbar({ locale = "en" }: NavbarProps) {
 
             <button
               onClick={openRecruiterModal}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all shadow-sm cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all shadow-sm cursor-pointer whitespace-nowrap"
               title={locale === "fr" ? "Ouvrir la fiche express recruteur" : "Open executive recruiter synthesis"}
             >
               <Zap className="h-3.5 w-3.5 fill-current text-emerald-500 animate-pulse" />
-              <span>{currentUi.recruiterFastTrack.buttonNav}</span>
+              <span className="hidden md:inline">{currentUi.recruiterFastTrack.buttonNav}</span>
             </button>
 
             <a
               href="/cv.pdf"
               download="Aritra_Mondal_Data_Scientist_CV.pdf"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-border bg-card/60 backdrop-blur-md text-foreground hover:bg-muted transition-colors shadow-sm"
+              className="inline-flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-lg text-xs font-medium border border-border bg-card/60 backdrop-blur-md text-foreground hover:bg-muted transition-colors shadow-sm whitespace-nowrap"
               title={locale === "fr" ? "Télécharger le CV (PDF)" : "Download CV (PDF)"}
             >
               <FileDown className="h-3.5 w-3.5 text-indigo-500" />
@@ -173,7 +190,7 @@ export function Navbar({ locale = "en" }: NavbarProps) {
 
             <a
               href="#contact"
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium bg-foreground text-background hover:opacity-90 transition-opacity shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3 lg:px-3.5 py-1.5 rounded-lg text-xs font-medium bg-foreground text-background hover:opacity-90 transition-opacity shadow-sm whitespace-nowrap"
             >
               <Sparkles className="h-3 w-3" />
               <span>{currentUi.nav.hireMe}</span>
@@ -182,8 +199,18 @@ export function Navbar({ locale = "en" }: NavbarProps) {
             <ThemeToggle />
           </div>
 
-          {/* Mobile Menu Button & Language Switch */}
+          {/* Mobile Actions: Cmd+K, Language Switch, Theme, Menu Button */}
           <div className="flex sm:hidden items-center gap-1.5">
+            {/* Mobile Command Palette Trigger */}
+            <button
+              onClick={openCommandPalette}
+              className="h-9 w-9 rounded-lg border border-border bg-card/60 flex items-center justify-center text-muted-foreground hover:text-foreground"
+              aria-label="Open command palette"
+              title="⌘K"
+            >
+              <Command className="h-4 w-4 text-indigo-500" />
+            </button>
+
             {/* Mobile Language Switcher */}
             <div className="inline-flex items-center p-0.5 rounded-md border border-border bg-card/60 text-[11px] font-mono">
               <Link
@@ -225,6 +252,23 @@ export function Navbar({ locale = "en" }: NavbarProps) {
         {mobileMenuOpen && (
           <div className="sm:hidden mt-3 p-4 rounded-xl border border-border bg-card/95 backdrop-blur-xl shadow-lg animate-accordion-down">
             <nav className="flex flex-col gap-2">
+              {/* Command Palette Trigger inside mobile menu */}
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  openCommandPalette();
+                }}
+                className="flex items-center justify-between px-3 py-2.5 text-xs font-semibold rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/30"
+              >
+                <span className="flex items-center gap-2">
+                  <Command className="h-4 w-4 text-indigo-500" />
+                  <span>{locale === "fr" ? "Palette de commandes globale" : "Global Command Palette"}</span>
+                </span>
+                <kbd className="px-1.5 py-0.5 text-[10px] font-mono rounded bg-muted border border-border text-foreground">
+                  ⌘K
+                </kbd>
+              </button>
+
               {navLinks.map((link) => (
                 <a
                   key={link.name}
@@ -286,6 +330,7 @@ export function Navbar({ locale = "en" }: NavbarProps) {
       </div>
 
       <RecruiterFastTrackModal locale={locale} />
+      <CommandPalette locale={locale} />
     </header>
   );
 }
