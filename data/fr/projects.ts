@@ -73,29 +73,31 @@ export const projectsDataFr: Project[] = [
   },
   {
     id: "book-rating-prediction",
-    title: "Moteur Prédictif de Recommandation & Régression",
-    tagline: "Modèle de régression haute dimension avec ingénierie automatique des features et optimisation bayésienne.",
+    title: "Moteur de Recommandation & Scoring Prédictif Haute Dimension",
+    tagline: "Modélisation hybride d'affinité, pipeline automatisé de features, optimisation bayésienne et explicabilité SHAP.",
     category: "Applied Predictive Modeling",
-    liveBadge: "Évaluation & Interprétabilité",
+    liveBadge: "Ranking & Explicabilité",
     metrics: [
-      { value: "10k+", label: "Observations dans le jeu de données" },
-      { value: "Faible RMSE", label: "Optimisation de l'erreur prédictive" },
-      { value: "SHAP", label: "Interprétabilité et importance des features" },
+      { value: "Top-K", label: "Ranking & Affinité Utilisateur" },
+      { value: "Bayésien", label: "Optimisation Optuna" },
+      { value: "SHAP", label: "Attribution & Explicabilité" },
     ],
     problem:
-      "Les plateformes de recommandation font face à la rareté des avis utilisateurs et au problème du démarrage à froid (cold-start), nécessitant des modèles prédictifs interprétables pour évaluer l'intérêt avant mise en ligne.",
+      "Les plateformes de recommandation font face à la forte cardinalité des interactions, au problème du démarrage à froid (cold-start) et à la dispersion des avis. Les heuristiques opaques réduisent l'engagement et n'offrent aucune visibilité aux équipes produit.",
     solution:
-      "Conception d'une chaîne de régression complète entraînée sur plus de 10 000 observations. Extraction de variables prédictives à partir des métadonnées, des comportements temporels et du traitement textuel. Optimisation systématique des hyperparamètres par recherche bayésienne et étalonnage des modèles d'ensemble.",
+      "Conception d'un framework hybride de recommandation et de régression combinant signaux collaboratifs et plongements de contenu. Développement d'un pipeline d'extraction de variables intégrant la décroissance temporelle et les biais utilisateurs, optimisé par recherche bayésienne (Optuna) sur des architectures d'ensemble (LightGBM, Scikit-learn).",
     production:
-      "Évaluation comparative sur MSE, RMSE et MAE. Intégration de l'analyse d'importance des variables (SHAP) pour identifier les facteurs déterminants de la note finale.",
+      "Validation rigoureuse par découpage train/validation/test, étalonnée sur RMSE, MAE et métriques de ranking. Intégration de vecteurs d'explicabilité TreeSHAP pour quantifier l'attribution des variables et valider les prédictions avant mise en production.",
     businessImpact:
-      "Livraison d'un outil de scoring transparent et haute précision permettant aux éditeurs et équipes produit d'anticiper la fidélisation des lecteurs et la réception des ouvrages.",
+      "Déploiement d'un moteur de scoring transparent et haute précision qui optimise la pertinence personnalisée, réduit le churn lié au cold-start et fournit aux équipes produit des leviers décisionnels mesurables.",
     techStack: [
       "Python",
+      "LightGBM",
       "Scikit-learn",
+      "Optuna",
+      "SHAP",
       "Feature Engineering",
       "Pandas / NumPy",
-      "Optimisation Hyperparamètres",
       "Interprétabilité SHAP",
     ],
     links: {

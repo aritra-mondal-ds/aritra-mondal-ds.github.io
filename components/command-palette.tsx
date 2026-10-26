@@ -290,6 +290,18 @@ export function CommandPalette({ locale = "en" }: CommandPaletteProps) {
         action: () => navigateTo("#projects"),
       },
       {
+        id: "project-recsys",
+        category: "Featured Projects",
+        categoryFr: "Projets Clés",
+        title: "Recommendation & Ranking Engine",
+        titleFr: "Moteur de Recommandation & Scoring Prédictif",
+        subtitle: "Sparse interaction graphs, Optuna Bayesian tuning & SHAP explainability",
+        subtitleFr: "Graphes d'interaction creux, tuning bayésien Optuna & explicabilité SHAP",
+        icon: <Layers className="h-4 w-4 text-cyan-400" />,
+        keywords: ["recsys", "recommendation", "ranking", "lightgbm", "shap", "optuna", "scoring"],
+        action: () => navigateTo("#projects"),
+      },
+      {
         id: "project-ids",
         category: "Featured Projects",
         categoryFr: "Projets Clés",

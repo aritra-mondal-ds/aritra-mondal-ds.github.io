@@ -73,29 +73,31 @@ export const projectsData: Project[] = [
   },
   {
     id: "book-rating-prediction",
-    title: "Predictive Recommendation & Rating Regression Engine",
-    tagline: "High-dimensional regression model with automated feature engineering and hyperparameter optimization.",
+    title: "High-Dimensional Recommendation & Ranking Engine",
+    tagline: "Collaborative & content-based affinity scoring with Bayesian hyperparameter optimization and SHAP explainability.",
     category: "Applied Predictive Modeling",
-    liveBadge: "Model Evaluation Showcase",
+    liveBadge: "Ranking & Explainability",
     metrics: [
-      { value: "10k+", label: "Dataset Observations" },
-      { value: "Low RMSE", label: "Optimized Predictive Error" },
-      { value: "SHAP", label: "Feature Importance Explainability" },
+      { value: "Top-K", label: "Ranking & Rating Affinity" },
+      { value: "Bayesian", label: "Optuna Hyperparameter Tuning" },
+      { value: "SHAP", label: "Feature Attribution & Interpretability" },
     ],
     problem:
-      "Recommender platforms struggle with sparse user feedback and cold-start rating dynamics, requiring interpretable predictive models to estimate reader affinity before deployment.",
+      "Modern recommender platforms face acute challenges with high-cardinality interaction matrices, cold-start latency, and sparse user feedback. Black-box recommendation heuristics degrade user engagement and provide zero transparency to product and operational teams.",
     solution:
-      "Engineered an end-to-end regression framework trained on 10,000+ observations. Applied rigorous feature extraction across metadata, temporal interactions, and text attributes. Systematically tuned hyperparameters via Bayesian / grid search and benchmarked ensemble models.",
+      "Engineered an end-to-end hybrid recommendation and regression framework combining collaborative interaction signals with structured content embeddings. Designed an automated feature extraction pipeline capturing temporal interaction decay and user bias, optimized via Bayesian hyperparameter search (Optuna) across ensemble architectures (LightGBM, Scikit-learn).",
     production:
-      "Evaluated across Mean Squared Error (MSE), Root Mean Squared Error (RMSE), and Mean Absolute Error (MAE). Integrated feature importance interpretability to identify the strongest latent rating drivers.",
+      "Enforced rigorous train/validation/test splits, benchmarked against Root Mean Squared Error (RMSE), Mean Absolute Error (MAE), and ranking metrics. Integrated TreeSHAP explainability vectors to quantify feature attribution and validate model decisions before deployment.",
     businessImpact:
-      "Delivered a transparent, high-accuracy scoring engine providing publishers and product managers with actionable insights into reader retention and review polarity.",
+      "Delivered an interpretable, production-ready ranking engine that boosts personalized relevance, mitigates cold-start drop-off, and provides product teams with actionable drivers of user engagement and retention.",
     techStack: [
       "Python",
+      "LightGBM",
       "Scikit-learn",
+      "Optuna",
+      "SHAP",
       "Feature Engineering",
       "Pandas / NumPy",
-      "Hyperparameter Optimization",
       "Model Interpretability",
     ],
     links: {

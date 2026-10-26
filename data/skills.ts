@@ -73,7 +73,7 @@ export const certificationsData: Certification[] = [
   {
     name: "AWS Certified Solutions Architect – Associate",
     issuer: "Amazon Web Services (AWS)",
-    dateOrStatus: "In Progress (2027)",
+    dateOrStatus: "In Progress (Target Q3 2026)",
     verifyUrl: "https://aws.amazon.com/certification/certified-solutions-architect-associate/",
   },
   {
@@ -91,19 +91,19 @@ export const certificationsData: Certification[] = [
   {
     name: "Fortinet NSE 1 – Information Security Awareness",
     issuer: "Fortinet Training Institute",
-    dateOrStatus: "Passed June 2026",
+    dateOrStatus: "Certified · Valid through June 2026",
     verifyUrl: "https://www.fortinet.com/training/certification",
   },
   {
     name: "Fortinet NSE 2 – Network Security Associate",
     issuer: "Fortinet Training Institute",
-    dateOrStatus: "Passed June 2026",
+    dateOrStatus: "Certified · Valid through June 2026",
     verifyUrl: "https://www.fortinet.com/training/certification",
   },
   {
     name: "Fortinet NSE 3 – Network Security Associate",
     issuer: "Fortinet Training Institute",
-    dateOrStatus: "Passed June 2026",
+    dateOrStatus: "Certified · Valid through June 2026",
     verifyUrl: "https://www.fortinet.com/training/certification",
   },
 ];
