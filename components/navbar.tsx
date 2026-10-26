@@ -71,29 +71,29 @@ export function Navbar({ locale = "en" }: NavbarProps) {
           : "bg-transparent py-4 sm:py-5"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-2">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between gap-2 sm:gap-4">
           {/* Logo / Personal Brand */}
           <Link
             href={locale === "fr" ? "/fr/" : "/"}
-            className="group flex items-center gap-2.5 sm:gap-3 text-foreground transition-opacity hover:opacity-90 shrink-0"
+            className="group flex items-center gap-2 sm:gap-2.5 text-foreground transition-opacity hover:opacity-90 shrink-0"
           >
-            <div className="h-9 w-9 rounded-lg bg-gradient-to-tr from-indigo-600 to-indigo-400 flex items-center justify-center text-white font-mono font-bold text-sm shadow-glow-sm">
+            <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-lg bg-gradient-to-tr from-indigo-600 to-indigo-400 flex items-center justify-center text-white font-mono font-bold text-xs sm:text-sm shadow-glow-sm">
               AM
             </div>
             <div className="flex flex-col">
-              <span className="font-semibold text-sm tracking-tight flex items-center gap-1.5">
+              <span className="font-semibold text-xs sm:text-sm tracking-tight flex items-center gap-1.5 whitespace-nowrap">
                 {currentProfile.name}
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               </span>
-              <span className="text-[11px] text-muted-foreground font-mono">
+              <span className="text-[10px] sm:text-[11px] text-muted-foreground font-mono truncate">
                 Data Scientist · France
               </span>
             </div>
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-0.5 bg-card/60 border border-border/80 px-2.5 py-1.5 rounded-full backdrop-blur-md shadow-sm">
+          {/* Desktop Navigation Links (Large screens >= 1280px) */}
+          <nav className="hidden xl:flex items-center gap-0.5 bg-card/60 border border-border/80 px-2.5 py-1 rounded-full backdrop-blur-md shadow-sm shrink-0">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -105,29 +105,26 @@ export function Navbar({ locale = "en" }: NavbarProps) {
             ))}
           </nav>
 
-          {/* Actions & Socials */}
-          <div className="hidden sm:flex items-center gap-1.5 lg:gap-2 shrink-0">
+          {/* Actions & Controls */}
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             {/* Global Command Palette Trigger (Cmd+K / Ctrl+K) */}
             <button
               onClick={openCommandPalette}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-border bg-card/60 backdrop-blur-md text-xs font-mono text-muted-foreground hover:text-foreground hover:border-indigo-500/40 transition-all shadow-sm cursor-pointer group"
+              className="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1.5 rounded-lg border border-border bg-card/60 backdrop-blur-md text-xs font-mono text-muted-foreground hover:text-foreground hover:border-indigo-500/40 transition-all shadow-sm cursor-pointer group shrink-0"
               title={locale === "fr" ? "Palette de commandes globale (⌘K)" : "Global Command Palette (⌘K)"}
               aria-label="Open command palette"
             >
               <Search className="h-3.5 w-3.5 text-indigo-500 group-hover:text-indigo-400 transition-colors" />
-              <span className="hidden xl:inline text-xs font-sans text-muted-foreground group-hover:text-foreground">
-                {locale === "fr" ? "Recherche" : "Search"}
-              </span>
-              <kbd className="px-1.5 py-0.5 text-[10px] font-mono rounded bg-muted/80 border border-border text-foreground font-semibold">
+              <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono rounded bg-muted/80 border border-border text-foreground font-semibold">
                 ⌘K
               </kbd>
             </button>
 
             {/* Language Switcher Pill */}
-            <div className="inline-flex items-center p-0.5 rounded-lg border border-border bg-card/60 backdrop-blur-md shadow-sm text-xs font-mono">
+            <div className="inline-flex items-center p-0.5 rounded-lg border border-border bg-card/60 backdrop-blur-md shadow-sm text-xs font-mono shrink-0">
               <Link
                 href={targetEnHref}
-                className={`px-2 py-1 rounded-md transition-all ${
+                className={`px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md transition-all ${
                   locale === "en"
                     ? "bg-indigo-600 text-white font-bold shadow-sm"
                     : "text-muted-foreground hover:text-foreground"
@@ -138,7 +135,7 @@ export function Navbar({ locale = "en" }: NavbarProps) {
               </Link>
               <Link
                 href={targetFrHref}
-                className={`px-2 py-1 rounded-md transition-all ${
+                className={`px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md transition-all ${
                   locale === "fr"
                     ? "bg-indigo-600 text-white font-bold shadow-sm"
                     : "text-muted-foreground hover:text-foreground"
@@ -149,12 +146,13 @@ export function Navbar({ locale = "en" }: NavbarProps) {
               </Link>
             </div>
 
+            {/* Social Icons (Wide screens >= 1536px) */}
             <a
               href="https://github.com/aritra-mondal-ds"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub Profile"
-              className="h-9 w-9 rounded-lg border border-border bg-card/60 backdrop-blur-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-zinc-400 dark:hover:border-zinc-700 transition-colors shadow-sm"
+              className="hidden 2xl:flex h-9 w-9 rounded-lg border border-border bg-card/60 backdrop-blur-md items-center justify-center text-muted-foreground hover:text-foreground hover:border-zinc-400 dark:hover:border-zinc-700 transition-colors shadow-sm shrink-0"
             >
               <Github className="h-4 w-4" />
             </a>
@@ -164,95 +162,63 @@ export function Navbar({ locale = "en" }: NavbarProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn Profile"
-              className="h-9 w-9 rounded-lg border border-border bg-card/60 backdrop-blur-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-zinc-400 dark:hover:border-zinc-700 transition-colors shadow-sm"
+              className="hidden 2xl:flex h-9 w-9 rounded-lg border border-border bg-card/60 backdrop-blur-md items-center justify-center text-muted-foreground hover:text-foreground hover:border-zinc-400 dark:hover:border-zinc-700 transition-colors shadow-sm shrink-0"
             >
               <Linkedin className="h-4 w-4" />
             </a>
 
+            {/* Recruiter Fast-Track Modal Trigger */}
             <button
               onClick={openRecruiterModal}
-              className="inline-flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all shadow-sm cursor-pointer whitespace-nowrap"
+              className="hidden sm:inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all shadow-sm cursor-pointer whitespace-nowrap shrink-0"
               title={locale === "fr" ? "Ouvrir la fiche express recruteur" : "Open executive recruiter synthesis"}
             >
               <Zap className="h-3.5 w-3.5 fill-current text-emerald-500 animate-pulse" />
-              <span className="hidden md:inline">{currentUi.recruiterFastTrack.buttonNav}</span>
+              <span className="hidden xl:inline">{currentUi.recruiterFastTrack.buttonNav}</span>
             </button>
 
+            {/* Download CV */}
             <a
               href="/cv.pdf"
               download="Aritra_Mondal_Data_Scientist_CV.pdf"
-              className="inline-flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 rounded-lg text-xs font-medium border border-border bg-card/60 backdrop-blur-md text-foreground hover:bg-muted transition-colors shadow-sm whitespace-nowrap"
+              className="hidden sm:inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg text-xs font-medium border border-border bg-card/60 backdrop-blur-md text-foreground hover:bg-muted transition-colors shadow-sm whitespace-nowrap shrink-0"
               title={locale === "fr" ? "Télécharger le CV (PDF)" : "Download CV (PDF)"}
             >
               <FileDown className="h-3.5 w-3.5 text-indigo-500" />
               <span>{currentUi.nav.downloadCv}</span>
             </a>
 
+            {/* Hire Me / Recrutez-moi */}
             <a
               href="#contact"
-              className="inline-flex items-center gap-1.5 px-3 lg:px-3.5 py-1.5 rounded-lg text-xs font-medium bg-foreground text-background hover:opacity-90 transition-opacity shadow-sm whitespace-nowrap"
+              className="hidden sm:inline-flex items-center gap-1.5 px-2.5 sm:px-3 xl:px-3.5 py-1.5 rounded-lg text-xs font-medium bg-foreground text-background hover:opacity-90 transition-opacity shadow-sm whitespace-nowrap shrink-0"
             >
               <Sparkles className="h-3 w-3" />
               <span>{currentUi.nav.hireMe}</span>
             </a>
 
-            <ThemeToggle />
-          </div>
-
-          {/* Mobile Actions: Cmd+K, Language Switch, Theme, Menu Button */}
-          <div className="flex sm:hidden items-center gap-1.5">
-            {/* Mobile Command Palette Trigger */}
-            <button
-              onClick={openCommandPalette}
-              className="h-9 w-9 rounded-lg border border-border bg-card/60 flex items-center justify-center text-muted-foreground hover:text-foreground"
-              aria-label="Open command palette"
-              title="⌘K"
-            >
-              <Command className="h-4 w-4 text-indigo-500" />
-            </button>
-
-            {/* Mobile Language Switcher */}
-            <div className="inline-flex items-center p-0.5 rounded-md border border-border bg-card/60 text-[11px] font-mono">
-              <Link
-                href={targetEnHref}
-                className={`px-1.5 py-0.5 rounded ${
-                  locale === "en"
-                    ? "bg-indigo-600 text-white font-bold"
-                    : "text-muted-foreground"
-                }`}
-              >
-                EN
-              </Link>
-              <Link
-                href={targetFrHref}
-                className={`px-1.5 py-0.5 rounded ${
-                  locale === "fr"
-                    ? "bg-indigo-600 text-white font-bold"
-                    : "text-muted-foreground"
-                }`}
-              >
-                FR
-              </Link>
+            {/* Theme Toggle (Always visible) */}
+            <div className="shrink-0">
+              <ThemeToggle />
             </div>
 
-            <ThemeToggle />
-
+            {/* Responsive Menu Button (<1280px where center nav is hidden) */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="h-10 w-10 rounded-lg border border-border bg-card/60 flex items-center justify-center text-muted-foreground hover:text-foreground touch-manipulation transition-colors"
+              className="xl:hidden h-9 w-9 rounded-lg border border-border bg-card/60 flex items-center justify-center text-muted-foreground hover:text-foreground touch-manipulation transition-colors shrink-0"
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Dropdown Menu */}
+        {/* Mobile & Tablet Dropdown Drawer (xl:hidden) */}
         {mobileMenuOpen && (
-          <div className="sm:hidden mt-3 p-4 rounded-xl border border-border bg-card/95 backdrop-blur-xl shadow-lg animate-accordion-down">
+          <div className="xl:hidden mt-3 p-4 rounded-xl border border-border bg-card/95 backdrop-blur-xl shadow-lg animate-accordion-down">
             <nav className="flex flex-col gap-2">
-              {/* Command Palette Trigger inside mobile menu */}
+              {/* Command Palette Trigger inside menu */}
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
@@ -279,6 +245,7 @@ export function Navbar({ locale = "en" }: NavbarProps) {
                   {link.name}
                 </a>
               ))}
+
               <div className="pt-2">
                 <button
                   onClick={() => {
@@ -296,6 +263,17 @@ export function Navbar({ locale = "en" }: NavbarProps) {
                   </span>
                 </button>
               </div>
+
+              {/* Hire Me CTA Button in mobile drawer */}
+              <a
+                href="#contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-2 px-3 py-2.5 text-xs font-semibold rounded-lg bg-foreground text-background hover:opacity-90 transition-opacity"
+              >
+                <Sparkles className="h-3.5 w-3.5" />
+                <span>{currentUi.nav.hireMe}</span>
+              </a>
+
               <div className="pt-3 border-t border-border flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <a

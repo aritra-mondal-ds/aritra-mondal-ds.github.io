@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { uiEn } from "@/data/en/ui";
 import { uiFr } from "@/data/fr/ui";
 import { pipelineNodesEn, pipelineBenchmarksEn } from "@/data/pipeline";
@@ -42,8 +43,13 @@ export function PipelineVisualizerModal({
   locale = "en",
 }: PipelineVisualizerModalProps) {
   const [internalIsOpen, setInternalIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [archMode, setArchMode] = useState<"scala" | "pyspark">("scala");
   const [selectedNodeId, setSelectedNodeId] = useState<string>("scala-catalyst");
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const isModalOpen = controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
 
@@ -83,7 +89,7 @@ export function PipelineVisualizerModal({
     };
   }, [isModalOpen]);
 
-  if (!isModalOpen) return null;
+  if (!isModalOpen || !mounted) return null;
 
   const selectedNode =
     currentNodes.find((n) => n.id === selectedNodeId) || currentNodes[2];
@@ -96,12 +102,12 @@ export function PipelineVisualizerModal({
     GitBranch: <GitBranch className="h-4 w-4" />,
   };
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
       aria-labelledby="pipeline-modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
     >
       {/* Backdrop */}
       <div
@@ -369,6 +375,7 @@ export function PipelineVisualizerModal({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

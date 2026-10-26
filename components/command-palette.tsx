@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
+import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { openRecruiterModal } from "./recruiter-fast-track-modal";
@@ -60,6 +61,7 @@ interface CommandPaletteProps {
 
 export function CommandPalette({ locale = "en" }: CommandPaletteProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [copiedText, setCopiedText] = useState<string | null>(null);
@@ -70,6 +72,22 @@ export function CommandPalette({ locale = "en" }: CommandPaletteProps) {
   const { theme, setTheme } = useTheme();
 
   const currentProfile = locale === "fr" ? profileDataFr : profileData;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Lock body scroll when palette is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   // Global Keyboard Listener for Cmd+K / Ctrl+K
   useEffect(() => {
@@ -444,28 +462,28 @@ export function CommandPalette({ locale = "en" }: CommandPaletteProps) {
     }
   }, [selectedIndex]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
       aria-label={locale === "fr" ? "Palette de commandes globale" : "Global Command Palette"}
-      className="fixed inset-0 z-50 flex items-start justify-center pt-20 sm:pt-28 px-4"
+      className="fixed inset-0 z-[9999] flex items-start justify-center pt-16 sm:pt-24 px-4 overflow-y-auto"
     >
       {/* Backdrop */}
       <div
         onClick={() => setIsOpen(false)}
-        className="fixed inset-0 bg-black/60 dark:bg-black/75 backdrop-blur-md transition-opacity animate-in fade-in duration-200"
+        className="fixed inset-0 bg-black/70 dark:bg-black/85 backdrop-blur-md transition-opacity animate-in fade-in duration-200"
       />
 
       {/* Palette Modal */}
       <div
         onKeyDown={handleKeyDown}
-        className="relative w-full max-w-2xl rounded-2xl border border-border bg-card/95 text-foreground shadow-2xl backdrop-blur-2xl overflow-hidden animate-in zoom-in-95 duration-150 flex flex-col"
+        className="relative w-full max-w-2xl rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#0f141c] text-zinc-900 dark:text-zinc-100 shadow-2xl overflow-hidden animate-in zoom-in-95 duration-150 flex flex-col my-4 z-10"
       >
         {/* Search Input Bar */}
-        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-border bg-muted/30">
+        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-900/60">
           <Search className="h-5 w-5 text-indigo-500 shrink-0" />
           <input
             ref={inputRef}
@@ -477,7 +495,7 @@ export function CommandPalette({ locale = "en" }: CommandPaletteProps) {
                 ? "Tapez une commande ou recherchez (ex: projects, spark, amadeus, cv)..."
                 : "Type a command or search (e.g. projects, spark, amadeus, cv)..."
             }
-            className="flex-1 bg-transparent text-sm sm:text-base outline-none placeholder:text-muted-foreground font-sans"
+            className="flex-1 bg-transparent text-sm sm:text-base outline-none placeholder:text-muted-foreground font-sans text-zinc-900 dark:text-zinc-100"
           />
           {query && (
             <button
@@ -519,7 +537,7 @@ export function CommandPalette({ locale = "en" }: CommandPaletteProps) {
                     className={`group flex items-center justify-between p-3 rounded-xl cursor-pointer transition-all ${
                       isSelected
                         ? "bg-indigo-600 text-white shadow-sm"
-                        : "hover:bg-muted/70 text-foreground"
+                        : "hover:bg-zinc-100 dark:hover:bg-zinc-800/70 text-zinc-800 dark:text-zinc-200"
                     }`}
                   >
                     <div className="flex items-center gap-3 min-w-0">
@@ -527,7 +545,7 @@ export function CommandPalette({ locale = "en" }: CommandPaletteProps) {
                         className={`p-2 rounded-lg border shrink-0 transition-colors ${
                           isSelected
                             ? "bg-white/10 border-white/20 text-white"
-                            : "bg-muted border-border/70 text-foreground"
+                            : "bg-zinc-100 dark:bg-zinc-800/80 border-zinc-200 dark:border-zinc-700/80 text-foreground"
                         }`}
                       >
                         {item.icon}
@@ -541,7 +559,7 @@ export function CommandPalette({ locale = "en" }: CommandPaletteProps) {
                             className={`text-[10px] font-mono px-1.5 py-0.2 rounded border ${
                               isSelected
                                 ? "bg-white/15 text-white/90 border-white/20"
-                                : "bg-muted/80 text-muted-foreground border-border/50"
+                                : "bg-zinc-100 dark:bg-zinc-800 text-muted-foreground border-zinc-200 dark:border-zinc-700"
                             }`}
                           >
                             {category}
@@ -583,7 +601,7 @@ export function CommandPalette({ locale = "en" }: CommandPaletteProps) {
         </div>
 
         {/* Footer shortcuts */}
-        <div className="px-4 py-2.5 bg-muted/40 border-t border-border flex items-center justify-between text-[11px] font-mono text-muted-foreground">
+        <div className="px-4 py-2.5 bg-zinc-50 dark:bg-zinc-900/60 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-[11px] font-mono text-muted-foreground">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5">
               <kbd className="px-1.5 py-0.5 rounded bg-muted border border-border">↑</kbd>
@@ -602,6 +620,8 @@ export function CommandPalette({ locale = "en" }: CommandPaletteProps) {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
+

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { RecruiterFastTrack } from "@/types";
 import { uiEn } from "@/data/en/ui";
 import { uiFr } from "@/data/fr/ui";
@@ -41,7 +42,12 @@ export function RecruiterFastTrackModal({
   locale = "en",
 }: RecruiterFastTrackModalProps) {
   const [internalIsOpen, setInternalIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const isModalOpen = controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
 
@@ -96,7 +102,7 @@ export function RecruiterFastTrackModal({
     };
   }, [isModalOpen]);
 
-  if (!isModalOpen) return null;
+  if (!isModalOpen || !mounted) return null;
 
   const handleCopySlackPitch = async () => {
     try {
@@ -110,12 +116,12 @@ export function RecruiterFastTrackModal({
     }
   };
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
       aria-labelledby="recruiter-modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
     >
       {/* Backdrop */}
       <div
@@ -351,6 +357,7 @@ export function RecruiterFastTrackModal({
           </a>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
