@@ -41,6 +41,13 @@ export function Navbar({ locale = "en" }: NavbarProps) {
     };
   }, []);
 
+  // When switching locale or landing, ensure viewport stays strictly at the top
+  useEffect(() => {
+    if (typeof window !== "undefined" && !window.location.hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
+  }, [locale]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && mobileMenuOpen) {
@@ -60,8 +67,17 @@ export function Navbar({ locale = "en" }: NavbarProps) {
     { name: currentUi.nav.contact, href: "#contact" },
   ];
 
-  const targetEnHref = currentHash ? `/${currentHash}` : "/";
-  const targetFrHref = currentHash ? `/fr/${currentHash}` : "/fr/";
+  const targetEnHref = "/";
+  const targetFrHref = "/fr/";
+
+  const handleLanguageSwitch = () => {
+    if (typeof window !== "undefined") {
+      if (window.location.hash) {
+        window.history.replaceState(null, "", window.location.pathname);
+      }
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
+  };
 
   return (
     <header
@@ -124,6 +140,7 @@ export function Navbar({ locale = "en" }: NavbarProps) {
             <div className="inline-flex items-center p-0.5 rounded-lg border border-border bg-card/60 backdrop-blur-md shadow-sm text-xs font-mono shrink-0">
               <Link
                 href={targetEnHref}
+                onClick={handleLanguageSwitch}
                 className={`px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md transition-all ${
                   locale === "en"
                     ? "bg-indigo-600 text-white font-bold shadow-sm"
@@ -135,6 +152,7 @@ export function Navbar({ locale = "en" }: NavbarProps) {
               </Link>
               <Link
                 href={targetFrHref}
+                onClick={handleLanguageSwitch}
                 className={`px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md transition-all ${
                   locale === "fr"
                     ? "bg-indigo-600 text-white font-bold shadow-sm"

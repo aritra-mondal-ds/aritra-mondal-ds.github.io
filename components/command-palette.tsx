@@ -402,11 +402,16 @@ export function CommandPalette({ locale = "en" }: CommandPaletteProps) {
         keywords: ["language", "langue", "french", "english", "traduire", "switch"],
         action: () => {
           setIsOpen(false);
-          const currentHash = window.location.hash;
+          if (typeof window !== "undefined") {
+            if (window.location.hash) {
+              window.history.replaceState(null, "", window.location.pathname);
+            }
+            window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+          }
           if (locale === "fr") {
-            router.push(`/${currentHash}`);
+            router.push("/");
           } else {
-            router.push(`/fr/${currentHash}`);
+            router.push("/fr/");
           }
         },
         shortcut: locale === "fr" ? "EN" : "FR",
