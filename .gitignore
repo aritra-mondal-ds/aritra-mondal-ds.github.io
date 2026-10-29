@@ -29,3 +29,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local resume drafts & personal working notes
+Resume_MONDAL_Aritra/
+*.log
