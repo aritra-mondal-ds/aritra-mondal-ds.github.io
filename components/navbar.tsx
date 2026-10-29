@@ -179,8 +179,8 @@ export function Navbar({ locale = "en" }: NavbarProps) {
 
             {/* Download CV */}
             <a
-              href="/cv.pdf"
-              download="Aritra_Mondal_Data_Scientist_CV.pdf"
+              href={locale === "fr" ? "/cv-fr.pdf" : "/cv.pdf"}
+              download={locale === "fr" ? "Aritra_Mondal_Data_Scientist_CV_FR.pdf" : "Aritra_Mondal_Data_Scientist_CV_EN.pdf"}
               className="hidden sm:inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg text-xs font-medium border border-border bg-card/60 backdrop-blur-md text-foreground hover:bg-muted transition-colors shadow-sm whitespace-nowrap shrink-0"
               title={locale === "fr" ? "Télécharger le CV (PDF)" : "Download CV (PDF)"}
             >
@@ -294,8 +294,8 @@ export function Navbar({ locale = "en" }: NavbarProps) {
                   </a>
                 </div>
                 <a
-                  href="/cv.pdf"
-                  download="Aritra_Mondal_Data_Scientist_CV.pdf"
+                  href={locale === "fr" ? "/cv-fr.pdf" : "/cv.pdf"}
+                  download={locale === "fr" ? "Aritra_Mondal_Data_Scientist_CV_FR.pdf" : "Aritra_Mondal_Data_Scientist_CV_EN.pdf"}
                   className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-medium border border-border bg-muted/80 text-foreground"
                 >
                   <FileDown className="h-3 w-3 text-indigo-500" />

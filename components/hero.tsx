@@ -180,8 +180,8 @@ export function Hero({ locale = "en" }: HeroProps) {
           </a>
 
           <a
-            href="/cv.pdf"
-            download="Aritra_Mondal_Data_Scientist_CV.pdf"
+            href={locale === "fr" ? "/cv-fr.pdf" : "/cv.pdf"}
+            download={locale === "fr" ? "Aritra_Mondal_Data_Scientist_CV_FR.pdf" : "Aritra_Mondal_Data_Scientist_CV_EN.pdf"}
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-colors shadow-sm"
           >
             <FileDown className="h-4 w-4 text-indigo-500" />

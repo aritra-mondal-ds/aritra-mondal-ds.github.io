@@ -331,8 +331,8 @@ export function RecruiterFastTrackModal({
         <div className="pt-4 border-t border-zinc-800 flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <a
-              href="/cv.pdf"
-              download="Aritra_Mondal_Data_Scientist_CV.pdf"
+              href={locale === "fr" ? "/cv-fr.pdf" : "/cv.pdf"}
+              download={locale === "fr" ? "Aritra_Mondal_Data_Scientist_CV_FR.pdf" : "Aritra_Mondal_Data_Scientist_CV_EN.pdf"}
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-zinc-800 hover:bg-zinc-700 text-white transition-colors"
             >
               <FileDown className="h-3.5 w-3.5 text-indigo-400" />

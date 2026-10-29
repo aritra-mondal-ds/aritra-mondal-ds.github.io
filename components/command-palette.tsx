@@ -321,15 +321,15 @@ export function CommandPalette({ locale = "en" }: CommandPaletteProps) {
         categoryFr: "Actions Rapides",
         title: "Download Full CV (PDF)",
         titleFr: "Télécharger le CV Complet (PDF)",
-        subtitle: "Aritra_Mondal_Data_Scientist_CV.pdf (English & French aligned)",
-        subtitleFr: "Format PDF complet avec toutes les réalisations quantifiées",
+        subtitle: "Aritra_Mondal_Data_Scientist_CV_EN.pdf (A4 Executive 1-Page)",
+        subtitleFr: "Aritra_Mondal_Data_Scientist_CV_FR.pdf (Format A4 Synthétique 1-Page)",
         icon: <FileDown className="h-4 w-4 text-indigo-500" />,
         keywords: ["cv", "resume", "pdf", "download", "telecharger"],
         action: () => {
           setIsOpen(false);
           const link = document.createElement("a");
-          link.href = "/cv.pdf";
-          link.download = "Aritra_Mondal_Data_Scientist_CV.pdf";
+          link.href = locale === "fr" ? "/cv-fr.pdf" : "/cv.pdf";
+          link.download = locale === "fr" ? "Aritra_Mondal_Data_Scientist_CV_FR.pdf" : "Aritra_Mondal_Data_Scientist_CV_EN.pdf";
           link.click();
         },
         shortcut: "CV",
