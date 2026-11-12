@@ -151,7 +151,7 @@ export function RecruiterFastTrackModal({
 
           <button
             onClick={handleClose}
-            className="p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors shrink-0"
+            className="p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors shrink-0 cursor-pointer active:scale-95"
             aria-label={currentUi.recruiterFastTrack.close}
           >
             <X className="h-5 w-5" />
@@ -159,7 +159,7 @@ export function RecruiterFastTrackModal({
         </div>
 
         {/* 6 Essential French Hiring Criteria Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 my-6 text-xs font-mono">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 my-6 text-xs font-mono cursor-default select-text">
           {/* Availability */}
           <div className="p-3.5 rounded-xl border border-zinc-800 bg-zinc-900/60 flex items-start gap-3">
             <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 shrink-0">
@@ -270,7 +270,7 @@ export function RecruiterFastTrackModal({
         </div>
 
         {/* Why Hire Aritra (3 Key Highlights) */}
-        <div className="my-6">
+        <div className="my-6 cursor-default select-text">
           <div className="text-xs font-mono uppercase tracking-wider text-indigo-400 mb-3 flex items-center gap-1.5 font-semibold">
             <Award className="h-4 w-4" />
             <span>{currentUi.recruiterFastTrack.highlightsLabel}</span>
@@ -299,14 +299,14 @@ export function RecruiterFastTrackModal({
         {/* 1-Click ATS / Slack Pitch Card */}
         <div className="my-6 p-4 rounded-xl border border-indigo-500/30 bg-indigo-950/20">
           <div className="flex items-center justify-between gap-2 mb-2">
-            <span className="text-xs font-mono font-semibold text-indigo-300 flex items-center gap-1.5">
+            <span className="text-xs font-mono font-semibold text-indigo-300 flex items-center gap-1.5 cursor-default select-text">
               <Sparkles className="h-3.5 w-3.5 text-indigo-400" />
               <span>{currentUi.recruiterFastTrack.slackPitchLabel}</span>
             </span>
 
             <button
               onClick={handleCopySlackPitch}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-mono font-semibold bg-indigo-600 hover:bg-indigo-500 text-white shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-mono font-semibold bg-indigo-600 hover:bg-indigo-500 text-white shadow-sm transition-all cursor-pointer hover:-translate-y-0.5 active:scale-95"
             >
               {copied ? (
                 <>
@@ -322,7 +322,7 @@ export function RecruiterFastTrackModal({
             </button>
           </div>
 
-          <pre className="text-[11px] leading-relaxed text-zinc-300 font-mono bg-zinc-950/80 p-3 rounded-lg border border-zinc-800 overflow-x-auto whitespace-pre-wrap">
+          <pre className="text-[11px] leading-relaxed text-zinc-300 font-mono bg-zinc-950/80 p-3 rounded-lg border border-zinc-800 overflow-x-auto whitespace-pre-wrap select-text">
             {currentData.slackPitch}
           </pre>
         </div>
@@ -333,7 +333,7 @@ export function RecruiterFastTrackModal({
             <a
               href={locale === "fr" ? "/cv-fr.pdf" : "/cv.pdf"}
               download={locale === "fr" ? "Aritra_Mondal_Data_Scientist_CV_FR.pdf" : "Aritra_Mondal_Data_Scientist_CV_EN.pdf"}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-zinc-800 hover:bg-zinc-700 text-white transition-colors"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-zinc-800 hover:bg-zinc-700 text-white transition-all cursor-pointer hover:-translate-y-0.5 active:scale-95"
             >
               <FileDown className="h-3.5 w-3.5 text-indigo-400" />
               <span>{currentUi.recruiterFastTrack.downloadCv}</span>
@@ -341,7 +341,7 @@ export function RecruiterFastTrackModal({
 
             <a
               href="tel:+33749297966"
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-zinc-700 hover:bg-zinc-800 text-zinc-200 transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-zinc-700 hover:bg-zinc-800 text-zinc-200 transition-all cursor-pointer hover:-translate-y-0.5 active:scale-95"
             >
               <Phone className="h-3.5 w-3.5 text-emerald-400" />
               <span className="hidden sm:inline">+33 7 49 29 79 66</span>
@@ -350,7 +350,7 @@ export function RecruiterFastTrackModal({
 
           <a
             href="mailto:aritramondal100@gmail.com?subject=Data%20Scientist%20Opportunity%20-%20Interview%20Inquiry"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/30 transition-all hover:scale-[1.02] active:scale-[0.98]"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/30 transition-all cursor-pointer hover:-translate-y-0.5 active:scale-95"
           >
             <Mail className="h-4 w-4" />
             <span>{currentUi.recruiterFastTrack.scheduleCall}</span>

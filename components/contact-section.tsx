@@ -84,7 +84,7 @@ export function ContactSection({ locale = "en" }: ContactSectionProps) {
                 </div>
                 <button
                   onClick={copyEmail}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono border border-border bg-muted/60 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono border border-border bg-muted/60 hover:bg-muted text-muted-foreground hover:text-foreground transition-all cursor-pointer active:scale-95"
                 >
                   {emailCopied ? (
                     <>
@@ -121,7 +121,7 @@ export function ContactSection({ locale = "en" }: ContactSectionProps) {
                 </div>
                 <button
                   onClick={copyPhone}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono border border-border bg-muted/60 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono border border-border bg-muted/60 hover:bg-muted text-muted-foreground hover:text-foreground transition-all cursor-pointer active:scale-95"
                 >
                   {phoneCopied ? (
                     <>
@@ -152,7 +152,7 @@ export function ContactSection({ locale = "en" }: ContactSectionProps) {
           </div>
 
           {/* Quick Signal Pills */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 my-6 pt-6 border-t border-border/60 text-xs text-muted-foreground">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 my-6 pt-6 border-t border-border/60 text-xs text-muted-foreground cursor-default select-text">
             <div className="flex items-center gap-2 p-2.5 rounded-xl bg-card/60 border border-border/60">
               <MapPin className="h-4 w-4 text-emerald-500 shrink-0" />
               <span>{currentUi.contact.basedLabel}</span>
@@ -171,7 +171,7 @@ export function ContactSection({ locale = "en" }: ContactSectionProps) {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-6 border-t border-border/60">
             <button
               onClick={openRecruiterModal}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all shadow-sm cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all shadow-sm cursor-pointer hover:-translate-y-0.5 active:scale-[0.98]"
             >
               <Zap className="h-4 w-4 fill-current text-emerald-500 animate-pulse" />
               <span>{currentUi.recruiterFastTrack.buttonNav}</span>
@@ -179,7 +179,7 @@ export function ContactSection({ locale = "en" }: ContactSectionProps) {
 
             <a
               href={`mailto:${currentProfile.email}?subject=Entretien%20Data%20Scientist%20-%20Aritra%20Mondal`}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/25 transition-all cursor-pointer hover:-translate-y-0.5 active:scale-[0.98]"
             >
               <Send className="h-4 w-4" />
               <span>
@@ -191,7 +191,7 @@ export function ContactSection({ locale = "en" }: ContactSectionProps) {
               href="https://www.linkedin.com/in/aritra-mondal-66702021"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-colors shadow-sm"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-all cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] shadow-sm"
             >
               <Linkedin className="h-4 w-4 text-sky-500" />
               <span>{currentUi.contact.linkedinLabel}</span>
@@ -201,7 +201,7 @@ export function ContactSection({ locale = "en" }: ContactSectionProps) {
               href="https://github.com/aritra-mondal-ds"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-colors shadow-sm"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-all cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] shadow-sm"
             >
               <Github className="h-4 w-4" />
               <span>{currentUi.contact.githubLabel}</span>

@@ -29,22 +29,22 @@ export function ProjectCard({ project, featuredIndex, locale = "en" }: ProjectCa
   const currentUi = locale === "fr" ? uiFr : uiEn;
 
   return (
-    <article className="group relative rounded-2xl border border-border bg-card/80 hover:border-indigo-500/40 hover:bg-card transition-all duration-300 shadow-sm hover:shadow-lg flex flex-col justify-between overflow-hidden">
+    <article className="relative rounded-2xl border border-border bg-card/80 shadow-sm flex flex-col justify-between overflow-hidden cursor-default select-text">
       {/* Top Header & Badges */}
       <div className="p-6 sm:p-7 pb-4">
         <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-          <span className="text-xs font-mono font-medium px-2.5 py-1 rounded-md bg-muted text-muted-foreground border border-border">
+          <span className="text-xs font-mono font-medium px-2.5 py-1 rounded-md bg-muted text-muted-foreground border border-border cursor-default">
             {project.category}
           </span>
           {project.liveBadge && (
-            <span className="text-xs font-mono font-semibold px-2.5 py-1 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/25 flex items-center gap-1.5">
+            <span className="text-xs font-mono font-semibold px-2.5 py-1 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/25 flex items-center gap-1.5 cursor-default">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
               {project.liveBadge}
             </span>
           )}
         </div>
 
-        <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors">
+        <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
           {project.title}
         </h3>
 
@@ -52,8 +52,8 @@ export function ProjectCard({ project, featuredIndex, locale = "en" }: ProjectCa
           {project.tagline}
         </p>
 
-        {/* Highlight Metrics Grid */}
-        <div className="grid grid-cols-3 gap-2 my-5 p-3 rounded-xl bg-muted/60 border border-border/70">
+        {/* Highlight Metrics Grid (Grounded Data Display) */}
+        <div className="grid grid-cols-3 gap-2 my-5 p-3 rounded-xl bg-muted/60 border border-border/70 cursor-default">
           {project.metrics.map((metric, idx) => (
             <div key={idx} className="text-center">
               <div className="text-base sm:text-lg font-mono font-extrabold text-foreground">
@@ -71,7 +71,7 @@ export function ProjectCard({ project, featuredIndex, locale = "en" }: ProjectCa
           <div className="mb-5">
             <button
               onClick={openPipelineModal}
-              className="w-full py-2.5 px-3.5 rounded-xl bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-sky-500/10 hover:from-indigo-500/20 hover:to-sky-500/20 border border-indigo-500/30 text-indigo-600 dark:text-indigo-400 font-mono text-xs font-semibold flex items-center justify-between transition-all group/btn shadow-sm cursor-pointer"
+              className="w-full py-2.5 px-3.5 rounded-xl bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-sky-500/10 hover:from-indigo-500/20 hover:to-sky-500/20 border border-indigo-500/30 hover:border-indigo-500/50 text-indigo-600 dark:text-indigo-400 font-mono text-xs font-semibold flex items-center justify-between transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-xs hover:shadow-md cursor-pointer group/btn"
             >
               <span className="flex items-center gap-2">
                 <Layers className="h-4 w-4 text-indigo-500 animate-pulse" />
@@ -144,18 +144,21 @@ export function ProjectCard({ project, featuredIndex, locale = "en" }: ProjectCa
           )}
         </div>
 
+        {/* Explicit Accordion Button */}
         <button
           onClick={() => setExpanded(!expanded)}
           aria-expanded={expanded}
-          className="mt-3 text-xs font-mono text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center gap-1 transition-colors"
+          className="mt-3.5 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-indigo-500/30 bg-indigo-500/5 hover:bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 text-xs font-mono font-semibold transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer shadow-xs"
         >
           {expanded ? (
             <>
-              {currentUi.projects.showLess} <ChevronUp className="h-3.5 w-3.5" />
+              <span>{currentUi.projects.showLess}</span>
+              <ChevronUp className="h-3.5 w-3.5" />
             </>
           ) : (
             <>
-              {currentUi.projects.showMore} <ChevronDown className="h-3.5 w-3.5" />
+              <span>{currentUi.projects.showMore}</span>
+              <ChevronDown className="h-3.5 w-3.5" />
             </>
           )}
         </button>
@@ -167,7 +170,7 @@ export function ProjectCard({ project, featuredIndex, locale = "en" }: ProjectCa
           {project.techStack.map((tech, tIdx) => (
             <span
               key={tIdx}
-              className="text-[11px] font-mono px-2 py-0.5 rounded bg-background border border-border text-foreground font-medium"
+              className="text-[11px] font-mono px-2 py-0.5 rounded bg-background border border-border text-foreground font-medium cursor-default select-text"
             >
               {tech}
             </span>
@@ -175,13 +178,13 @@ export function ProjectCard({ project, featuredIndex, locale = "en" }: ProjectCa
         </div>
 
         <div className="flex items-center justify-between gap-3 pt-2">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             {project.links.github && (
               <a
                 href={project.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card hover:bg-muted hover:border-foreground/30 text-xs font-medium text-foreground transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-xs cursor-pointer"
               >
                 <Github className="h-3.5 w-3.5" />
                 <span>{currentUi.projects.sourceCode}</span>
@@ -193,7 +196,7 @@ export function ProjectCard({ project, featuredIndex, locale = "en" }: ProjectCa
                 href={project.links.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:underline transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-indigo-500/30 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-xs font-semibold transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-xs cursor-pointer"
               >
                 <ExternalLink className="h-3.5 w-3.5" />
                 <span>{currentUi.projects.interactive}</span>
@@ -201,7 +204,7 @@ export function ProjectCard({ project, featuredIndex, locale = "en" }: ProjectCa
             )}
           </div>
 
-          <span className="text-[11px] font-mono text-muted-foreground">
+          <span className="text-[11px] font-mono text-muted-foreground cursor-default select-text">
             {currentUi.projects.provenLabel}
           </span>
         </div>

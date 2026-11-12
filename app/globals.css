@@ -49,6 +49,14 @@
   :focus-visible {
     @apply outline-none ring-2 ring-indigo-500 ring-offset-2 ring-offset-background;
   }
+
+  /* Interactive element affordances: guarantee pointer cursor on actionable elements */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  a[href],
+  summary {
+    cursor: pointer;
+  }
 }
 
 /* Custom subtle grid background */

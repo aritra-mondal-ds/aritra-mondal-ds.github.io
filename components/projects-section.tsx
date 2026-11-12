@@ -58,10 +58,10 @@ export function ProjectsSection({ locale = "en" }: ProjectsSectionProps) {
                 key={cat.key}
                 onClick={() => setSelectedCategory(cat.key)}
                 aria-pressed={selectedCategory === cat.key}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all cursor-pointer active:scale-[0.98] ${
                   selectedCategory === cat.key
                     ? "bg-foreground text-background font-semibold shadow-sm"
-                    : "bg-card border border-border text-muted-foreground hover:text-foreground"
+                    : "bg-card border border-border text-muted-foreground hover:text-foreground hover:border-foreground/30 hover:bg-muted/50"
                 }`}
               >
                 {cat.label}

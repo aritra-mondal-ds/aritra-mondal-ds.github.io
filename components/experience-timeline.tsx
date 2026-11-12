@@ -95,10 +95,10 @@ export function ExperienceTimeline({ locale = "en" }: ExperienceTimelineProps) {
               aria-controls="experience-panel"
               id="experience-tab"
               onClick={() => handleTabChange("experience")}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer active:scale-[0.98] ${
                 activeTab === "experience"
                   ? "bg-indigo-600 text-white shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
               }`}
             >
               <Briefcase className="h-3.5 w-3.5" />
@@ -112,10 +112,10 @@ export function ExperienceTimeline({ locale = "en" }: ExperienceTimelineProps) {
               aria-controls="education-panel"
               id="education-tab"
               onClick={() => handleTabChange("education")}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer active:scale-[0.98] ${
                 activeTab === "education"
                   ? "bg-indigo-600 text-white shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
               }`}
             >
               <GraduationCap className="h-3.5 w-3.5" />
@@ -137,29 +137,29 @@ export function ExperienceTimeline({ locale = "en" }: ExperienceTimelineProps) {
             {currentExperiences.map((exp) => (
               <div key={exp.id} className="relative flex items-start gap-6 sm:gap-8 group">
                 {/* Timeline node */}
-                <div className="relative z-10 flex h-7 w-7 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-card border-2 border-indigo-600 text-indigo-600 dark:text-indigo-400 font-mono font-bold text-xs shadow-md shrink-0">
+                <div className="relative z-10 flex h-7 w-7 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-card border-2 border-indigo-600 text-indigo-600 dark:text-indigo-400 font-mono font-bold text-xs shadow-md shrink-0 cursor-default select-none">
                   {exp.logoText || <Building2 className="h-4 w-4" />}
                 </div>
 
-                {/* Card */}
-                <div className="flex-1 p-6 sm:p-7 rounded-2xl border border-border bg-card/80 hover:border-indigo-500/40 hover:bg-card transition-all duration-300 shadow-sm">
+                {/* Card (Stable Timeline Container) */}
+                <div className="flex-1 p-6 sm:p-7 rounded-2xl border border-border bg-card/80 shadow-sm cursor-default select-text">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
                     <div>
                       <h3 className="text-xl font-bold text-foreground">{exp.role}</h3>
                       <div className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 flex flex-wrap items-center gap-2 mt-0.5">
                         <Building2 className="h-3.5 w-3.5" />
                         <span>{exp.company}</span>
-                        <span className="text-xs font-mono font-normal px-2 py-0.5 rounded bg-muted text-muted-foreground border border-border">
+                        <span className="text-xs font-mono font-normal px-2 py-0.5 rounded bg-muted text-muted-foreground border border-border cursor-default">
                           {exp.type}
                         </span>
                         {(exp.location.toLowerCase().includes("hybrid") || exp.location.toLowerCase().includes("hybride")) && (
-                          <span className="text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25 flex items-center gap-1">
+                          <span className="text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25 flex items-center gap-1 cursor-default">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                             {locale === "fr" ? "Mode Hybride (Présentiel & Télétravail)" : "Hybrid (On-site & Remote)"}
                           </span>
                         )}
                         {(exp.location.toLowerCase().includes("100% remote") || exp.location.toLowerCase().includes("100% télétravail")) && (
-                          <span className="text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-sky-500/10 text-sky-700 dark:text-sky-300 border border-sky-500/25 flex items-center gap-1">
+                          <span className="text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-sky-500/10 text-sky-700 dark:text-sky-300 border border-sky-500/25 flex items-center gap-1 cursor-default">
                             <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
                             {locale === "fr" ? "100% Télétravail (Autonomie complète)" : "100% Autonomous Remote"}
                           </span>
@@ -201,7 +201,7 @@ export function ExperienceTimeline({ locale = "en" }: ExperienceTimelineProps) {
                     {exp.technologies.map((tech, tIdx) => (
                       <span
                         key={tIdx}
-                        className="text-xs font-mono px-2.5 py-1 rounded-md bg-muted text-foreground border border-border"
+                        className="text-xs font-mono px-2.5 py-1 rounded-md bg-muted text-foreground border border-border cursor-default select-text"
                       >
                         {tech}
                       </span>
@@ -224,12 +224,12 @@ export function ExperienceTimeline({ locale = "en" }: ExperienceTimelineProps) {
               return (
                 <div key={edu.id} className="relative flex items-start gap-6 sm:gap-8 group">
                   {/* Timeline node */}
-                  <div className="relative z-10 flex h-7 w-7 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-card border-2 border-indigo-600 text-indigo-600 dark:text-indigo-400 font-mono font-bold text-[10px] shadow-md shrink-0">
+                  <div className="relative z-10 flex h-7 w-7 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-card border-2 border-indigo-600 text-indigo-600 dark:text-indigo-400 font-mono font-bold text-[10px] shadow-md shrink-0 cursor-default select-none">
                     {edu.logoText || <GraduationCap className="h-4 w-4" />}
                   </div>
 
-                  {/* Card */}
-                  <div className="flex-1 p-6 sm:p-7 rounded-2xl border border-border bg-card/80 hover:border-indigo-500/40 hover:bg-card transition-all duration-300 shadow-sm">
+                  {/* Card (Stable Timeline Container) */}
+                  <div className="flex-1 p-6 sm:p-7 rounded-2xl border border-border bg-card/80 shadow-sm cursor-default select-text">
                     {/* Header row */}
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-3">
                       <div className="flex-1">
@@ -240,17 +240,17 @@ export function ExperienceTimeline({ locale = "en" }: ExperienceTimelineProps) {
                               href={edu.institutionUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="hover:underline flex items-center gap-1"
+                              className="hover:underline flex items-center gap-1 cursor-pointer group/inst"
                             >
-                              {edu.institution}
-                              <ExternalLink className="h-3 w-3 opacity-60" />
+                              <span>{edu.institution}</span>
+                              <ExternalLink className="h-3 w-3 opacity-60 group-hover/inst:opacity-100 transition-opacity" />
                             </a>
                           ) : (
                             <span>{edu.institution}</span>
                           )}
                         </div>
                         {edu.frenchEquivalent && (
-                          <span className="inline-flex mt-1.5 text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/25">
+                          <span className="inline-flex mt-1.5 text-[11px] font-mono font-semibold px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/25 cursor-default">
                             {edu.frenchEquivalent}
                           </span>
                         )}
@@ -270,7 +270,7 @@ export function ExperienceTimeline({ locale = "en" }: ExperienceTimelineProps) {
 
                     {/* Honours badge */}
                     {edu.honors && (
-                      <div className="inline-flex items-center gap-1.5 mb-3 px-3 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-300 text-xs font-mono font-semibold">
+                      <div className="inline-flex items-center gap-1.5 mb-3 px-3 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-300 text-xs font-mono font-semibold cursor-default">
                         <Award className="h-3.5 w-3.5" />
                         <span>{edu.honors}</span>
                       </div>
@@ -283,7 +283,7 @@ export function ExperienceTimeline({ locale = "en" }: ExperienceTimelineProps) {
 
                     {/* Dissertation / Thesis */}
                     {edu.thesis && (
-                      <div className="mb-4 p-3.5 rounded-xl border border-border/70 bg-muted/40">
+                      <div className="mb-4 p-3.5 rounded-xl border border-border/70 bg-muted/40 cursor-default">
                         <div className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-foreground mb-1.5">
                           <FlaskConical className="h-3.5 w-3.5 text-indigo-500" />
                           <span>{currentUi.experience.thesisLabel}</span>
@@ -294,20 +294,20 @@ export function ExperienceTimeline({ locale = "en" }: ExperienceTimelineProps) {
                       </div>
                     )}
 
-                    {/* Modules – collapsible */}
+                    {/* Modules – collapsible with distinct button styling */}
                     {edu.modules && edu.modules.length > 0 && (
                       <div className="mb-4">
                         <button
                           onClick={() => toggleModules(edu.id)}
-                          className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-foreground hover:text-indigo-500 transition-colors mb-2"
+                          className="cursor-pointer inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border/80 bg-muted/60 hover:bg-muted hover:border-indigo-500/30 text-xs font-mono font-semibold uppercase tracking-wider text-foreground transition-all hover:-translate-y-0.5 active:translate-y-0 mb-3"
                         >
                           <BookOpen className="h-3.5 w-3.5 text-indigo-500" />
                           <span>
                             {currentUi.experience.modulesLabel} ({edu.modules.length})
                           </span>
                           {modulesOpen
-                            ? <ChevronUp className="h-3.5 w-3.5" />
-                            : <ChevronDown className="h-3.5 w-3.5" />}
+                            ? <ChevronUp className="h-3.5 w-3.5 text-muted-foreground" />
+                            : <ChevronDown className="h-3.5 w-3.5 text-muted-foreground" />}
                         </button>
 
                         {modulesOpen && (
@@ -315,7 +315,7 @@ export function ExperienceTimeline({ locale = "en" }: ExperienceTimelineProps) {
                             {edu.modules.map((mod, mIdx) => (
                               <div
                                 key={mIdx}
-                                className="flex items-start gap-2 text-xs text-muted-foreground px-3 py-2 rounded-lg bg-muted/50 border border-border/60"
+                                className="flex items-start gap-2 text-xs text-muted-foreground px-3 py-2 rounded-lg bg-muted/50 border border-border/60 cursor-default select-text"
                               >
                                 <span className="text-indigo-500 font-mono shrink-0 mt-0.5">→</span>
                                 <span>{mod}</span>
@@ -328,14 +328,14 @@ export function ExperienceTimeline({ locale = "en" }: ExperienceTimelineProps) {
 
                     {/* Skills gained */}
                     <div className="pt-4 border-t border-border/60">
-                      <span className="text-xs font-mono font-semibold uppercase tracking-wider text-muted-foreground block mb-2">
+                      <span className="text-xs font-mono font-semibold uppercase tracking-wider text-muted-foreground block mb-2 cursor-default">
                         {currentUi.experience.skillsLabel}
                       </span>
                       <div className="flex flex-wrap gap-1.5">
                         {edu.skillsGained.map((skill, sIdx) => (
                           <span
                             key={sIdx}
-                            className="text-xs font-mono px-2.5 py-1 rounded-md bg-muted text-foreground border border-border"
+                            className="text-xs font-mono px-2.5 py-1 rounded-md bg-muted text-foreground border border-border cursor-default select-text"
                           >
                             {skill}
                           </span>

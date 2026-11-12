@@ -54,7 +54,7 @@ export function Hero({ locale = "en" }: HeroProps) {
         {/* Top availability pill with 1-click Fast-Track recruiter modal trigger */}
         <button
           onClick={openRecruiterModal}
-          className="group inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs font-mono font-medium hover:bg-emerald-500/20 transition-all cursor-pointer shadow-sm mb-6"
+          className="group inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs font-mono font-medium hover:bg-emerald-500/20 hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer shadow-sm mb-6"
           title={locale === "fr" ? "Ouvrir la fiche express recruteur" : "Open executive recruiter synthesis"}
         >
           <span className="relative flex h-2 w-2">
@@ -101,9 +101,9 @@ export function Hero({ locale = "en" }: HeroProps) {
             </p>
           </div>
 
-          {/* Authentic Portrait with 100% Biometric Preservation */}
+          {/* Authentic Portrait with Biometric Preservation (Static Framing, No Misleading Hover Zoom) */}
           <div className="relative shrink-0 self-start md:self-center">
-            <div className="relative w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-2xl p-1 bg-gradient-to-tr from-indigo-500/30 via-border to-sky-500/20 shadow-xl overflow-hidden group">
+            <div className="relative w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-2xl p-1 bg-gradient-to-tr from-indigo-500/30 via-border to-sky-500/20 shadow-xl overflow-hidden">
               <div className="relative w-full h-full rounded-xl overflow-hidden bg-muted">
                 <Image
                   src="/aritra-mondal.jpg"
@@ -111,18 +111,18 @@ export function Hero({ locale = "en" }: HeroProps) {
                   width={176}
                   height={176}
                   priority
-                  className="object-cover object-top w-full h-full transition-transform duration-300 group-hover:scale-105"
+                  className="object-cover object-top w-full h-full"
                 />
               </div>
             </div>
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap px-2.5 py-0.5 rounded-full bg-card/90 backdrop-blur-md border border-border shadow-sm text-[10px] font-mono text-muted-foreground flex items-center gap-1.5">
+            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap px-2.5 py-0.5 rounded-full bg-card/90 backdrop-blur-md border border-border shadow-sm text-[10px] font-mono text-muted-foreground flex items-center gap-1.5 cursor-default select-none">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               <span>Aritra Mondal</span>
             </div>
           </div>
         </div>
 
-        {/* French Recruiter Signal Pills */}
+        {/* French Recruiter Signal Cards (Informational Summary - Grounded & Non-Clickable) */}
         <div className="mt-8 pt-6 border-t border-border/60">
           <div className="text-xs font-mono uppercase tracking-wider text-muted-foreground mb-3 flex items-center gap-2">
             <Sparkles className="h-3 w-3 text-indigo-500" />
@@ -133,7 +133,7 @@ export function Hero({ locale = "en" }: HeroProps) {
             {currentProfile.recruiterSignals.map((signal, idx) => (
               <div
                 key={idx}
-                className="group relative flex items-start gap-3 p-3 rounded-xl border border-border/80 bg-card/60 backdrop-blur-sm hover:border-indigo-500/40 hover:bg-card/90 transition-all shadow-sm min-h-[84px]"
+                className="relative flex items-start gap-3 p-3 rounded-xl border border-border/70 bg-card/50 backdrop-blur-sm shadow-xs min-h-[84px] cursor-default select-text"
               >
                 <div className="p-2 rounded-lg bg-muted/80 border border-border/50 shrink-0">
                   {iconMap[signal.icon] || <Sparkles className="h-4 w-4 text-indigo-500" />}
@@ -144,7 +144,7 @@ export function Hero({ locale = "en" }: HeroProps) {
                       {signal.label}
                     </span>
                     {signal.badge && (
-                      <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20 whitespace-nowrap shrink-0">
+                      <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-muted text-muted-foreground border border-border/60 whitespace-nowrap shrink-0">
                         {signal.badge}
                       </span>
                     )}
@@ -161,11 +161,11 @@ export function Hero({ locale = "en" }: HeroProps) {
           </div>
         </div>
 
-        {/* Primary CTAs & Social Links */}
+        {/* Primary CTAs & Social Links (Clearly Actionable Buttons with Tactile Elevation) */}
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <button
             onClick={openRecruiterModal}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-sm cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm cursor-pointer"
           >
             <Zap className="h-4 w-4 fill-current text-emerald-500 animate-pulse" />
             <span>{currentUi.recruiterFastTrack.buttonHero}</span>
@@ -173,7 +173,7 @@ export function Hero({ locale = "en" }: HeroProps) {
 
           <a
             href="#projects"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/25 transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
           >
             <span>{currentUi.hero.viewProjects}</span>
             <ArrowRight className="h-4 w-4" />
@@ -182,7 +182,7 @@ export function Hero({ locale = "en" }: HeroProps) {
           <a
             href={locale === "fr" ? "/cv-fr.pdf" : "/cv.pdf"}
             download={locale === "fr" ? "Aritra_Mondal_Data_Scientist_CV_FR.pdf" : "Aritra_Mondal_Data_Scientist_CV_EN.pdf"}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-colors shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm cursor-pointer"
           >
             <FileDown className="h-4 w-4 text-indigo-500" />
             <span>{currentUi.hero.downloadCvPdf}</span>
@@ -190,7 +190,7 @@ export function Hero({ locale = "en" }: HeroProps) {
 
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-colors shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm cursor-pointer"
           >
             <Mail className="h-4 w-4 text-muted-foreground" />
             <span>{currentUi.hero.getInTouch}</span>
@@ -200,7 +200,7 @@ export function Hero({ locale = "en" }: HeroProps) {
             href="https://github.com/aritra-mondal-ds"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-colors shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm cursor-pointer"
           >
             <Github className="h-4 w-4" />
             <span className="hidden sm:inline">GitHub</span>
@@ -210,7 +210,7 @@ export function Hero({ locale = "en" }: HeroProps) {
             href="https://www.linkedin.com/in/aritra-mondal-66702021"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-colors shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm cursor-pointer"
           >
             <Linkedin className="h-4 w-4 text-sky-500" />
             <span className="hidden sm:inline">LinkedIn</span>
@@ -218,7 +218,7 @@ export function Hero({ locale = "en" }: HeroProps) {
 
           <a
             href="#terminal"
-            className="inline-flex items-center gap-2 px-3 py-2.5 rounded-xl font-medium text-sm text-muted-foreground hover:text-foreground font-mono transition-colors"
+            className="inline-flex items-center gap-2 px-3 py-2.5 rounded-xl font-medium text-sm text-muted-foreground hover:text-foreground font-mono transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer hover:bg-muted/50 border border-transparent hover:border-border"
           >
             <Terminal className="h-4 w-4 text-indigo-400" />
             <span className="text-xs">curl -s /profile</span>
@@ -226,7 +226,7 @@ export function Hero({ locale = "en" }: HeroProps) {
 
           <button
             onClick={openCommandPalette}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-mono text-muted-foreground hover:text-foreground border border-border bg-card/60 hover:bg-card transition-colors shadow-sm ml-auto cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-mono text-muted-foreground hover:text-foreground border border-border bg-card/60 hover:bg-card transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm ml-auto cursor-pointer"
             title={locale === "fr" ? "Ouvrir la palette de commandes (⌘K)" : "Open command palette (⌘K)"}
           >
             <Command className="h-3.5 w-3.5 text-indigo-500" />

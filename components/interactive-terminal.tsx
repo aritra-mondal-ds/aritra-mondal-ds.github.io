@@ -156,7 +156,7 @@ export function InteractiveTerminal({ locale = "en" }: InteractiveTerminalProps)
 
             <button
               onClick={handleCopy}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs transition-colors"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs transition-all cursor-pointer active:scale-95"
             >
               {copied ? (
                 <>
@@ -179,10 +179,10 @@ export function InteractiveTerminal({ locale = "en" }: InteractiveTerminalProps)
               <button
                 key={cmd}
                 onClick={() => setActiveCommand(cmd)}
-                className={`px-2.5 py-1 rounded text-xs transition-colors whitespace-nowrap flex items-center gap-1.5 ${
+                className={`px-2.5 py-1 rounded text-xs transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer active:scale-95 ${
                   activeCommand === cmd
-                    ? "bg-indigo-600 text-white font-semibold"
-                    : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
+                    ? "bg-indigo-600 text-white font-semibold shadow-sm"
+                    : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-white"
                 }`}
               >
                 <Play className="h-2.5 w-2.5 fill-current" />

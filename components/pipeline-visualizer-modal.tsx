@@ -137,7 +137,7 @@ export function PipelineVisualizerModal({
 
           <button
             onClick={handleClose}
-            className="p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors shrink-0"
+            className="p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors shrink-0 cursor-pointer active:scale-95"
             aria-label={currentUi.pipelineVisualizer.closeButton}
           >
             <X className="h-5 w-5" />
@@ -153,7 +153,7 @@ export function PipelineVisualizerModal({
             <div className="inline-flex p-1 rounded-lg bg-zinc-950 border border-zinc-800 text-xs font-mono">
               <button
                 onClick={() => setArchMode("pyspark")}
-                className={`px-3 py-1 rounded-md transition-all ${
+                className={`px-3 py-1 rounded-md transition-all cursor-pointer active:scale-95 ${
                   archMode === "pyspark"
                     ? "bg-amber-600/30 text-amber-300 font-bold border border-amber-500/40"
                     : "text-zinc-400 hover:text-white"
@@ -163,7 +163,7 @@ export function PipelineVisualizerModal({
               </button>
               <button
                 onClick={() => setArchMode("scala")}
-                className={`px-3 py-1 rounded-md transition-all flex items-center gap-1.5 ${
+                className={`px-3 py-1 rounded-md transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 ${
                   archMode === "scala"
                     ? "bg-indigo-600 text-white font-bold shadow-sm"
                     : "text-zinc-400 hover:text-white"
@@ -207,7 +207,7 @@ export function PipelineVisualizerModal({
                 <button
                   key={node.id}
                   onClick={() => setSelectedNodeId(node.id)}
-                  className={`text-left p-3 rounded-xl border transition-all relative flex flex-col justify-between ${
+                  className={`text-left p-3 rounded-xl border transition-all relative flex flex-col justify-between cursor-pointer active:scale-[0.98] ${
                     isSelected
                       ? "border-indigo-500 bg-indigo-950/40 shadow-glow-sm ring-1 ring-indigo-500/50"
                       : "border-zinc-800 bg-zinc-900/50 hover:border-zinc-700 hover:bg-zinc-900"
@@ -243,7 +243,7 @@ export function PipelineVisualizerModal({
         </div>
 
         {/* Selected Node Deep-Dive Inspector */}
-        <div className="my-6 p-4 sm:p-5 rounded-2xl border border-zinc-800 bg-zinc-950/70 shadow-inner">
+        <div className="my-6 p-4 sm:p-5 rounded-2xl border border-zinc-800 bg-zinc-950/70 shadow-inner cursor-default select-text">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 mb-4 border-b border-zinc-800/80">
             <div className="flex items-center gap-2.5">
               <div className="p-2 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
@@ -369,7 +369,7 @@ export function PipelineVisualizerModal({
 
           <button
             onClick={handleClose}
-            className="px-4 py-2 rounded-xl text-xs font-semibold bg-zinc-800 hover:bg-zinc-700 text-white transition-colors"
+            className="px-4 py-2 rounded-xl text-xs font-semibold bg-zinc-800 hover:bg-zinc-700 text-white transition-all cursor-pointer active:scale-95"
           >
             {currentUi.pipelineVisualizer.closeButton}
           </button>

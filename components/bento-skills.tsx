@@ -62,10 +62,10 @@ export function BentoSkills({ locale = "en" }: BentoSkillsProps) {
               <button
                 onClick={() => setActiveFilter("all")}
                 aria-pressed={activeFilter === "all"}
-                className={`px-2.5 py-1 rounded-md transition-colors ${
+                className={`px-2.5 py-1 rounded-md transition-all cursor-pointer active:scale-[0.98] ${
                   activeFilter === "all"
-                    ? "bg-indigo-600 text-white font-semibold"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? "bg-indigo-600 text-white font-semibold shadow-xs"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
                 }`}
               >
                 {currentUi.skills.filterAll}
@@ -73,10 +73,10 @@ export function BentoSkills({ locale = "en" }: BentoSkillsProps) {
               <button
                 onClick={() => setActiveFilter("core")}
                 aria-pressed={activeFilter === "core"}
-                className={`px-2.5 py-1 rounded-md transition-colors ${
+                className={`px-2.5 py-1 rounded-md transition-all cursor-pointer active:scale-[0.98] ${
                   activeFilter === "core"
-                    ? "bg-indigo-600 text-white font-semibold"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? "bg-indigo-600 text-white font-semibold shadow-xs"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
                 }`}
               >
                 {currentUi.skills.filterCore}
@@ -87,7 +87,7 @@ export function BentoSkills({ locale = "en" }: BentoSkillsProps) {
 
         {/* Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* 4 Technical Domains */}
+          {/* 4 Technical Domains (Stable Informational Bento Tiles) */}
           {currentCategories.map((category) => {
             const filteredSkills =
               activeFilter === "core"
@@ -97,7 +97,7 @@ export function BentoSkills({ locale = "en" }: BentoSkillsProps) {
             return (
               <div
                 key={category.id}
-                className="group relative flex flex-col justify-between p-6 rounded-2xl border border-border bg-card/70 hover:border-indigo-500/50 hover:bg-card transition-all duration-300 shadow-sm hover:shadow-md"
+                className="relative flex flex-col justify-between p-6 rounded-2xl border border-border bg-card/70 shadow-sm cursor-default select-text"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -120,7 +120,7 @@ export function BentoSkills({ locale = "en" }: BentoSkillsProps) {
                     {filteredSkills.map((skill, sIdx) => (
                       <span
                         key={sIdx}
-                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium transition-all ${
+                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium cursor-default select-text ${
                           skill.highlight
                             ? "bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/25 font-semibold"
                             : "bg-muted/70 text-foreground border border-border/60"
@@ -146,7 +146,7 @@ export function BentoSkills({ locale = "en" }: BentoSkillsProps) {
           })}
 
           {/* Certifications Card */}
-          <div className="p-6 rounded-2xl border border-border bg-gradient-to-br from-card to-muted/40 flex flex-col justify-between shadow-sm">
+          <div className="p-6 rounded-2xl border border-border bg-gradient-to-br from-card to-muted/40 flex flex-col justify-between shadow-sm cursor-default select-text">
             <div>
               <div className="flex items-center justify-between mb-4">
                 <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-500 flex items-center justify-center">
@@ -165,36 +165,50 @@ export function BentoSkills({ locale = "en" }: BentoSkillsProps) {
               </p>
 
               <div className="space-y-3">
-                {currentCerts.map((cert, cIdx) => (
-                  <div
-                    key={cIdx}
-                    className="p-3 rounded-xl border border-border/70 bg-card/80 text-xs hover:border-indigo-500/30 transition-colors"
-                  >
-                    <div className="font-semibold text-foreground flex items-center justify-between gap-1.5">
-                      <div className="flex items-center gap-1.5">
-                        <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
-                        <span>{cert.name}</span>
+                {currentCerts.map((cert, cIdx) => {
+                  const isClickable = !!cert.verifyUrl;
+                  const cardContent = (
+                    <>
+                      <div className="font-semibold text-foreground flex items-center justify-between gap-1.5">
+                        <div className="flex items-center gap-1.5">
+                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
+                          <span>{cert.name}</span>
+                        </div>
+                        {isClickable && (
+                          <span className="inline-flex items-center gap-1 text-[10px] font-mono font-medium text-indigo-600 dark:text-indigo-400 group-hover/cert:underline shrink-0">
+                            <span>Verify</span>
+                            <ExternalLink className="h-3 w-3" />
+                          </span>
+                        )}
                       </div>
-                      {cert.verifyUrl && (
-                        <a
-                          href={cert.verifyUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`Verify ${cert.name}`}
-                          className="text-muted-foreground hover:text-indigo-500 transition-colors shrink-0"
-                        >
-                          <ExternalLink className="h-3 w-3" />
-                        </a>
-                      )}
+                      <div className="flex items-center justify-between mt-1 text-[11px] text-muted-foreground">
+                        <span>{cert.issuer}</span>
+                        <span className="font-mono text-indigo-600 dark:text-indigo-400 font-medium">
+                          {cert.dateOrStatus}
+                        </span>
+                      </div>
+                    </>
+                  );
+
+                  return isClickable ? (
+                    <a
+                      key={cIdx}
+                      href={cert.verifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group/cert block p-3 rounded-xl border border-border/80 bg-card/90 hover:border-indigo-500/50 hover:bg-indigo-500/[0.04] transition-all hover:-translate-y-0.5 active:translate-y-0 text-xs shadow-xs hover:shadow-sm cursor-pointer"
+                    >
+                      {cardContent}
+                    </a>
+                  ) : (
+                    <div
+                      key={cIdx}
+                      className="p-3 rounded-xl border border-border/60 bg-card/50 text-xs cursor-default select-text"
+                    >
+                      {cardContent}
                     </div>
-                    <div className="flex items-center justify-between mt-1 text-[11px] text-muted-foreground">
-                      <span>{cert.issuer}</span>
-                      <span className="font-mono text-indigo-600 dark:text-indigo-400 font-medium">
-                        {cert.dateOrStatus}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
