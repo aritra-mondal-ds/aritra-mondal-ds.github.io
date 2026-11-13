@@ -94,7 +94,7 @@ export function InteractiveTerminal({ locale = "en" }: InteractiveTerminalProps)
     "contact --fast": {
       email: currentProfile.email,
       telephone: currentProfile.phone,
-      disponibilite: "IMMÉDIATE (0 jour de préavis / Aucun préavis)",
+      disponibilite: "IMMÉDIATE (Libre de tout engagement / Prise de poste rapide)",
       contrat_cible: "CDI (Statut Cadre)",
       mobilite: "Paris & France (Déménagement autonome prêt / Hybride ou Présentiel)",
       droit_au_travail: "Titre de séjour valide (Plein droit au travail en France & UE)",

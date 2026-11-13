@@ -4,7 +4,7 @@ export const skillCategoriesFr: SkillCategory[] = [
   {
     id: "ml-ai",
     title: "Machine Learning & Modélisation Statistique",
-    description: "Développement de modèles de bout en bout, stratégies de validation et architectures prédictives.",
+    description: "Cycle complet de modélisation (de la conception au déploiement), stratégies de validation et architectures prédictives.",
     icon: "Brain",
     accentColor: "indigo",
     skills: [

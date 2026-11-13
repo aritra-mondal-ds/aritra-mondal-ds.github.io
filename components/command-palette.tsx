@@ -220,7 +220,7 @@ export function CommandPalette({ locale = "en" }: CommandPaletteProps) {
         category: "Navigation",
         categoryFr: "Navigation",
         title: "Go to Skills & Architecture",
-        titleFr: "Accéder aux Compétences & Stack",
+        titleFr: "Accéder aux Compétences & Technologies",
         subtitle: "Spark, Scala, Python, AWS EMR, Neo4j, Docker, CI/CD",
         subtitleFr: "Compétences clés, certifications vérifiées et mobilité",
         icon: <Layers className="h-4 w-4 text-cyan-500" />,

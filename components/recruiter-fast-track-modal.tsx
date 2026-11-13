@@ -136,7 +136,7 @@ export function RecruiterFastTrackModal({
           <div>
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-[11px] font-mono font-semibold uppercase tracking-wider mb-2">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>{locale === "fr" ? "Disponibilité Immédiate · 0 Préavis" : "Immediate Availability · 0 Notice"}</span>
+              <span>{locale === "fr" ? "Disponibilité Immédiate · CDI Cadre" : "Immediate Availability · 0 Notice"}</span>
             </div>
             <h2
               id="recruiter-modal-title"
@@ -242,7 +242,7 @@ export function RecruiterFastTrackModal({
                 {currentUi.recruiterFastTrack.salaryLabel}
               </span>
               <span className="font-semibold text-white block">
-                {locale === "fr" ? "50k€ - 62k€ (Selon package & séniorité)" : "€50k - €62k (Market Aligned)"}
+                {locale === "fr" ? "50k€ - 62k€ (Selon profil & expérience)" : "€50k - €62k (Market Aligned)"}
               </span>
               <span className="text-[10px] text-zinc-500 mt-0.5 block">
                 {currentData.salaryExpectation}

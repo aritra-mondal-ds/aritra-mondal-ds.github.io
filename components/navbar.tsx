@@ -277,7 +277,7 @@ export function Navbar({ locale = "en" }: NavbarProps) {
                     <span>{currentUi.recruiterFastTrack.buttonNav}</span>
                   </span>
                   <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 font-bold">
-                    {locale === "fr" ? "0 Préavis" : "0 Notice"}
+                    {locale === "fr" ? "Immédiat" : "0 Notice"}
                   </span>
                 </button>
               </div>

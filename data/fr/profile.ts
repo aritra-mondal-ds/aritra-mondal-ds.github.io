@@ -11,7 +11,7 @@ export const profileDataFr: Profile = {
   location: "Paris / Biarritz, France (Déménagement immédiat et autonome à Paris / Hybride & Présentiel)",
   email: "aritramondal100@gmail.com",
   phone: "+33 (0)7 49 29 79 66",
-  availability: "Disponibilité Immédiate (0 préavis / Aucun préavis) · CDI (Statut Cadre)",
+  availability: "Disponibilité Immédiate · CDI (Statut Cadre)",
   workAuthorization: "Autorisé à travailler en France (Titre de séjour / Plein droit de travail en France & UE)",
   educationLevel: "Applied MSc en Data Science & IA (Bac+5 / Summa Cum Laude) + BSc (Hons) Computer Security",
   languages: [
@@ -49,8 +49,8 @@ export const profileDataFr: Profile = {
     {
       icon: "Clock",
       label: "Disponibilité",
-      value: "Immédiate (0 préavis)",
-      badge: "Aucun Préavis",
+      value: "Immédiate",
+      badge: "Disponible",
       detail: "Libre de tout engagement, immédiatement disponible à l'embauche",
     },
     {
@@ -93,8 +93,8 @@ export const profileDataFr: Profile = {
 
 export const recruiterFastTrackFr: RecruiterFastTrack = {
   headline: "Fiche Synthèse Recruteur",
-  availability: "Immédiate (Sans délai d'attente)",
-  noticePeriod: "0 jour (Aucun préavis en cours / Disponibilité totale)",
+  availability: "Immédiate",
+  noticePeriod: "Aucun préavis (Libre de tout engagement)",
   contractType: "CDI (Contrat à Durée Indéterminée / Statut Cadre)",
   targetRole: "Data Scientist / Machine Learning Engineer (Profil Junior à Confirmé)",
   locationDetails: "Paris & Île-de-France (Installation autonome immédiate / 2–3 jours hybride ou présentiel complet), Biarritz, Sophia Antipolis, Lyon ou Télétravail France/Europe",
@@ -111,13 +111,13 @@ export const recruiterFastTrackFr: RecruiterFastTrack = {
       description: "Applied MSc en Data Science & IA à Data ScienceTech Institute (DSTI) avec Félicitations du Jury (Summa Cum Laude), précédé d'un BSc (Hons) en Sécurité Informatique (Northumbria University, UK)."
     },
     {
-      title: "Autonomie de bout en bout (Data Science + MLOps)",
+      title: "Maîtrise du Cycle Complet (Data Science & MLOps)",
       description: "Capacité opérationnelle complète : de l'ingénierie statistique des features (XGBoost, séries temporelles, graphes Neo4j) à la conteneurisation et l'automatisation CI/CD (Docker, Jenkins, AWS, Bash)."
     }
   ],
   slackPitch: `*Fiche Synthèse Recrutement : Aritra Mondal*
 • *Poste visé* : Data Scientist / Machine Learning Engineer (Junior – Confirmé)
-• *Type de contrat & Disponibilité* : CDI (Statut Cadre) — *Disponibilité immédiate (0 jour de préavis)*
+• *Type de contrat & Disponibilité* : CDI (Statut Cadre) — *Disponibilité immédiate*
 • *Formation* : Applied MSc Data Science & IA (DSTI France, Équivalent Bac+5 — Summa Cum Laude) + BSc (Hons) Computer Security
 • *Expérience Industrielle* : Amadeus (Pipelines de prévision de demande sur AWS EMR, migration Spark/Scala avec +35% de gain de vitesse, Parquet, Jenkins CI/CD)
 • *Localisation & Mobilité* : Paris & Île-de-France (Déménagement autonome immédiat / 2-3 jours hybride ou présentiel complet)
