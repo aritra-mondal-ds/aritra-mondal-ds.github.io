@@ -161,80 +161,88 @@ export function Hero({ locale = "en" }: HeroProps) {
           </div>
         </div>
 
-        {/* Primary CTAs & Social Links (Clearly Actionable Buttons with Tactile Elevation) */}
-        <div className="mt-8 flex flex-wrap items-center gap-3">
-          <button
-            onClick={openRecruiterModal}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm cursor-pointer"
-          >
-            <Zap className="h-4 w-4 fill-current text-emerald-500 animate-pulse" />
-            <span>{currentUi.recruiterFastTrack.buttonHero}</span>
-          </button>
+        {/* Actionable CTAs & Developer Utilities (Structured Visual Hierarchy) */}
+        <div className="mt-8 space-y-3.5">
+          {/* Row 1: Primary Recruiter & Conversion CTAs */}
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+            <button
+              onClick={openRecruiterModal}
+              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl font-semibold text-sm bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm cursor-pointer"
+            >
+              <Zap className="h-4 w-4 fill-current text-emerald-500 animate-pulse" />
+              <span>{currentUi.recruiterFastTrack.buttonHero}</span>
+            </button>
 
-          <a
-            href="#projects"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/25 transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
-          >
-            <span>{currentUi.hero.viewProjects}</span>
-            <ArrowRight className="h-4 w-4" />
-          </a>
+            <a
+              href="#projects"
+              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl font-medium text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/25 transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+            >
+              <span>{currentUi.hero.viewProjects}</span>
+              <ArrowRight className="h-4 w-4" />
+            </a>
 
-          <a
-            href={locale === "fr" ? "/cv-fr.pdf" : "/cv.pdf"}
-            download={locale === "fr" ? "Aritra_Mondal_Data_Scientist_CV_FR.pdf" : "Aritra_Mondal_Data_Scientist_CV_EN.pdf"}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm cursor-pointer"
-          >
-            <FileDown className="h-4 w-4 text-indigo-500" />
-            <span>{currentUi.hero.downloadCvPdf}</span>
-          </a>
+            <a
+              href={locale === "fr" ? "/cv-fr.pdf" : "/cv.pdf"}
+              download={locale === "fr" ? "Aritra_Mondal_Data_Scientist_CV_FR.pdf" : "Aritra_Mondal_Data_Scientist_CV_EN.pdf"}
+              className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm cursor-pointer"
+            >
+              <FileDown className="h-4 w-4 text-indigo-500" />
+              <span>{currentUi.hero.downloadCvPdf}</span>
+            </a>
 
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm cursor-pointer"
-          >
-            <Mail className="h-4 w-4 text-muted-foreground" />
-            <span>{currentUi.hero.getInTouch}</span>
-          </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm cursor-pointer"
+            >
+              <Mail className="h-4 w-4 text-muted-foreground" />
+              <span>{currentUi.hero.getInTouch}</span>
+            </a>
+          </div>
 
-          <a
-            href="https://github.com/aritra-mondal-ds"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm cursor-pointer"
-          >
-            <Github className="h-4 w-4" />
-            <span className="hidden sm:inline">GitHub</span>
-          </a>
+          {/* Row 2: Secondary Social Channels & Developer Shortcuts */}
+          <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-border/40">
+            <a
+              href="https://github.com/aritra-mondal-ds"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub Profile"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-muted-foreground hover:text-foreground bg-card/60 hover:bg-card border border-border/60 transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer shadow-xs"
+            >
+              <Github className="h-3.5 w-3.5" />
+              <span>GitHub</span>
+            </a>
 
-          <a
-            href="https://www.linkedin.com/in/aritra-mondal-66702021"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm cursor-pointer"
-          >
-            <Linkedin className="h-4 w-4 text-sky-500" />
-            <span className="hidden sm:inline">LinkedIn</span>
-          </a>
+            <a
+              href="https://www.linkedin.com/in/aritra-mondal-66702021"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn Profile"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-muted-foreground hover:text-foreground bg-card/60 hover:bg-card border border-border/60 transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer shadow-xs"
+            >
+              <Linkedin className="h-3.5 w-3.5 text-sky-500" />
+              <span>LinkedIn</span>
+            </a>
 
-          <a
-            href="#terminal"
-            className="inline-flex items-center gap-2 px-3 py-2.5 rounded-xl font-medium text-sm text-muted-foreground hover:text-foreground font-mono transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer hover:bg-muted/50 border border-transparent hover:border-border"
-          >
-            <Terminal className="h-4 w-4 text-indigo-400" />
-            <span className="text-xs">curl -s /profile</span>
-          </a>
+            <a
+              href="#terminal"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono text-muted-foreground hover:text-foreground bg-card/40 hover:bg-card border border-border/50 transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+            >
+              <Terminal className="h-3.5 w-3.5 text-indigo-400" />
+              <span>curl -s /profile</span>
+            </a>
 
-          <button
-            onClick={openCommandPalette}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-mono text-muted-foreground hover:text-foreground border border-border bg-card/60 hover:bg-card transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm ml-auto cursor-pointer"
-            title={locale === "fr" ? "Ouvrir la palette de commandes (⌘K)" : "Open command palette (⌘K)"}
-          >
-            <Command className="h-3.5 w-3.5 text-indigo-500" />
-            <span className="text-[11px] font-sans hidden sm:inline">{locale === "fr" ? "Commandes" : "Commands"}</span>
-            <kbd className="px-1.5 py-0.5 text-[10px] font-mono rounded bg-muted border border-border text-foreground font-semibold">
-              ⌘K
-            </kbd>
-          </button>
+            <button
+              onClick={openCommandPalette}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-mono text-muted-foreground hover:text-foreground border border-border/70 bg-card hover:bg-muted transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-xs sm:ml-auto cursor-pointer"
+              title={locale === "fr" ? "Ouvrir la palette de commandes (⌘K)" : "Open command palette (⌘K)"}
+            >
+              <Command className="h-3.5 w-3.5 text-indigo-500" />
+              <span className="text-[11px] font-sans hidden sm:inline">{locale === "fr" ? "Commandes" : "Commands"}</span>
+              <kbd className="px-1.5 py-0.5 text-[10px] font-mono rounded bg-muted border border-border text-foreground font-semibold">
+                ⌘K
+              </kbd>
+            </button>
+          </div>
         </div>
       </div>
     </section>

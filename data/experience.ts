@@ -2,6 +2,38 @@ import { Experience, Education } from "@/types";
 
 export const experiencesData: Experience[] = [
   {
+    id: "mercor",
+    role: "Data & Analytics Contributor",
+    company: "Mercor",
+    location: "Remote / Worldwide",
+    period: "Sep 2026 – Present",
+    type: "Contract",
+    summary:
+      "Authored expert-level data science benchmarks, system specifications, constraints, reference execution workflows, failure modes, and automated grading rubrics for cutting-edge AI evaluation.",
+    achievements: [
+      "Authored rigorous data science assessment tasks covering end-to-end data pipelines, time-series forecasting, and statistical modeling.",
+      "Solved and verified complex production ML scenarios in Python and SQL under strict operational constraints and latency limits.",
+    ],
+    technologies: ["Python", "SQL", "Time-Series", "Data Pipelines", "Data Validation", "Git"],
+    logoText: "MC",
+  },
+  {
+    id: "freelance-data-web",
+    role: "Freelance Developer — Data & Web",
+    company: "Independent Practice",
+    location: "Remote / Hybrid",
+    period: "Sep 2025 – Present",
+    type: "Contract",
+    summary:
+      "Delivering high-impact data science and web engineering solutions, including algorithmic matching systems and full-stack web applications for commercial clients.",
+    achievements: [
+      "Architected a two-sided algorithmic matching engine for a real estate marketplace pairing tenants with landlords using predictive affinity scores.",
+      "Engineered responsive full-stack web applications and scalable database schemas tailored to specific client business logic.",
+    ],
+    technologies: ["Python", "TypeScript", "Next.js", "SQL", "PostgreSQL", "Tailwind CSS"],
+    logoText: "FD",
+  },
+  {
     id: "amadeus",
     role: "Data Scientist (Apprentice)",
     company: "Amadeus",

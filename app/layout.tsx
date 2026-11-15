@@ -12,7 +12,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://aritra-mondal.dev"),
+  metadataBase: new URL("https://aritra-mondal-ds.github.io"),
   title: "Aritra Mondal | Data Scientist & Machine Learning Engineer (France)",
   description:
     "Data Scientist with production experience at Amadeus and an Applied MSc in Data Science & AI (Summa Cum Laude, Bac+5). Specializing in distributed ML systems (Spark/Scala/AWS), time-series forecasting, and predictive modeling in France.",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_FR",
-    url: "https://aritra-mondal.dev",
+    url: "https://aritra-mondal-ds.github.io",
     title: "Aritra Mondal | Data Scientist & ML Systems Engineer",
     description:
       "Production ML pipelines (Spark/Scala/AWS), time-series forecasting, and predictive modeling. Based in France.",

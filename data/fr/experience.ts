@@ -2,6 +2,38 @@ import { Experience, Education } from "@/types";
 
 export const experiencesDataFr: Experience[] = [
   {
+    id: "mercor",
+    role: "Contributeur Data & Analytics",
+    company: "Mercor",
+    location: "Mission freelance à distance",
+    period: "Sept 2026 – Présent",
+    type: "Contract",
+    summary:
+      "Conception et rédaction de benchmarks de data science de niveau expert : schémas de données, contraintes opérationnelles, workflows de référence, modes d'échec et grilles d'évaluation automatisées.",
+    achievements: [
+      "Rédaction de tâches data science de niveau expert couvrant la modélisation de séries temporelles, les schémas de données distribués et les pipelines analytiques.",
+      "Résolution et validation de scénarios data science complexes en Python et SQL sous contraintes strictes de conception et de robustesse.",
+    ],
+    technologies: ["Python", "SQL", "Time-Series", "Pipelines Data", "Validation de Données", "Git"],
+    logoText: "MC",
+  },
+  {
+    id: "freelance-data-web",
+    role: "Développeur Freelance — Data & Web",
+    company: "Activité indépendante",
+    location: "Télétravail / Indépendant",
+    period: "Sept 2025 – Présent",
+    type: "Contract",
+    summary:
+      "Développement de solutions complètes en ingénierie de données et web, incluant un moteur d'appariement algorithmique pour une plateforme immobilière et des applications web sur mesure.",
+    achievements: [
+      "Conception de l'architecture d'un moteur d'appariement algorithmique locataires / propriétaires fondé sur des scores d'affinité prédictifs pour une plateforme immobilière.",
+      "Développement d'applications web sur mesure et modélisation de bases de données relationnelles optimisées pour les besoins métier des clients.",
+    ],
+    technologies: ["Python", "TypeScript", "Next.js", "SQL", "PostgreSQL", "Tailwind CSS"],
+    logoText: "FD",
+  },
+  {
     id: "amadeus",
     role: "Data Scientist (Alternant)",
     company: "Amadeus",

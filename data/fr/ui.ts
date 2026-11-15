@@ -46,7 +46,7 @@ export const uiFr = {
     certificationsTitle: "Certifications Industrielles",
     certificationsSub: "Architectures cloud, bases de données graphes et sécurité d'entreprise.",
     verifiedBadge: "Certifications Vérifiées",
-    targetLabel: "Objectif Cloud : AWS Solutions Architect (2027)",
+    targetLabel: "Objectif Cloud : AWS Solutions Architect (2026)",
     mobilityTitle: "Langues & Communication",
     mobilitySub: "Parfaite aisance de travail au sein d'équipes agiles françaises et internationales.",
     mobilityBadge: "Mobilité Globale",

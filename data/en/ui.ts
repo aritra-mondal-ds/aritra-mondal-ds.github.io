@@ -46,7 +46,7 @@ export const uiEn = {
     certificationsTitle: "Industry Certifications",
     certificationsSub: "Cloud architecture, graph databases, and enterprise security frameworks.",
     verifiedBadge: "Verified Credentials",
-    targetLabel: "Cloud Target: AWS Solutions Architect (2027)",
+    targetLabel: "Cloud Target: AWS Solutions Architect (2026)",
     mobilityTitle: "Languages & Communication",
     mobilitySub: "Operating smoothly in cross-functional French & international agile teams.",
     mobilityBadge: "Global Mobility",

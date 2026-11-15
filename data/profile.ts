@@ -11,7 +11,7 @@ export const profileData: Profile = {
   location: "Paris / Biarritz, France (Immediate Paris relocation ready / Hybrid & Onsite)",
   email: "aritramondal100@gmail.com",
   phone: "+33 (0)7 49 29 79 66",
-  availability: "Immediate Availability (0-day notice / Aucun préavis) · CDI (Statut Cadre)",
+  availability: "Immediate Availability (0-day notice) · CDI (Statut Cadre)",
   workAuthorization: "Eligible to work in France (Titre de séjour / Full Working Rights)",
   educationLevel: "Applied MSc in DS & AI (Bac+5 / Summa Cum Laude) + BSc (Hons) Computer Security",
   languages: [
@@ -51,7 +51,7 @@ export const profileData: Profile = {
       label: "Availability",
       value: "Immediate (0-Day Notice)",
       badge: "No Notice Period",
-      detail: "Available immediately for hire — free of employment constraints (Aucun préavis)",
+      detail: "Available immediately for hire — free of employment constraints",
     },
     {
       icon: "Briefcase",
@@ -94,7 +94,7 @@ export const profileData: Profile = {
 export const recruiterFastTrackEn: RecruiterFastTrack = {
   headline: "Executive Recruiter Synthesis",
   availability: "Immediate (Available to start without delay)",
-  noticePeriod: "0 days (No current employment notice period / Aucun préavis)",
+  noticePeriod: "0 days (No employment notice period / Immediate start)",
   contractType: "CDI (Permanent contract / Statut Cadre)",
   targetRole: "Entry-level / Junior – Mid Data Scientist & Machine Learning Engineer",
   locationDetails: "Paris & Île-de-France (Immediate autonomous relocation / Hybrid 2-3 days or Full Onsite), Biarritz, Sophia Antipolis, Lyon, or EU Remote",
@@ -117,7 +117,7 @@ export const recruiterFastTrackEn: RecruiterFastTrack = {
   ],
   slackPitch: `*Candidate Synthesis : Aritra Mondal*
 • *Target Role* : Entry-level / Junior – Mid Data Scientist & Machine Learning Engineer
-• *Contract & Availability* : CDI (Statut Cadre) — *Immediate availability (0-day notice / Aucun préavis)*
+• *Contract & Availability* : CDI (Statut Cadre) — *Immediate availability (0-day notice / Immediate start)*
 • *Education* : Applied MSc in Data Science & AI (DSTI France, Bac+5 Equivalent — Summa Cum Laude) + BSc (Hons) Computer Security
 • *Production Track Record* : Amadeus (Distributed airline demand forecasting on AWS EMR, Spark/Scala migration with 35% ETL speedup, Parquet, Jenkins CI/CD)
 • *Location & Mobility* : Paris & France (Immediate autonomous relocation ready / 2-3 days hybrid or full onsite)
