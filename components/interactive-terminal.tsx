@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { profileData } from "@/data/profile";
 import { profileDataFr } from "@/data/fr/profile";
 import { uiEn } from "@/data/en/ui";
 import { uiFr } from "@/data/fr/ui";
-import { Terminal, Copy, Check, Sparkles, Play } from "lucide-react";
+import { Terminal, Copy, Check, Sparkles, Play, Activity } from "lucide-react";
+import { getTelemetrySnapshot, trackEvent } from "@/lib/telemetry";
 
 interface InteractiveTerminalProps {
   locale?: "en" | "fr";
@@ -52,11 +53,37 @@ export function InteractiveTerminal({ locale = "en" }: InteractiveTerminalProps)
     "contact --fast": {
       email: currentProfile.email,
       phone: currentProfile.phone,
-      availability: "IMMEDIATE (0-day notice / Aucun préavis)",
+      availability: "IMMEDIATE (0-day notice / Immediate start)",
       target_contract: "CDI (Statut Cadre)",
       location: "Paris & France (Relocation ready / Hybrid 2-3 days or full onsite)",
       work_authorization: "Titre de séjour (Full legal work authorization in France & EU)",
       recruiter_sheet: "Click [Fast-Track ⚡] in the top navigation to view full executive synthesis",
+    },
+    "telemetry --live": {
+      status: "ONLINE (Privacy-Preserving / Zero-Cookie CNIL & GDPR Compliant)",
+      streaming_engine: "Client-side telemetry buffer with event batching",
+      tracked_signals: [
+        "page_views",
+        "company_referrals",
+        "cv_downloads",
+        "recruiter_fast_track_activations",
+        "spark_pipeline_deep_dives",
+      ],
+      production_benchmarks: {
+        amadeus_spark_latency: "-35% verified reduction (PySpark → Scala)",
+        parquet_throughput: "Multi-GB daily event stream on AWS S3 & EMR",
+        cross_validation: "Purged walk-forward CV (zero lookahead leakage)",
+      },
+      compliance: "100% GDPR / CNIL conformant (no personal IPs stored, no tracking cookies)",
+    },
+    "track --company <name>": {
+      usage: "Generates custom recruiter tracking link for targeted job applications",
+      sample_output: "https://aritra-mondal-ds.github.io/?company=TargetCompany&ref=direct-application",
+      tracking_features: [
+        "Personalized team welcome banner on landing",
+        "Company-tagged recruiter intent alerts",
+        "Zero-configuration static URL parameter parsing",
+      ],
     },
   };
 
@@ -100,16 +127,48 @@ export function InteractiveTerminal({ locale = "en" }: InteractiveTerminalProps)
       droit_au_travail: "Titre de séjour valide (Plein droit au travail en France & UE)",
       fiche_recruteur: "Cliquez sur [Fiche Recruteur ⚡] dans la barre de navigation pour la synthèse complète",
     },
+    "telemetry --live": {
+      statut: "EN LIGNE (Respect de la vie privée / Zéro-Cookie CNIL & RGPD)",
+      moteur_streaming: "Tampon de télémétrie côté client avec traitement par lots d'événements",
+      signaux_suivis: [
+        "vues_de_page",
+        "visites_entreprises_cibles",
+        "telechargements_cv",
+        "activations_fiche_recruteur",
+        "explorations_architecture_spark",
+      ],
+      mesures_production: {
+        gain_latence_amadeus: "Réduction vérifiée de 35% (PySpark → Scala)",
+        debit_parquet: "Flux multi-Go quotidien sur AWS S3 & EMR",
+        validation_croisee: "Walk-forward stricte sans fuite temporelle",
+      },
+      conformite: "100% conforme RGPD / CNIL (aucune IP personnelle stockée)",
+    },
+    "track --company <name>": {
+      utilisation: "Génère un lien de candidature personnalisé et tracké pour chaque entreprise ciblée",
+      exemple: "https://aritra-mondal-ds.github.io/fr/?company=EntrepriseCible&ref=candidature-directe",
+      fonctionnalites: [
+        "Bannière d'accueil personnalisée pour l'équipe recrutement",
+        "Alertes d'intérêt avec tag de l'entreprise",
+        "Zéro configuration requise côté serveur",
+      ],
+    },
   };
 
   const commandResponses = locale === "fr" ? commandResponsesFr : commandResponsesEn;
   const currentOutput = commandResponses[activeCommand] || commandResponses["curl -s /profile | jq ."];
+
+  const handleCommandSelect = (cmd: string) => {
+    setActiveCommand(cmd);
+    trackEvent("terminal_command", { command: cmd }, locale);
+  };
 
   const handleCopy = async () => {
     try {
       if (navigator?.clipboard?.writeText) {
         await navigator.clipboard.writeText(JSON.stringify(currentOutput, null, 2));
         setCopied(true);
+        trackEvent("contact_copy", { target: "terminal_output", command: activeCommand }, locale);
         setTimeout(() => setCopied(false), 2000);
       }
     } catch {
@@ -122,6 +181,8 @@ export function InteractiveTerminal({ locale = "en" }: InteractiveTerminalProps)
     "cat production-metrics.json",
     "cat stack.json",
     "contact --fast",
+    "telemetry --live",
+    "track --company <name>",
   ];
 
   return (
@@ -178,7 +239,7 @@ export function InteractiveTerminal({ locale = "en" }: InteractiveTerminalProps)
             {commands.map((cmd) => (
               <button
                 key={cmd}
-                onClick={() => setActiveCommand(cmd)}
+                onClick={() => handleCommandSelect(cmd)}
                 className={`px-2.5 py-1 rounded text-xs transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer active:scale-95 ${
                   activeCommand === cmd
                     ? "bg-indigo-600 text-white font-semibold shadow-sm"

@@ -8,6 +8,7 @@ import { uiFr } from "@/data/fr/ui";
 import { Mail, Command } from "lucide-react";
 import { Github, Linkedin } from "@/components/icons";
 import { openCommandPalette } from "./command-palette";
+import { LiveTelemetryBadge } from "./live-telemetry-badge";
 
 interface FooterProps {
   locale?: "en" | "fr";
@@ -88,7 +89,8 @@ export function Footer({ locale = "en" }: FooterProps) {
           <div>
             © {currentYear} {currentProfile.name}. {currentUi.footer.rightsReserved}
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
+            <LiveTelemetryBadge locale={locale} />
             <button
               onClick={openCommandPalette}
               className="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-muted/70 hover:bg-muted border border-border text-[11px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
@@ -97,7 +99,7 @@ export function Footer({ locale = "en" }: FooterProps) {
               <Command className="h-3 w-3 text-indigo-500" />
               <span>⌘K Palette</span>
             </button>
-            <span>{currentUi.footer.techStack}</span>
+            <span className="hidden md:inline">{currentUi.footer.techStack}</span>
           </div>
         </div>
       </div>

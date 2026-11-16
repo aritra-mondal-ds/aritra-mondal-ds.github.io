@@ -25,6 +25,8 @@ import {
 import { Github, Linkedin } from "@/components/icons";
 import { openRecruiterModal } from "./recruiter-fast-track-modal";
 import { openCommandPalette } from "./command-palette";
+import { RecruiterCompanyBanner } from "./recruiter-company-banner";
+import { trackEvent } from "@/lib/telemetry";
 
 interface HeroProps {
   locale?: "en" | "fr";
@@ -51,9 +53,15 @@ export function Hero({ locale = "en" }: HeroProps) {
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-indigo-500/10 dark:bg-indigo-600/15 blur-[120px] rounded-full pointer-events-none -z-10" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Dynamic Personalized Recruiter Greeting Banner (rendered if ?company= or ?ref= present) */}
+        <RecruiterCompanyBanner locale={locale} />
+
         {/* Top availability pill with 1-click Fast-Track recruiter modal trigger */}
         <button
-          onClick={openRecruiterModal}
+          onClick={() => {
+            trackEvent("recruiter_modal_open", { source: "hero_availability_pill" }, locale);
+            openRecruiterModal();
+          }}
           className="group inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs font-mono font-medium hover:bg-emerald-500/20 hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer shadow-sm mb-6"
           title={locale === "fr" ? "Ouvrir la fiche express recruteur" : "Open executive recruiter synthesis"}
         >
@@ -166,7 +174,10 @@ export function Hero({ locale = "en" }: HeroProps) {
           {/* Row 1: Primary Recruiter & Conversion CTAs */}
           <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
             <button
-              onClick={openRecruiterModal}
+              onClick={() => {
+                trackEvent("recruiter_modal_open", { source: "hero_primary_button" }, locale);
+                openRecruiterModal();
+              }}
               className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl font-semibold text-sm bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm cursor-pointer"
             >
               <Zap className="h-4 w-4 fill-current text-emerald-500 animate-pulse" />
@@ -175,6 +186,7 @@ export function Hero({ locale = "en" }: HeroProps) {
 
             <a
               href="#projects"
+              onClick={() => trackEvent("page_view", { section: "projects", source: "hero_view_projects" }, locale)}
               className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl font-medium text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/25 transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
             >
               <span>{currentUi.hero.viewProjects}</span>
@@ -184,6 +196,7 @@ export function Hero({ locale = "en" }: HeroProps) {
             <a
               href={locale === "fr" ? "/cv-fr.pdf" : "/cv.pdf"}
               download={locale === "fr" ? "Aritra_Mondal_Data_Scientist_CV_FR.pdf" : "Aritra_Mondal_Data_Scientist_CV_EN.pdf"}
+              onClick={() => trackEvent("cv_download", { locale, source: "hero_cta" }, locale)}
               className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm cursor-pointer"
             >
               <FileDown className="h-4 w-4 text-indigo-500" />
@@ -192,6 +205,7 @@ export function Hero({ locale = "en" }: HeroProps) {
 
             <a
               href="#contact"
+              onClick={() => trackEvent("contact_click", { source: "hero_get_in_touch" }, locale)}
               className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-xl font-medium text-sm bg-card hover:bg-muted text-foreground border border-border transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm cursor-pointer"
             >
               <Mail className="h-4 w-4 text-muted-foreground" />

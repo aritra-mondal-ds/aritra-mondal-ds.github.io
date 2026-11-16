@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { Github, Linkedin } from "@/components/icons";
 import { openRecruiterModal } from "./recruiter-fast-track-modal";
+import { trackEvent } from "@/lib/telemetry";
 
 interface ContactSectionProps {
   locale?: "en" | "fr";
@@ -36,6 +37,7 @@ export function ContactSection({ locale = "en" }: ContactSectionProps) {
       if (navigator?.clipboard?.writeText) {
         await navigator.clipboard.writeText(currentProfile.email);
         setEmailCopied(true);
+        trackEvent("contact_copy", { target: "email" }, locale);
         setTimeout(() => setEmailCopied(false), 2000);
       }
     } catch {
@@ -48,6 +50,7 @@ export function ContactSection({ locale = "en" }: ContactSectionProps) {
       if (navigator?.clipboard?.writeText) {
         await navigator.clipboard.writeText(currentProfile.phone);
         setPhoneCopied(true);
+        trackEvent("contact_copy", { target: "phone" }, locale);
         setTimeout(() => setPhoneCopied(false), 2000);
       }
     } catch {

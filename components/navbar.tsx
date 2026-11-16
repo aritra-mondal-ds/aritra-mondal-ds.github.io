@@ -11,6 +11,7 @@ import { FileDown, Menu, X, Sparkles, Globe, Zap, Command, Search } from "lucide
 import { Github, Linkedin } from "@/components/icons";
 import { RecruiterFastTrackModal, openRecruiterModal } from "./recruiter-fast-track-modal";
 import { CommandPalette, openCommandPalette } from "./command-palette";
+import { trackEvent, updateScrollDepth } from "@/lib/telemetry";
 
 interface NavbarProps {
   locale?: "en" | "fr";
@@ -27,22 +28,31 @@ export function Navbar({ locale = "en" }: NavbarProps) {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight > 0) {
+        const percent = Math.round((window.scrollY / docHeight) * 100);
+        if (percent >= 90) updateScrollDepth(100, locale);
+        else if (percent >= 70) updateScrollDepth(75, locale);
+        else if (percent >= 45) updateScrollDepth(50, locale);
+        else if (percent >= 20) updateScrollDepth(25, locale);
+      }
     };
     const handleHash = () => {
       setCurrentHash(window.location.hash);
     };
 
     handleHash();
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("hashchange", handleHash);
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("hashchange", handleHash);
     };
-  }, []);
+  }, [locale]);
 
-  // When switching locale or landing, ensure viewport stays strictly at the top
+  // When switching locale or landing, ensure viewport stays strictly at the top and log page_view
   useEffect(() => {
+    trackEvent("page_view", { locale, path: typeof window !== "undefined" ? window.location.pathname : "/" }, locale);
     if (typeof window !== "undefined" && !window.location.hash) {
       window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     }
@@ -187,7 +197,10 @@ export function Navbar({ locale = "en" }: NavbarProps) {
 
             {/* Recruiter Fast-Track Modal Trigger */}
             <button
-              onClick={openRecruiterModal}
+              onClick={() => {
+                trackEvent("recruiter_modal_open", { source: "navbar_fast_track" }, locale);
+                openRecruiterModal();
+              }}
               className="hidden sm:inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all shadow-sm cursor-pointer whitespace-nowrap shrink-0"
               title={locale === "fr" ? "Ouvrir la fiche express recruteur" : "Open executive recruiter synthesis"}
             >
@@ -199,6 +212,7 @@ export function Navbar({ locale = "en" }: NavbarProps) {
             <a
               href={locale === "fr" ? "/cv-fr.pdf" : "/cv.pdf"}
               download={locale === "fr" ? "Aritra_Mondal_Data_Scientist_CV_FR.pdf" : "Aritra_Mondal_Data_Scientist_CV_EN.pdf"}
+              onClick={() => trackEvent("cv_download", { locale, source: "navbar_cv_link" }, locale)}
               className="hidden sm:inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg text-xs font-medium border border-border bg-card/60 backdrop-blur-md text-foreground hover:bg-muted transition-colors shadow-sm whitespace-nowrap shrink-0"
               title={locale === "fr" ? "Télécharger le CV (PDF)" : "Download CV (PDF)"}
             >
@@ -209,6 +223,7 @@ export function Navbar({ locale = "en" }: NavbarProps) {
             {/* Hire Me / Recrutez-moi */}
             <a
               href="#contact"
+              onClick={() => trackEvent("contact_click", { source: "navbar_hire_me" }, locale)}
               className="hidden sm:inline-flex items-center gap-1.5 px-2.5 sm:px-3 xl:px-3.5 py-1.5 rounded-lg text-xs font-medium bg-foreground text-background hover:opacity-90 transition-opacity shadow-sm whitespace-nowrap shrink-0"
             >
               <Sparkles className="h-3 w-3" />

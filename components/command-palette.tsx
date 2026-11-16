@@ -164,7 +164,7 @@ export function CommandPalette({ locale = "en" }: CommandPaletteProps) {
         title: "Fast-Track Recruiter Sheet (1-Min Read)",
         titleFr: "Fiche Express Recruteur (Lecture 1 min)",
         subtitle: "Contract terms, salary expectations, CDI availability & 1-click ATS summary",
-        subtitleFr: "Conditions CDI, rémunération, disponibilité 0 jour et pitch Slack/ATS",
+        subtitleFr: "Conditions CDI, rémunération, disponibilité immédiate et pitch Slack/ATS",
         icon: <Zap className="h-4 w-4 text-emerald-500" />,
         keywords: ["recruiter", "fiche", "hr", "ats", "salary", "contract", "cdi", "hire", "fast track"],
         action: () => {

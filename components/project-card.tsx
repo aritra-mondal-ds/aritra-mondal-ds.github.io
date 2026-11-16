@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { Github } from "@/components/icons";
 import { openPipelineModal } from "./pipeline-visualizer-modal";
+import { trackEvent } from "@/lib/telemetry";
 
 interface ProjectCardProps {
   project: Project;
@@ -70,7 +71,10 @@ export function ProjectCard({ project, featuredIndex, locale = "en" }: ProjectCa
         {project.id === "airline-demand-forecasting" && (
           <div className="mb-5">
             <button
-              onClick={openPipelineModal}
+              onClick={() => {
+                trackEvent("pipeline_modal_open", { project: project.id }, locale);
+                openPipelineModal();
+              }}
               className="w-full py-2.5 px-3.5 rounded-xl bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-sky-500/10 hover:from-indigo-500/20 hover:to-sky-500/20 border border-indigo-500/30 hover:border-indigo-500/50 text-indigo-600 dark:text-indigo-400 font-mono text-xs font-semibold flex items-center justify-between transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-xs hover:shadow-md cursor-pointer group/btn"
             >
               <span className="flex items-center gap-2">

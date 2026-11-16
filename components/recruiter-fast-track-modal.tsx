@@ -7,6 +7,7 @@ import { uiEn } from "@/data/en/ui";
 import { uiFr } from "@/data/fr/ui";
 import { recruiterFastTrackEn } from "@/data/profile";
 import { recruiterFastTrackFr } from "@/data/fr/profile";
+import { trackEvent } from "@/lib/telemetry";
 import {
   X,
   Zap,
@@ -109,6 +110,7 @@ export function RecruiterFastTrackModal({
       if (navigator?.clipboard?.writeText) {
         await navigator.clipboard.writeText(currentData.slackPitch);
         setCopied(true);
+        trackEvent("contact_copy", { target: "slack_pitch" }, locale);
         setTimeout(() => setCopied(false), 2500);
       }
     } catch {
@@ -333,6 +335,7 @@ export function RecruiterFastTrackModal({
             <a
               href={locale === "fr" ? "/cv-fr.pdf" : "/cv.pdf"}
               download={locale === "fr" ? "Aritra_Mondal_Data_Scientist_CV_FR.pdf" : "Aritra_Mondal_Data_Scientist_CV_EN.pdf"}
+              onClick={() => trackEvent("cv_download", { locale, source: "recruiter_modal" }, locale)}
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-zinc-800 hover:bg-zinc-700 text-white transition-all cursor-pointer hover:-translate-y-0.5 active:scale-95"
             >
               <FileDown className="h-3.5 w-3.5 text-indigo-400" />
@@ -341,6 +344,7 @@ export function RecruiterFastTrackModal({
 
             <a
               href="tel:+33749297966"
+              onClick={() => trackEvent("contact_click", { target: "phone", source: "recruiter_modal" }, locale)}
               className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-zinc-700 hover:bg-zinc-800 text-zinc-200 transition-all cursor-pointer hover:-translate-y-0.5 active:scale-95"
             >
               <Phone className="h-3.5 w-3.5 text-emerald-400" />
@@ -349,7 +353,12 @@ export function RecruiterFastTrackModal({
           </div>
 
           <a
-            href="mailto:aritramondal100@gmail.com?subject=Data%20Scientist%20Opportunity%20-%20Interview%20Inquiry"
+            href={
+              locale === "fr"
+                ? "mailto:aritramondal100@gmail.com?subject=Prise%20de%20contact%20-%20Opportunit%C3%A9%20Data%20Scientist%20%28Aritra%20Mondal%29&body=Bonjour%20Aritra%2C%0A%0ANous%20avons%20consult%C3%A9%20votre%20portfolio%20et%20votre%20profil%20retient%20toute%20notre%20attention.%0ANous%20souhaiterions%20planifier%20un%20premier%20%C3%A9change%20concernant%20nos%20projets%20Data%20%2F%20Machine%20Learning."
+                : "mailto:aritramondal100@gmail.com?subject=Interview%20Inquiry%20-%20Data%20Scientist%20%28Aritra%20Mondal%29&body=Hello%20Aritra%2C%0A%0AWe%20reviewed%20your%20portfolio%20and%20are%20impressed%20by%20your%20production%20ML%20track%20record.%0AWe%20would%20like%20to%20schedule%20an%20initial%2010-min%20intro%20call%20regarding%20an%20open%20role%20at%20our%20company."
+            }
+            onClick={() => trackEvent("schedule_call_click", { source: "recruiter_modal" }, locale)}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/30 transition-all cursor-pointer hover:-translate-y-0.5 active:scale-95"
           >
             <Mail className="h-4 w-4" />
